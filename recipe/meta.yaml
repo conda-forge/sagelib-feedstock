@@ -25,6 +25,8 @@ source:
     - patches/less-verbosity.patch
     # conda's python doesn't have a symlink from lib/python2.7 to lib/python
     - patches/sage-script.patch
+    # don't do sanity checks as we are not in a source build
+    - patches/sage-env.patch
 
 build:
   number: 0
@@ -52,6 +54,7 @@ requirements:
     - ecm
     - givaro
     - glpk
+    - gmp >=5.0.1,<7
     - gsl
     - iml
     - jinja2
@@ -68,7 +71,6 @@ requirements:
     - mpc
     - mpfi
     - mpfr 3.*
-    - gmp >=5.0.1,<7
     - ntl
     - numpy 1.11.*
     - pari
@@ -84,6 +86,11 @@ requirements:
     - six
     - symmetrica
     - zn_poly
+    # sageruntime deps
+    - ipython
+    - psutil
+    - pexpect
+
   run:
     - arb 2.9.*
     - blas 1.1 {{ variant }}
@@ -97,6 +104,7 @@ requirements:
     - ecm
     - givaro
     - glpk
+    - gmp >=5.0.1,<7
     - gsl
     - iml
     - jinja2
@@ -113,7 +121,6 @@ requirements:
     - mpc
     - mpfi
     - mpfr 3.*
-    - gmp >=5.0.1,<7
     - ntl
     - numpy 1.11.*
     - pari
@@ -129,10 +136,16 @@ requirements:
     - six
     - symmetrica
     - zn_poly
+    # sageruntime deps
+    - ipython
+    - psutil
+    - pexpect
 
 test:
   import:
     - sage
+  commands:
+    - sage -v
 
 about:
   home: https://www.sagemath.org
