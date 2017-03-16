@@ -52,6 +52,7 @@ requirements:
     - ecl
     - eclib
     - ecm
+    - future
     - givaro
     - glpk
     - gmp >=5.0.1,<7

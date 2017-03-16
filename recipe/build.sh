@@ -37,9 +37,6 @@ rm "$PREFIX/share/jupyter/kernels/sagemath/doc"
 rm "$PREFIX/share/jupyter/nbextensions/mathjax"
 rm "$PREFIX/share/jupyter/nbextensions/jsmol"
 
-# remove lib64 symlink
-rm "$PREFIX/lib64"
-
 cp "$RECIPE_DIR/activate/activate.sh" "$PREFIX/etc/conda/activate.d/sage-activate.sh"
 cp "$RECIPE_DIR/activate/deactivate.sh" "$PREFIX/etc/conda/deactivate.d/sage-deactivate.sh"
 
