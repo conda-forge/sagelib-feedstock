@@ -1,0 +1,12 @@
+--- src/bin/sage-location.old   2017-03-17 08:01:42.147745511 +0530
++++ src/bin/sage-location       2017-03-17 08:01:52.239787029 +0530
+@@ -299,7 +299,7 @@
+ """
+ 
+ 
+-if __name__ == '__main__':
++def main():
+ 
+     if SAGE_ROOT is None:
+         print('You must run this script from within a Sage shell')
+

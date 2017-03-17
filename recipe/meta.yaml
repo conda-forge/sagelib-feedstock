@@ -27,6 +27,9 @@ source:
     - patches/sage-script.patch
     # don't do sanity checks as we are not in a source build
     - patches/sage-env.patch
+    # disable sage-location since conda handles that and sage-location breaks
+    # conda scripts
+    - patches/disable-sage-location.patch
 
 build:
   number: 2
