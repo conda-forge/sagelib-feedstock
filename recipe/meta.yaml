@@ -12,24 +12,27 @@ source:
   sha256: 3cd9af3e3bfd7f5cc966b7c36168d04b9a1213aa9a7af3286b5d53d40e7653e3
   patches:
     # deps are already available as conda packages
-    - patches/deps.patch
+    #- patches/deps.patch
     # sage patches cython to include sys.path, workaround that
     - patches/Fix-cython-bug.patch
     # sage's planarity is 2.x and conda-forge's is 3.x
     - patches/u1-version-planarity-3.patch
     # sage doesn't like building in root
-    - patches/root.patch
+    #- patches/root.patch
     # sage's gsl is linked with openblas, but conda-forge's is not.
     - patches/gsl.patch
     # less verbosity so that output < 4MB
-    - patches/less-verbosity.patch
+    #- patches/less-verbosity.patch
     # conda's python doesn't have a symlink from lib/python2.7 to lib/python
     - patches/sage-script.patch
     # don't do sanity checks as we are not in a source build
     - patches/sage-env.patch
+    # disable sage-location since conda handles that and sage-location breaks
+    # conda scripts
+    - patches/disable-sage-location.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win or osx]
   skip: true  # [py!=27]
   features:
@@ -52,6 +55,7 @@ requirements:
     - ecl
     - eclib
     - ecm
+    - future
     - givaro
     - glpk
     - gmp >=5.0.1,<7
