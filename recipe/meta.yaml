@@ -32,7 +32,7 @@ source:
     - patches/disable-sage-location.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win or osx]
   skip: true  # [py!=27]
   features:
@@ -106,6 +106,7 @@ requirements:
     - ecl
     - eclib
     - ecm
+    - future
     - givaro
     - glpk
     - gmp >=5.0.1,<7
