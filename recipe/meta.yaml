@@ -1,4 +1,4 @@
-{% set version = "7.5.1" %}
+{% set version = "7.6" %}
 {% set name = "sagelib" %}
 {% set variant = "openblas" %}
 
@@ -9,20 +9,12 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: 3cd9af3e3bfd7f5cc966b7c36168d04b9a1213aa9a7af3286b5d53d40e7653e3
+  sha256: e6e0729ab25446e7c922058db0eee4b0b294b32c196e34842e843ea9fae41423
   patches:
-    # deps are already available as conda packages
-    #- patches/deps.patch
     # sage patches cython to include sys.path, workaround that
     - patches/Fix-cython-bug.patch
     # sage's planarity is 2.x and conda-forge's is 3.x
     - patches/u1-version-planarity-3.patch
-    # sage doesn't like building in root
-    #- patches/root.patch
-    # sage's gsl is linked with openblas, but conda-forge's is not.
-    - patches/gsl.patch
-    # less verbosity so that output < 4MB
-    #- patches/less-verbosity.patch
     # conda's python doesn't have a symlink from lib/python2.7 to lib/python
     - patches/sage-script.patch
     # don't do sanity checks as we are not in a source build
@@ -32,7 +24,7 @@ source:
     - patches/disable-sage-location.patch
 
 build:
-  number: 3
+  number: 0
   skip: true  # [win or osx]
   skip: true  # [py!=27]
   features:
@@ -48,103 +40,103 @@ requirements:
     - arb 2.9.*
     - blas 1.1 {{ variant }}
     - openblas 0.2.19|0.2.19.*
-    - brial
-    - cliquer
-    - cysignals
-    - cython
-    - ecl
-    - eclib
-    - ecm
+    - brial 0.8.*
+    - cliquer 1.21
+    - cysignals 1.4.*
+    - cython >=0.25
+    - ecl 16.1.*
+    - eclib >=20170330
+    - ecm 7.*
     - future
-    - givaro
-    - glpk
+    - givaro 4.0.*
+    - glpk 4.61
     - gmp >=5.0.1,<7
-    - gsl
-    - iml
-    - jinja2
-    - jupyter_core
-    - lcalc
-    - lrcalc
-    - libflint
-    - libgap
-    - libgd
+    - gsl 2.2.*
+    - iml 1.0.*
+    - jinja2 2.9.*
+    - jupyter_core >=4
+    - lcalc 1.23
+    - lrcalc 1.2
+    - libflint 2.5.*
+    - libgap 4.8.*
+    - libgd 2.2.*
     - libpng >=1.6.28,<1.7
-    - linbox
-    - m4ri
-    - m4rie
-    - mpc
-    - mpfi
+    - linbox 1.4.*
+    - m4ri >=20140914
+    - m4rie >=20150908
+    - mpc 1.0.*
+    - mpfi 1.5.*
     - mpfr 3.*
-    - ntl
+    - ntl 10.3.*
     - numpy 1.11.*
-    - pari
+    - pari 2.9.*
     - pkgconfig
     - planarity 3.*
-    - ppl
-    - pynac
+    - ppl 1.2
+    - pynac 0.7.5
     - python
-    - ratpoints
+    - ratpoints 2.1.*
     - readline 6.2*
-    - rw
-    - singular
+    - rw 0.7
+    - singular 4.1.*
     - six
-    - symmetrica
-    - zn_poly
+    - symmetrica 2.0
+    - zn_poly 0.9
     # sageruntime deps
-    - ipython
-    - psutil
-    - pexpect
+    - ipython >=5
+    - psutil >=5
+    - pexpect >=4
 
   run:
     - arb 2.9.*
     - blas 1.1 {{ variant }}
     - openblas 0.2.19|0.2.19.*
-    - brial
-    - cliquer
-    - cysignals
-    - cython
-    - ecl
-    - eclib
-    - ecm
+    - brial 0.8.*
+    - cliquer 1.21
+    - cysignals 1.4.*
+    - cython >=0.25
+    - ecl 16.1.*
+    - eclib >=20170330
+    - ecm 7.*
     - future
-    - givaro
-    - glpk
+    - givaro 4.0.*
+    - glpk 4.61
     - gmp >=5.0.1,<7
-    - gsl
-    - iml
-    - jinja2
-    - jupyter_core
-    - lcalc
-    - lrcalc
-    - libflint
-    - libgap
-    - libgd
+    - gsl 2.2.*
+    - iml 1.0.*
+    - jinja2 2.9.*
+    - jupyter_core >=4
+    - lcalc 1.23
+    - lrcalc 1.2
+    - libflint 2.5.*
+    - libgap 4.8.*
+    - libgd 2.2.*
     - libpng >=1.6.28,<1.7
-    - linbox
-    - m4ri
-    - m4rie
-    - mpc
-    - mpfi
+    - linbox 1.4.*
+    - m4ri >=20140914
+    - m4rie >=20150908
+    - mpc 1.0.*
+    - mpfi 1.5.*
     - mpfr 3.*
-    - ntl
+    - ntl 10.3.*
     - numpy 1.11.*
-    - pari
+    - pari 2.9.*
     - pkgconfig
     - planarity 3.*
-    - ppl
-    - pynac
+    - ppl 1.2
+    - pynac 0.7.5
     - python
-    - ratpoints
+    - ratpoints 2.1.*
     - readline 6.2*
-    - rw
-    - singular
+    - rw 0.7
+    - singular 4.1.*
     - six
-    - symmetrica
-    - zn_poly
+    - symmetrica 2.0
+    - zn_poly 0.9
     # sageruntime deps
-    - ipython
-    - psutil
-    - pexpect
+    - ipython >=5
+    - psutil >=5
+    - pexpect >=4
 
 test:
   import:
