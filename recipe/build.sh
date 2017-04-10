@@ -36,6 +36,7 @@ python -u setup.py install > /dev/null 2>&1
 rm "$PREFIX/share/jupyter/kernels/sagemath/doc"
 rm "$PREFIX/share/jupyter/nbextensions/mathjax"
 rm "$PREFIX/share/jupyter/nbextensions/jsmol"
+rm "$PREFIX/share/jupyter/nbextensions/threejs"
 
 cp "$RECIPE_DIR/activate/activate.sh" "$PREFIX/etc/conda/activate.d/sage-activate.sh"
 cp "$RECIPE_DIR/activate/deactivate.sh" "$PREFIX/etc/conda/deactivate.d/sage-deactivate.sh"
