@@ -58,7 +58,7 @@ requirements:
     - lcalc 1.23
     - lrcalc 1.2
     - libflint 2.5.*
-    - libgap 4.8.*
+    - libgap 4.8.6
     - libgd 2.2.*
     - libpng >=1.6.28,<1.7
     - linbox 1.4.*
@@ -109,7 +109,7 @@ requirements:
     - lcalc 1.23
     - lrcalc 1.2
     - libflint 2.5.*
-    - libgap 4.8.*
+    - libgap 4.8.6
     - libgd 2.2.*
     - libpng >=1.6.28,<1.7
     - linbox 1.4.*
