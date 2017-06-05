@@ -24,7 +24,7 @@ source:
     - patches/disable-sage-location.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win or osx]
   skip: true  # [py!=27]
   features:
