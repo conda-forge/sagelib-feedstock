@@ -2,23 +2,26 @@
 
 args=("$@")
 have_stdcc=false
-have_stdcxx=false
+have_cxx=false
 
 for arg in "$@"; do
-    if [[ $arg == "-std=c"* ]]; then
+    if [[ $arg == "-std="* ]]; then
         if [[ $arg == *"++"* ]]; then
-            have_stdcxx=true
+            have_cxx=true
         else
             have_stdcc=true;
         fi
+    fi
+    if [[ $arg == *".cpp" ]]; then
+        have_cxx=true
     fi
 done
 
 new_args=$(basename "$0")
 
-if [[ $have_stdcc == true && $have_stdcxx == true ]]; then
+if [[ $have_stdcc == true && $have_cxx == true ]]; then
     for arg in "$@"; do
-        if [[ ($arg != "-std=c"*) || ($arg == *"++"*) ]]; then
+        if [[ ($arg != "-std="*) || ($arg == *"++"*) ]]; then
             new_args=("${new_args[@]}" "$arg")
         fi
     done
