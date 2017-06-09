@@ -29,6 +29,11 @@ cp -r ext "$SAGE_SHARE/sage/ext"
 mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
 
+
+if [[ `uname` == 'Darwin' ]]; then
+    export PATH="$RECIPE_DIR:$PATH"
+fi
+
 python -u setup.py build
 python -u setup.py install > /dev/null 2>&1
 
