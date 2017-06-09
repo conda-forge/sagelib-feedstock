@@ -29,6 +29,10 @@ else
     new_args=("${new_args[@]}" "$@")
 fi
 
+if [[ -f $PREFIX/bin/ccache ]]; then
+    new_args=("ccache" "${new_args[@]}")
+fi
+
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 IFS=':' read -ra env_path <<< "$PATH"
 PATH=""

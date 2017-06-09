@@ -33,6 +33,7 @@ build:
 requirements:
   build:
     - toolchain
+    - ccache
     - libtool
     - automake
     - pip

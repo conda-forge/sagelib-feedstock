@@ -34,8 +34,7 @@ if [[ `uname` == 'Darwin' ]]; then
     export PATH="$RECIPE_DIR:$PATH"
 fi
 
-python -u setup.py build
-python -u setup.py install > /dev/null 2>&1
+timeout 1200 bash -c "python -u setup.py build; python -u setup.py install > /dev/null 2>&1"
 
 # TODO: Add these in corresponding packages
 rm "$PREFIX/share/jupyter/kernels/sagemath/doc"
