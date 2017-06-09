@@ -16,7 +16,7 @@ export SAGE_SPKG_INST="$SAGE_LOCAL/var/lib/sage/installed"
 export SAGE_DOC="$SAGE_SHARE/doc/sage"
 
 ln -s "$PREFIX" local
-export SAGE_NUM_THREADS=2
+export SAGE_NUM_THREADS=$((CPU_COUNT+1))
 
 cd src
 # move the scripts
