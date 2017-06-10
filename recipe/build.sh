@@ -16,7 +16,7 @@ export SAGE_SPKG_INST="$SAGE_LOCAL/var/lib/sage/installed"
 export SAGE_DOC="$SAGE_SHARE/doc/sage"
 
 ln -s "$PREFIX" local
-export SAGE_NUM_THREADS=2
+export SAGE_NUM_THREADS=8
 
 cd src
 # move the scripts
@@ -29,7 +29,13 @@ cp -r ext "$SAGE_SHARE/sage/ext"
 mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
 
+
+if [[ `uname` == 'Darwin' ]]; then
+    export PATH="$RECIPE_DIR:$PATH"
+fi
+
 python -u setup.py build
+exit 1
 python -u setup.py install > /dev/null 2>&1
 
 # TODO: Add these in corresponding packages

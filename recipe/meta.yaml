@@ -25,7 +25,7 @@ source:
 
 build:
   number: 1
-  skip: true  # [win or osx]
+  skip: true  # [win]
   skip: true  # [py!=27]
   features:
     - blas_{{ variant }}
@@ -33,6 +33,7 @@ build:
 requirements:
   build:
     - toolchain
+    - ccache
     - libtool
     - automake
     - pip

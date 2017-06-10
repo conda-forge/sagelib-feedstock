@@ -1,0 +1,47 @@
+#! /bin/bash
+
+args=("$@")
+have_stdcc=false
+have_cxx=false
+
+for arg in "$@"; do
+    if [[ $arg == "-std="* ]]; then
+        if [[ $arg == *"++"* ]]; then
+            have_cxx=true
+        else
+            have_stdcc=true;
+        fi
+    fi
+    if [[ $arg == *".cpp" ]]; then
+        have_cxx=true
+    fi
+done
+
+new_args=$(basename "$0")
+
+if [[ $have_stdcc == true && $have_cxx == true ]]; then
+    for arg in "$@"; do
+        if [[ ($arg != "-std="*) || ($arg == *"++"*) ]]; then
+            new_args=("${new_args[@]}" "$arg")
+        fi
+    done
+else
+    new_args=("${new_args[@]}" "$@")
+fi
+
+if [[ -f $PREFIX/bin/ccache ]]; then
+    new_args=("ccache" "${new_args[@]}")
+fi
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+IFS=':' read -ra env_path <<< "$PATH"
+PATH=""
+for dir in "${env_path[@]}"; do
+    addpath=true
+    if [[ "$dir" != "$SCRIPT_DIR" ]]; then
+        PATH="${PATH:+$PATH:}$dir"
+    fi
+done
+
+export PATH
+exec "${new_args[@]}"
