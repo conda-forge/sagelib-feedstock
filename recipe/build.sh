@@ -35,6 +35,7 @@ if [[ `uname` == 'Darwin' ]]; then
 fi
 
 python -u setup.py build
+exit 1
 python -u setup.py install > /dev/null 2>&1
 
 # TODO: Add these in corresponding packages
