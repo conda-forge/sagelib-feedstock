@@ -139,7 +139,7 @@ requirements:
     - pexpect >=4
 
 test:
-  import:
+  imports:
     - sage
   commands:
     - sage -v
