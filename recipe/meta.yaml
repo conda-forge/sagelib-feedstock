@@ -24,7 +24,7 @@ source:
     - patches/disable-sage-location.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win or osx]
   skip: true  # [py!=27]
   features:
@@ -39,7 +39,7 @@ requirements:
     - setuptools
     - arb 2.9.*
     - blas 1.1 {{ variant }}
-    - openblas 0.2.19|0.2.19.*
+    - openblas 0.2.20|0.2.20.*
     - brial 0.8.*
     - cliquer 1.21
     - cysignals 1.4.*
@@ -90,7 +90,7 @@ requirements:
   run:
     - arb 2.9.*
     - blas 1.1 {{ variant }}
-    - openblas 0.2.19|0.2.19.*
+    - openblas 0.2.20|0.2.20.*
     - brial 0.8.*
     - cliquer 1.21
     - cysignals 1.4.*
@@ -119,7 +119,7 @@ requirements:
     - mpfi 1.5.*
     - mpfr 3.*
     - ntl 10.3.*
-    - numpy 1.11.*
+    - numpy >=1.11
     - pari 2.9.*
     - pkgconfig
     - planarity 3.*
