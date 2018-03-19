@@ -18,6 +18,8 @@ source:
     # disable sage-location since conda handles that and sage-location breaks
     # conda scripts
     - patches/disable-sage-location.patch
+    # fix cython errors
+    - patches/0001-Map._extra_slots-do-not-pass-dict.patch
 
 build:
   number: 0
