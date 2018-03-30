@@ -21,6 +21,8 @@ source:
     # fix cython errors
     - patches/0001-Map._extra_slots-do-not-pass-dict.patch
     - patches/0002-Various-Cython-fixes.patch
+    # fix pynac interface changes
+    - patches/0003-remove-superfluous-interface.patch
 
 build:
   number: 0
