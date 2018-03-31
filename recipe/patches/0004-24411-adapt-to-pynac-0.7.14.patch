@@ -7,10 +7,10 @@ Subject: [PATCH] 24411: adapt to pynac-0.7.14
  src/sage/functions/gamma.py | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/src/sage/functions/gamma.py b/src/sage/functions/gamma.py
+diff --git a/src/sage/functions/other.py b/src/sage/functions/other.py
 index fe25c31d2a..635cc77d6e 100644
---- a/src/sage/functions/gamma.py
-+++ b/src/sage/functions/gamma.py
+--- a/src/sage/functions/other.py
++++ b/src/sage/functions/other.py
 @@ -163,7 +163,7 @@ class Function_gamma(GinacFunction):
              :meth:`gamma`
          """
