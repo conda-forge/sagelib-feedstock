@@ -24,6 +24,7 @@ source:
     # fix pynac interface changes
     - patches/0003-remove-superfluous-interface.patch
     - patches/0004-24411-adapt-to-pynac-0.7.14.patch
+    - patches/0005-changes-to-interface.patch
 
 build:
   number: 0
