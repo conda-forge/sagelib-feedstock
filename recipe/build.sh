@@ -32,7 +32,7 @@ mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
 
 python -u setup.py build
-python -u setup.py install > /dev/null 2>&1
+python -u setup.py install
 
 # TODO: Add these in corresponding packages
 rm "$PREFIX/share/jupyter/kernels/sagemath/doc"
