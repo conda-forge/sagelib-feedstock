@@ -4,23 +4,10 @@ Date: Wed, 6 Dec 2017 09:59:05 +0100
 Subject: [PATCH] changes to interface
 
 ---
- src/sage/functions/other.py      | 1 -
  src/sage/libs/pynac/pynac.pxd    | 2 +-
  src/sage/symbolic/expression.pyx | 2 +-
- 3 files changed, 2 insertions(+), 3 deletions(-)
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/src/sage/functions/other.py b/src/sage/functions/other.py
-index 81cd48518b..931cecc722 100644
---- a/src/sage/functions/other.py
-+++ b/src/sage/functions/other.py
-@@ -688,7 +688,6 @@ class Function_gamma(GinacFunction):
-             :meth:`sage.functions.other.gamma`
-         """
-         GinacFunction.__init__(self, 'gamma', latex_name=r"\Gamma",
--                               ginac_name='tgamma',
-                                conversions={'mathematica':'Gamma',
-                                             'maple':'GAMMA',
-                                             'sympy':'gamma',
 diff --git a/src/sage/libs/pynac/pynac.pxd b/src/sage/libs/pynac/pynac.pxd
 index 173906756b..d4afc4e6d7 100644
 --- a/src/sage/libs/pynac/pynac.pxd
