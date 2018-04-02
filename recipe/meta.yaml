@@ -58,6 +58,7 @@ requirements:
     - gsl 2.4.*
     - iml 1.0.*
     - jinja2 2.9.*
+    - jupyter_core 4.*
     - lcalc 1.23
     - lrcalc 1.2
     - libflint 2.5.*
@@ -109,6 +110,7 @@ requirements:
     - gsl 2.4.*
     - iml 1.0.*
     - jinja2 2.9.*
+    - jupyter_core 4.*
     - lcalc 1.23
     - lrcalc 1.2
     - libflint 2.5.*
