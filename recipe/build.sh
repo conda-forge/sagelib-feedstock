@@ -20,6 +20,9 @@ export SAGE_ROOT=`pwd`
 ln -s "$PREFIX" local
 export SAGE_NUM_THREADS=$CPU_COUNT
 
+make configure
+./configure --prefix="$PREFIX"
+
 cd src
 # move the scripts
 cp bin/* "$SAGE_LOCAL/bin/"
@@ -31,8 +34,6 @@ cp -r ext "$SAGE_SHARE/sage/ext"
 mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
 
-make configure
-./configure --prefix="$PREFIX"
 python -u setup.py build
 python -u setup.py install
 
