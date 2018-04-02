@@ -31,6 +31,7 @@ cp -r ext "$SAGE_SHARE/sage/ext"
 mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
 
+./configure --prefix="$PREFIX"
 python -u setup.py build
 python -u setup.py install
 
