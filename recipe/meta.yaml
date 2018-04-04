@@ -144,10 +144,14 @@ requirements:
     - pexpect >=4
 
 test:
+  source_files:
+    - src
   imports:
     - sage
   commands:
     - sage -v
+    # lots of tests are failing at the moment
+    - sage -tp src || true
 
 about:
   home: https://www.sagemath.org
