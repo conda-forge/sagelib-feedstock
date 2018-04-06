@@ -144,16 +144,10 @@ requirements:
     - pexpect >=4
 
 test:
-  source_files:
-    - src
   imports:
     - sage
   commands:
     - sage -v
-    # lots of tests are failing at the moment (set SAGE_SPKG_INST to pretend
-    # that no SPKGs are installed, until
-    # https://trac.sagemath.org/ticket/20382 has been merged.)
-    - SAGE_SPKG_INST=`mktemp -d` sage -tp src || true
 
 about:
   home: https://www.sagemath.org
