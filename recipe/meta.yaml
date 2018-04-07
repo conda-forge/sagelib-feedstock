@@ -25,9 +25,11 @@ source:
     - patches/0003-remove-superfluous-interface.patch
     - patches/0004-24411-adapt-to-pynac-0.7.14.patch
     - patches/0005-changes-to-interface.patch
+    # mostly remove SPKG interface until we have #20382 (Sage 8.3)
+    - patches/0006-no-spkg-doctest.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py!=27]
   features:
@@ -144,10 +146,15 @@ requirements:
     - pexpect >=4
 
 test:
+  source_files:
+    # include src/ so we can run Sage's doctests
+    - src
   imports:
     - sage
   commands:
     - sage -v
+    # too many doctests fail still but we test that the doctesting framework works by testing a trivial file
+    - sage -tp src/sage/version.py
 
 about:
   home: https://www.sagemath.org
