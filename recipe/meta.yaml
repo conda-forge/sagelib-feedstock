@@ -1,4 +1,4 @@
-{% set version = "7.6" %}
+{% set version = "8.1" %}
 {% set name = "sagelib" %}
 {% set variant = "openblas" %}
 
@@ -9,23 +9,26 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: e6e0729ab25446e7c922058db0eee4b0b294b32c196e34842e843ea9fae41423
+  sha256: a42b55c2c8ac244535dc9b87171b7d4dd7e1d498099518ab253354fbe2eaaa7b
   patches:
     # sage patches cython to include sys.path, workaround that
     - patches/Fix-cython-bug.patch
-    # sage's planarity is 2.x and conda-forge's is 3.x
-    - patches/u1-version-planarity-3.patch
-    # conda's python doesn't have a symlink from lib/python2.7 to lib/python
-    - patches/sage-script.patch
     # don't do sanity checks as we are not in a source build
     - patches/sage-env.patch
     # disable sage-location since conda handles that and sage-location breaks
     # conda scripts
     - patches/disable-sage-location.patch
+    # fix cython errors
+    - patches/0001-Map._extra_slots-do-not-pass-dict.patch
+    - patches/0002-Various-Cython-fixes.patch
+    # fix pynac interface changes
+    - patches/0003-remove-superfluous-interface.patch
+    - patches/0004-24411-adapt-to-pynac-0.7.14.patch
+    - patches/0005-changes-to-interface.patch
 
 build:
-  number: 1
-  skip: true  # [win or osx]
+  number: 0
+  skip: true  # [win]
   skip: true  # [py!=27]
   features:
     - blas_{{ variant }}
@@ -37,30 +40,31 @@ requirements:
     - automake
     - pip
     - setuptools
-    - arb 2.9.*
+    - arb 2.11.*
     - blas 1.1 {{ variant }}
-    - openblas 0.2.19|0.2.19.*
-    - brial 0.8.*
+    - openblas 0.2.20|0.2.20.*
+    - brial 1.2.*
     - cliquer 1.21
-    - cysignals 1.4.*
-    - cython >=0.25
+    - cypari2 >=1.1.4
+    - cysignals 1.6.*
+    - cython >=0.27
     - ecl 16.1.*
-    - eclib >=20170330
+    - eclib >=20171002
     - ecm 7.*
     - future
     - givaro 4.0.*
-    - glpk 4.61
+    - glpk 4.65.*
     - gmp >=5.0.1,<7
-    - gsl 2.2.*
+    - gsl 2.4.*
     - iml 1.0.*
     - jinja2 2.9.*
-    - jupyter_core >=4
+    - jupyter_core 4.*
     - lcalc 1.23
     - lrcalc 1.2
     - libflint 2.5.*
     - libgap 4.8.6
     - libgd 2.2.*
-    - libpng >=1.6.28,<1.7
+    - libpng >=1.6.29,<1.7
     - linbox 1.4.*
     - m4ri >=20140914
     - m4rie >=20150908
@@ -68,12 +72,12 @@ requirements:
     - mpfi 1.5.*
     - mpfr 3.*
     - ntl 10.3.*
-    - numpy 1.11.*
+    - numpy 1.13.*
     - pari 2.9.*
     - pkgconfig
     - planarity 3.*
     - ppl 1.2
-    - pynac 0.7.5
+    - pynac 0.7.17
     - python
     - ratpoints 2.1.*
     - readline 6.2*
@@ -88,30 +92,31 @@ requirements:
     - pexpect >=4
 
   run:
-    - arb 2.9.*
+    - arb 2.11.*
     - blas 1.1 {{ variant }}
-    - openblas 0.2.19|0.2.19.*
-    - brial 0.8.*
+    - openblas 0.2.20|0.2.20.*
+    - brial 1.2.*
     - cliquer 1.21
-    - cysignals 1.4.*
-    - cython >=0.25
+    - cypari2 1.1.*
+    - cysignals 1.6.*
+    - cython >=0.27
     - ecl 16.1.*
-    - eclib >=20170330
+    - eclib >=20171002
     - ecm 7.*
     - future
     - givaro 4.0.*
-    - glpk 4.61
+    - glpk 4.65.*
     - gmp >=5.0.1,<7
-    - gsl 2.2.*
+    - gsl 2.4.*
     - iml 1.0.*
     - jinja2 2.9.*
-    - jupyter_core >=4
+    - jupyter_core 4.*
     - lcalc 1.23
     - lrcalc 1.2
     - libflint 2.5.*
     - libgap 4.8.6
     - libgd 2.2.*
-    - libpng >=1.6.28,<1.7
+    - libpng >=1.6.29,<1.7
     - linbox 1.4.*
     - m4ri >=20140914
     - m4rie >=20150908
@@ -119,12 +124,12 @@ requirements:
     - mpfi 1.5.*
     - mpfr 3.*
     - ntl 10.3.*
-    - numpy 1.11.*
+    - numpy >=1.13
     - pari 2.9.*
     - pkgconfig
     - planarity 3.*
     - ppl 1.2
-    - pynac 0.7.5
+    - pynac 0.7.17
     - python
     - ratpoints 2.1.*
     - readline 6.2*
@@ -139,7 +144,7 @@ requirements:
     - pexpect >=4
 
 test:
-  import:
+  imports:
     - sage
   commands:
     - sage -v
@@ -155,3 +160,4 @@ about:
 extra:
   recipe-maintainers:
     - isuruf
+    - saraedum

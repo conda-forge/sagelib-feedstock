@@ -12,9 +12,9 @@ index 4d20a0f..25d9d79 100755
 --- a/src/setup.py
 +++ b/src/setup.py
 @@ -409,6 +409,7 @@ class sage_build_ext(build_ext):
-                 'fast_getattr': True,
-                 'profile': profile,
-             },
+             compiler_directives=self.cython_directives,
+             compile_time_env=self.compile_time_env,
+             create_extension=self.create_extension,
 +            include_path=sys.path,
              # Debugging
              gdb_debug=debug,

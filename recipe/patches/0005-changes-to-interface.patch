@@ -1,0 +1,39 @@
+From 514a2997ab7a29dc860d868abc58efd9e0235ed2 Mon Sep 17 00:00:00 2001
+From: Ralf Stephan <ralf@ark.in-berlin.de>
+Date: Wed, 6 Dec 2017 09:59:05 +0100
+Subject: [PATCH] changes to interface
+
+---
+ src/sage/libs/pynac/pynac.pxd    | 2 +-
+ src/sage/symbolic/expression.pyx | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/sage/libs/pynac/pynac.pxd b/src/sage/libs/pynac/pynac.pxd
+index 173906756b..d4afc4e6d7 100644
+--- a/src/sage/libs/pynac/pynac.pxd
++++ b/src/sage/libs/pynac/pynac.pxd
+@@ -362,7 +362,7 @@ cdef extern from "pynac_wrap.h":
+     GEx g_zeta2 "GiNaC::zeta" (GEx m, GEx s)            except + # alternating Euler sum
+     GEx g_stieltjes "GiNaC::stieltjes" (GEx m)          except + # Stieltjes constants
+     GEx g_zetaderiv "GiNaC::zetaderiv" (GEx n, GEx x)   except + # derivatives of Riemann's zeta function
+-    GEx g_tgamma "GiNaC::tgamma" (GEx x)                except + # gamma function
++    GEx g_gamma "GiNaC::gamma" (GEx x)                  except + # gamma function
+     GEx g_lgamma "GiNaC::lgamma" (GEx x)                except + # logarithm of gamma function
+     GEx g_beta "GiNaC::beta" (GEx x, GEx y)             except + # beta function (tgamma(x)*tgamma(y)/tgamma(x+y))
+     GEx g_psi "GiNaC::psi" (GEx x)                      except + # psi (digamma) function
+diff --git a/src/sage/symbolic/expression.pyx b/src/sage/symbolic/expression.pyx
+index dfb8751467..52303d148e 100644
+--- a/src/sage/symbolic/expression.pyx
++++ b/src/sage/symbolic/expression.pyx
+@@ -8917,7 +8917,7 @@ cdef class Expression(CommutativeRingElement):
+         cdef GEx x
+         sig_on()
+         try:
+-            x = g_hold_wrapper(g_tgamma, self._gobj, hold)
++            x = g_hold_wrapper(g_gamma, self._gobj, hold)
+         finally:
+             sig_off()
+         return new_Expression_from_GEx(self._parent, x)
+-- 
+2.16.2
+
