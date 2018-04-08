@@ -146,6 +146,9 @@ requirements:
     - pexpect >=4
 
 test:
+  requires:
+    # Sage's doctesting framework uses a pretty printing command from sympy
+    - sympy
   source_files:
     # include src/ so we can run Sage's doctests
     - src
