@@ -53,6 +53,7 @@ requirements:
     - ecl 16.1.*
     - eclib >=20171002
     - ecm 7.*
+    - fflas-ffpack >=2.2.2,<2.3.0
     - future
     - givaro 4.0.*
     - glpk 4.65.*
@@ -112,6 +113,7 @@ requirements:
     - ecl 16.1.*
     - eclib >=20171002
     - ecm 7.*
+    - fflas-ffpack >=2.2.2,<3
     - future
     - givaro 4.0.*
     - glpk 4.65.*
