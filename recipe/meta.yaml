@@ -27,9 +27,8 @@ source:
     - patches/0005-changes-to-interface.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
-  skip: true  # [py!=27]
   features:
     - blas_{{ variant }}
 
