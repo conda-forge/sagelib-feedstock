@@ -25,6 +25,8 @@ source:
     - patches/0003-remove-superfluous-interface.patch
     - patches/0004-24411-adapt-to-pynac-0.7.14.patch
     - patches/0005-changes-to-interface.patch
+    # fix too long file name
+    - patches/fix_cache_file_length.patch
 
 build:
   number: 1
