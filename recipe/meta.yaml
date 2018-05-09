@@ -53,7 +53,7 @@ requirements:
     - ecm 7.*
     - fflas-ffpack >=2.2.2,<2.3.0
     - future
-    - givaro 4.0.*
+    - givaro >=4.0.0,<4.0.3
     - glpk 4.65.*
     - gmp >=5.0.1,<7
     - gsl 2.4.*
@@ -113,7 +113,7 @@ requirements:
     - ecm 7.*
     - fflas-ffpack >=2.2.2,<2.3.0
     - future
-    - givaro 4.0.*
+    - givaro >=4.0.0,<4.0.3
     - glpk 4.65.*
     - gmp >=5.0.1,<7
     - gsl 2.4.*
