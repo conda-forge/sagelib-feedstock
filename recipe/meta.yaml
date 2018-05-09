@@ -27,7 +27,7 @@ source:
     - patches/0005-changes-to-interface.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py!=27]
   features:
@@ -51,6 +51,7 @@ requirements:
     - ecl 16.1.*
     - eclib >=20171002
     - ecm 7.*
+    - fflas-ffpack >=2.2.2,<2.3.0
     - future
     - givaro 4.0.*
     - glpk 4.65.*
@@ -110,6 +111,7 @@ requirements:
     - ecl 16.1.*
     - eclib >=20171002
     - ecm 7.*
+    - fflas-ffpack >=2.2.2,<2.3.0
     - future
     - givaro 4.0.*
     - glpk 4.65.*
