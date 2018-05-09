@@ -88,6 +88,7 @@ requirements:
     - singular 4.1.*
     - six
     - symmetrica 2.0
+    - zlib
     - zn_poly 0.9
     # sageruntime deps
     - ipython >=5
@@ -148,6 +149,7 @@ requirements:
     - singular 4.1.*
     - six
     - symmetrica 2.0
+    - zlib
     - zn_poly 0.9
     # sageruntime deps
     - ipython >=5
