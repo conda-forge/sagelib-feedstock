@@ -1,4 +1,4 @@
-{% set version = "8.2rc4" %}
+{% set version = "8.2" %}
 {% set name = "sagelib" %}
 {% set variant = "openblas" %}
 
