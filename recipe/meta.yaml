@@ -25,9 +25,11 @@ source:
     - patches/0003-remove-superfluous-interface.patch
     - patches/0004-24411-adapt-to-pynac-0.7.14.patch
     - patches/0005-changes-to-interface.patch
+    # fix too long file name
+    - patches/fix_cache_file_length.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py!=27]
   features:
@@ -51,8 +53,9 @@ requirements:
     - ecl 16.1.*
     - eclib >=20171002
     - ecm 7.*
+    - fflas-ffpack >=2.2.2,<2.3.0
     - future
-    - givaro 4.0.*
+    - givaro >=4.0.0,<4.0.3
     - glpk 4.65.*
     - gmp >=5.0.1,<7
     - gsl 2.4.*
@@ -85,6 +88,7 @@ requirements:
     - singular 4.1.*
     - six
     - symmetrica 2.0
+    - zlib
     - zn_poly 0.9
     # sageruntime deps
     - ipython >=5
@@ -110,8 +114,9 @@ requirements:
     - ecl 16.1.*
     - eclib >=20171002
     - ecm 7.*
+    - fflas-ffpack >=2.2.2,<2.3.0
     - future
-    - givaro 4.0.*
+    - givaro >=4.0.0,<4.0.3
     - glpk 4.65.*
     - gmp >=5.0.1,<7
     - gsl 2.4.*
@@ -144,6 +149,7 @@ requirements:
     - singular 4.1.*
     - six
     - symmetrica 2.0
+    - zlib
     - zn_poly 0.9
     # sageruntime deps
     - ipython >=5
