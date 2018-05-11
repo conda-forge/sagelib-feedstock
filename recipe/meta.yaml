@@ -31,7 +31,7 @@ source:
     - patches/fix_cache_file_length.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   skip: true  # [py!=27]
   features:
