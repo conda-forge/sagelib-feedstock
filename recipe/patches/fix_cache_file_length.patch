@@ -1,0 +1,20 @@
+diff --git a/src/sage/misc/lazy_import_cache.py b/src/sage/misc/lazy_import_cache.py
+index 7688a95..61b4c55 100644
+--- a/src/sage/misc/lazy_import_cache.py
++++ b/src/sage/misc/lazy_import_cache.py
+@@ -5,6 +5,7 @@ This is a pure Python file with no dependencies so it can be used in setup.py.
+ """
+ 
+ import os
++import hashlib
+ 
+ from ..env import SAGE_SRC, DOT_SAGE
+ 
+@@ -31,5 +32,7 @@ def get_cache_file():
+         sage: sage.misc.lazy_import_cache.DOT_SAGE = OLD
+     """
+     mangled = os.path.realpath(SAGE_SRC).replace(os.sep, '_')
++    if len(mangled) > 255 - 25:
++        mangled = hashlib.sha256(mangled).hexdigest()
+     return os.path.join(DOT_SAGE, 'cache',
+                         "%s-lazy_import_cache.pickle" % mangled)
