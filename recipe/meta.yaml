@@ -31,7 +31,7 @@ source:
     - patches/fix_cache_file_length.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   skip: true  # [py!=27]
   features:
@@ -163,8 +163,7 @@ test:
     # Sage's doctesting framework uses a pretty printing command from sympy
     - sympy
   source_files:
-    # include src/ so we can run Sage's doctests
-    - src
+    - src/sage/version.py
   imports:
     - sage
   commands:
