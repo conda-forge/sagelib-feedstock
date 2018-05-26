@@ -31,7 +31,7 @@ source:
     - patches/fix_cache_file_length.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
   skip: true  # [py!=27]
   features:
@@ -69,7 +69,7 @@ requirements:
     - libflint 2.5.*
     - libgap 4.8.6
     - libgd 2.2.*
-    - libpng >=1.6.29,<1.7
+    - libpng >=1.6.34,<1.7
     - linbox 1.4.*
     - m4ri >=20140914
     - m4rie >=20150908
@@ -130,7 +130,7 @@ requirements:
     - libflint 2.5.*
     - libgap 4.8.6
     - libgd 2.2.*
-    - libpng >=1.6.29,<1.7
+    - libpng >=1.6.34,<1.7
     - linbox 1.4.*
     - m4ri >=20140914
     - m4rie >=20150908
