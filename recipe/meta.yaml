@@ -94,6 +94,7 @@ requirements:
     - ipython >=5
     - psutil >=5
     - pexpect >=4
+    - perl
 
   # We can not include all actual runtime dependencies of Sage here as some of
   # them require Sage to build, such as some of the database packages.
