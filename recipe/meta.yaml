@@ -9,7 +9,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: a42b55c2c8ac244535dc9b87171b7d4dd7e1d498099518ab253354fbe2eaaa7b
+  sha256: 41ba2c2dde7a02e1bb6880ae875d37ab058567cc26e760efe87eeb12188cd65b
   patches:
     # sage patches cython to include sys.path, workaround that
     - patches/Fix-cython-bug.patch
