@@ -77,7 +77,7 @@ requirements:
     - mpfi 1.5.*
     - mpfr 3.*
     - ntl 10.3.*
-    - numpy 1.13.*
+    - numpy 1.14.*
     - pari 2.9.*
     - pkgconfig
     - planarity 3.*
@@ -138,7 +138,7 @@ requirements:
     - mpfi 1.5.*
     - mpfr 3.*
     - ntl 10.3.*
-    - numpy >=1.13
+    - numpy >=1.14
     - pari 2.9.*
     - pkgconfig
     - planarity 3.*
