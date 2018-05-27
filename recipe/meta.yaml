@@ -83,7 +83,7 @@ requirements:
     - pynac 0.7.17
     - python
     - ratpoints 2.1.*
-    - readline 6.2*
+    - readline 7.0
     - rw 0.7
     - singular 4.1.*
     - six
@@ -142,7 +142,7 @@ requirements:
     - pynac 0.7.17
     - python
     - ratpoints 2.1.*
-    - readline 6.2*
+    - readline 7.*
     - rw 0.7
     - singular 4.1.*
     - six
