@@ -29,6 +29,8 @@ source:
     - patches/0006-no-spkg-doctest.patch
     # fix too long file name
     - patches/fix_cache_file_length.patch
+    # undo upgrade to an unreleased PARI
+    - patches/use-sages-ratpoints.patch
 
 build:
   number: 3
