@@ -60,8 +60,8 @@ requirements:
     - eclib >=20171002
     - ecm 7.*
     - future
-    - glpk 4.65.*
-    - gmp >=5.0.1,<7
+    - glpk
+    - gmp
     - gsl 2.4.*
     - iml 1.0.*
     - jinja2 2.10.*
@@ -77,7 +77,7 @@ requirements:
     - m4rie >=20150908
     - mpc 1.1.*
     - mpfi 1.5.*
-    - mpfr 4.*
+    - mpfr
     - ntl 10.3.*
     - numpy 1.14.*
     - pari 2.9.5
@@ -87,7 +87,7 @@ requirements:
     - pynac 0.7.17
     - python
     - ratpoints 2.1.*
-    - readline 7.0
+    - readline
     - rw 0.7
     - singular 4.1.*
     - six
@@ -119,8 +119,8 @@ requirements:
     - eclib >=20171002
     - ecm 7.*
     - future
-    - glpk 4.65.*
-    - gmp >=5.0.1,<7
+    - glpk
+    - gmp
     - gsl 2.4.*
     - iml 1.0.*
     - jinja2 2.10.*
@@ -136,7 +136,7 @@ requirements:
     - m4rie >=20150908
     - mpc 1.1.*
     - mpfi 1.5.*
-    - mpfr 4.*
+    - mpfr
     - ntl 10.3.*
     - numpy >=1.14
     - pari 2.9.5
@@ -146,7 +146,7 @@ requirements:
     - pynac 0.7.17
     - python
     - ratpoints 2.1.*
-    - readline 7.*
+    - readline
     - rw 0.7
     - singular 4.1.*
     - six
