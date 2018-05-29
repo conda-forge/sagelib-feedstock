@@ -132,6 +132,7 @@ requirements:
     - libgd 2.2.*
     - libpng
     - linbox 1.5.*
+    - matplotlib
     - m4ri >=20140914
     - m4rie >=20150908
     - mpc 1.1.*
