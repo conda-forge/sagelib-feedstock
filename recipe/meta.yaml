@@ -33,7 +33,7 @@ source:
     - patches/use-sages-ratpoints.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   features:
     - blas_{{ variant }}
