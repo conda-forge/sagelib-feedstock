@@ -1,0 +1,32 @@
+cxx_compiler:
+- toolchain_cxx
+glpk:
+- '4.65'
+gmp:
+- '6'
+libpng:
+- 1.6.34
+mpfr:
+- '4'
+pin_run_as_build:
+  glpk:
+    max_pin: x.x
+  gmp:
+    max_pin: x
+  libpng:
+    max_pin: x.x
+  mpfr:
+    max_pin: x
+  python:
+    min_pin: x.x
+    max_pin: x.x
+  readline:
+    max_pin: x.x
+  zlib:
+    max_pin: x.x
+python:
+- '3.6'
+readline:
+- '7.0'
+zlib:
+- '1.2'
