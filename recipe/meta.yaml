@@ -33,7 +33,7 @@ source:
     - patches/use-sages-ratpoints.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py!=27]
   features:
@@ -73,6 +73,8 @@ requirements:
     - libgd 2.2.*
     - libpng
     - linbox 1.5.*
+    - givaro
+    - fflas-ffpack
     - m4ri >=20140914
     - m4rie >=20150908
     - mpc 1.1.*
@@ -132,6 +134,8 @@ requirements:
     - libgd 2.2.*
     - libpng
     - linbox 1.5.*
+    - givaro
+    - fflas-ffpack
     - matplotlib
     - m4ri >=20140914
     - m4rie >=20150908
