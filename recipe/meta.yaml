@@ -33,7 +33,7 @@ source:
     - patches/use-sages-ratpoints.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   skip: true  # [py!=27]
   features:
@@ -62,7 +62,7 @@ requirements:
     - future
     - glpk
     - gmp
-    - gsl 2.4.*
+    - gsl
     - iml 1.0.*
     - jinja2 2.10.*
     - jupyter_core 4.*
@@ -123,7 +123,7 @@ requirements:
     - future
     - glpk
     - gmp
-    - gsl 2.4.*
+    - gsl
     - iml 1.0.*
     - jinja2 2.10.*
     - jupyter_core 4.*
