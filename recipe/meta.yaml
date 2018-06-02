@@ -33,7 +33,7 @@ source:
     - patches/use-sages-ratpoints.patch
 
 build:
-  number: 1
+  number: 3
   skip: true  # [win]
   features:
     - blas_{{ variant }}
@@ -61,7 +61,7 @@ requirements:
     - future
     - glpk
     - gmp
-    - gsl 2.4.*
+    - gsl
     - iml 1.0.*
     - jinja2 2.10.*
     - jupyter_core 4.*
@@ -72,6 +72,8 @@ requirements:
     - libgd 2.2.*
     - libpng
     - linbox 1.5.*
+    - givaro
+    - fflas-ffpack
     - m4ri >=20140914
     - m4rie >=20150908
     - mpc 1.1.*
@@ -120,7 +122,7 @@ requirements:
     - future
     - glpk
     - gmp
-    - gsl 2.4.*
+    - gsl
     - iml 1.0.*
     - jinja2 2.10.*
     - jupyter_core 4.*
@@ -131,6 +133,8 @@ requirements:
     - libgd 2.2.*
     - libpng
     - linbox 1.5.*
+    - givaro
+    - fflas-ffpack
     - matplotlib
     - m4ri >=20140914
     - m4rie >=20150908
