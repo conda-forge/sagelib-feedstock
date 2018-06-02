@@ -21,7 +21,7 @@ ln -s "$PREFIX" local
 export SAGE_NUM_THREADS=$CPU_COUNT
 
 make configure
-./configure --prefix="$PREFIX"
+./configure --prefix="$PREFIX" --with-python="$CONDA_PY"
 
 cd src
 # move the scripts
