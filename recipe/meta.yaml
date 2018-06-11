@@ -54,7 +54,7 @@ requirements:
     - cliquer 1.21
     - cypari2 >=1.1.4
     - cysignals 1.7.*
-    - cython >=0.28
+    - cython >=0.28.2
     - ecl 16.1.*
     - eclib >=20171002
     - ecm 7.*
@@ -115,7 +115,7 @@ requirements:
     - cliquer 1.21
     - cypari2 1.1.4
     - cysignals 1.7.*
-    - cython >=0.28
+    - cython >=0.28.2
     - ecl 16.1.*
     - eclib >=20171002
     - ecm 7.*
