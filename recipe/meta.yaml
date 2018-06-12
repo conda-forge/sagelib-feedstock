@@ -35,6 +35,7 @@ source:
 build:
   number: 3
   skip: true  # [win]
+  skip: true  # [py3k and py<36]
   features:
     - blas_{{ variant }}
 
