@@ -33,9 +33,9 @@ source:
     - patches/use-sages-ratpoints.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
-  skip: true  # [py!=27]
+  skip: true  # [py3k and py<36]
   features:
     - blas_{{ variant }}
 
@@ -55,7 +55,7 @@ requirements:
     - cliquer 1.21
     - cypari2 >=1.1.4
     - cysignals 1.7.*
-    - cython >=0.28
+    - cython >=0.28.2
     - ecl 16.1.*
     - eclib >=20171002
     - ecm 7.*
@@ -116,7 +116,7 @@ requirements:
     - cliquer 1.21
     - cypari2 1.1.4
     - cysignals 1.7.*
-    - cython >=0.28
+    - cython >=0.28.2
     - ecl 16.1.*
     - eclib >=20171002
     - ecm 7.*

@@ -15,6 +15,6 @@ index 7688a95..61b4c55 100644
      """
      mangled = os.path.realpath(SAGE_SRC).replace(os.sep, '_')
 +    if len(mangled) > 255 - 25:
-+        mangled = hashlib.sha256(mangled).hexdigest()
++        mangled = hashlib.sha256(mangled.encode('utf-8')).hexdigest()
      return os.path.join(DOT_SAGE, 'cache',
                          "%s-lazy_import_cache.pickle" % mangled)
