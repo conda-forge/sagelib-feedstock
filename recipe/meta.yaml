@@ -33,7 +33,7 @@ source:
     - patches/use-sages-ratpoints.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
@@ -48,7 +48,7 @@ requirements:
   host:
     - pip
     - setuptools
-    - arb 2.13.*
+    - arb 2.12.*
     - blas 1.1 {{ variant }}
     - openblas 0.2.20|0.2.20.*
     - brial 1.2.*
@@ -81,12 +81,12 @@ requirements:
     - mpfi 1.5.*
     - mpfr
     - ntl 10.3.*
-    - numpy 1.14.*
+    - numpy 1.13.*
     - pari 2.9.5
     - pkgconfig
     - planarity 3.*
     - ppl 1.2
-    - pynac 0.7.17
+    - pynac 0.7.16
     - python
     - ratpoints 2.1.*
     - readline
@@ -109,7 +109,7 @@ requirements:
   # things do not work. To get all the standard dependencies of Sage, install
   # the "sage" package (which requires this "sagelib" package.)
   run:
-    - arb 2.13.*
+    - arb 2.12.*
     - blas 1.1 {{ variant }}
     - openblas 0.2.20|0.2.20.*
     - brial 1.2.*
@@ -143,12 +143,12 @@ requirements:
     - mpfi 1.5.*
     - mpfr
     - ntl 10.3.*
-    - numpy >=1.14
+    - numpy >=1.13
     - pari 2.9.5
     - pkgconfig
     - planarity 3.*
     - ppl 1.2
-    - pynac 0.7.17
+    - pynac 0.7.16
     - python
     - ratpoints 2.1.*
     - readline
