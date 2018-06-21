@@ -31,9 +31,11 @@ source:
     - patches/fix_cache_file_length.patch
     # undo upgrade to an unreleased PARI
     - patches/use-sages-ratpoints.patch
+    # work around changed cdd output in version 094h
+    - patches/u1-version-cddlib-094h.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
