@@ -35,7 +35,7 @@ source:
     - patches/u1-version-cddlib-094h.patch
 
 build:
-  number: 4
+  number: 5
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
