@@ -1,3 +1,5 @@
+c_compiler:
+- toolchain_c
 cxx_compiler:
 - toolchain_cxx
 glpk:
@@ -10,6 +12,10 @@ libpng:
 - 1.6.34
 mpfr:
 - '4'
+ntl:
+- 10.3.0
+openblas:
+- 0.2.20
 pin_run_as_build:
   glpk:
     max_pin: x.x
@@ -21,11 +27,13 @@ pin_run_as_build:
     max_pin: x.x
   mpfr:
     max_pin: x
+  openblas:
+    max_pin: x.x.x
   python:
+    max_pin: x.x
     min_pin: x.x
-    max_pin: x.x
   readline:
-    max_pin: x.x
+    max_pin: x
   zlib:
     max_pin: x.x
 python:
