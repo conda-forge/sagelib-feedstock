@@ -35,7 +35,7 @@ source:
     - patches/u1-version-cddlib-094h.patch
 
 build:
-  number: 5
+  number: 6
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
@@ -43,16 +43,19 @@ build:
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
     - libtool
     - automake
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - {{ compiler('cxx') }}
 
   host:
     - pip
     - setuptools
     - arb 2.12.*
     - blas 1.1 {{ variant }}
-    - openblas 0.2.20|0.2.20.*
+    - openblas
     - brial 1.2.*
     - cliquer 1.21
     - cypari2 >=1.1.4
@@ -82,8 +85,8 @@ requirements:
     - mpc 1.1.*
     - mpfi 1.5.*
     - mpfr
-    - ntl 10.3.*
-    - numpy 1.13.*
+    - ntl
+    - {{ pin_compatible('numpy') }}
     - pari 2.9.5
     - pkgconfig
     - planarity 3.*
@@ -113,7 +116,7 @@ requirements:
   run:
     - arb 2.12.*
     - blas 1.1 {{ variant }}
-    - openblas 0.2.20|0.2.20.*
+    - openblas
     - brial 1.2.*
     - cliquer 1.21
     - cypari2 1.1.4
@@ -144,8 +147,8 @@ requirements:
     - mpc 1.1.*
     - mpfi 1.5.*
     - mpfr
-    - ntl 10.3.*
-    - numpy >=1.13
+    - ntl
+    - {{ pin_compatible('numpy') }}
     - pari 2.9.5
     - pkgconfig
     - planarity 3.*
