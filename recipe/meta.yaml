@@ -45,8 +45,6 @@ requirements:
   build:
     - libtool
     - automake
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
   host:
     - {{ compiler('cxx') }}
 
