@@ -1,4 +1,4 @@
-{% set version = "8.2" %}
+{% set version = "8.3" %}
 {% set name = "sagelib" %}
 {% set variant = "openblas" %}
 
@@ -9,7 +9,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: 41ba2c2dde7a02e1bb6880ae875d37ab058567cc26e760efe87eeb12188cd65b
+  sha256: 41fd0b4eb820f7a1274e12294b6fbdbbf60d0027bff98c22fdc84da140964929
   patches:
     # sage patches cython to include sys.path, workaround that
     - patches/Fix-cython-bug.patch
@@ -35,7 +35,7 @@ source:
     - patches/u1-version-cddlib-094h.patch
 
 build:
-  number: 5
+  number: 0
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
