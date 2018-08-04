@@ -110,7 +110,7 @@ requirements:
   # things do not work. To get all the standard dependencies of Sage, install
   # the "sage" package (which requires this "sagelib" package.)
   run:
-    - arb 2.12.*
+    - arb 2.13.*
     - blas 1.1 {{ variant }}
     - openblas
     - brial 1.2.*
