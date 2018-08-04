@@ -26,9 +26,11 @@ source:
     - patches/use-sages-ratpoints.patch
     # fix a compile error with c++11
     - patches/0007-drop-struct-keyword.patch
+    # compatibility with cddlib 0.94j so we can use gfan
+    - patches/cddlib-094j.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
