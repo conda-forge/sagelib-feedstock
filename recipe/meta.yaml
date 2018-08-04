@@ -31,6 +31,7 @@ source:
     - patches/fix_cache_file_length.patch
     # undo upgrade to an unreleased PARI
     - patches/use-sages-ratpoints.patch
+    - patches/0007-drop-struct-keyword.patch
 
 build:
   number: 0

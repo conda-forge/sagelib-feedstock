@@ -1,0 +1,66 @@
+From 27b93b83ea88f0115863485a69f6cfa5d05c0344 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Julian=20R=C3=BCth?= <julian.rueth@fsfe.org>
+Date: Sat, 4 Aug 2018 14:24:35 +0200
+Subject: [PATCH] Drop struct keyword
+
+I am not entirely sure what's the problem here, probably C++11 vs C++14. I
+think that in C++ you do not need the struct keyword here (as opposed to C at
+some point) and it actually causes a compile error with c++11.
+---
+ src/sage/libs/eclib/wrap.cpp | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/src/sage/libs/eclib/wrap.cpp b/src/sage/libs/eclib/wrap.cpp
+index 5fd5693b53..30ac35e545 100644
+--- a/src/sage/libs/eclib/wrap.cpp
++++ b/src/sage/libs/eclib/wrap.cpp
+@@ -73,17 +73,17 @@ char* Curvedata_repr(struct Curvedata* curve)
+   return stringstream_to_char(instore);
+ }
+ 
+-double Curvedata_silverman_bound(const struct Curvedata* curve)
++double Curvedata_silverman_bound(const Curvedata* curve)
+ {
+   return silverman_bound(*curve);
+ }
+ 
+-double Curvedata_cps_bound(const struct Curvedata* curve)
++double Curvedata_cps_bound(const Curvedata* curve)
+ {
+   return cps_bound(*curve);
+ }
+ 
+-double Curvedata_height_constant(const struct Curvedata* curve)
++double Curvedata_height_constant(const Curvedata* curve)
+ {
+   return height_constant(*curve);
+ }
+@@ -133,8 +133,8 @@ char* Curvedata_isogeny_class(struct Curvedata* E, int verbose)
+ 
+ 
+ int mw_process(struct Curvedata* curve, struct mw* m,
+-                      const struct bigint* x, const struct bigint* y,
+-                      const struct bigint* z, int sat)
++                      const bigint* x, const bigint* y,
++                      const bigint* z, int sat)
+ {
+   Point P(*curve, *x, *y, *z);
+   if (!P.isvalid())
+@@ -238,12 +238,12 @@ char* two_descent_get_basis(struct two_descent* t)
+   return p2point_vector_to_str(t->getbasis());
+ }
+ 
+-int two_descent_ok(const struct two_descent* t)
++int two_descent_ok(const two_descent* t)
+ {
+   return t->ok();
+ }
+ 
+-long two_descent_get_certain(const struct two_descent* t)
++long two_descent_get_certain(const two_descent* t)
+ {
+   return t->getcertain();
+ }
+-- 
+2.18.0
+
