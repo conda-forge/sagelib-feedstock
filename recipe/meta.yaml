@@ -28,9 +28,11 @@ source:
     - patches/0007-drop-struct-keyword.patch
     # compatibility with cddlib 0.94j so we can use gfan
     - patches/cddlib-094j.patch
+    # print like numpy 1.13 even if we are running > 1.13
+    - patches/numpy113-printing.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:

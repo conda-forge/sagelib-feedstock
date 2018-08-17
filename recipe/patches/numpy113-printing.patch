@@ -1,0 +1,20 @@
+diff --git a/src/sage/doctest/forker.py b/src/sage/doctest/forker.py
+index 19313e9725..d65fb26f74 100644
+--- a/src/sage/doctest/forker.py
++++ b/src/sage/doctest/forker.py
+@@ -172,6 +172,15 @@ def init_sage():
+         from sympy.printing.pretty.stringpict import stringPict
+         stringPict.terminal_width = lambda self:0
+ 
++    import numpy
++    try:
++        # Have numpy print arrays as Sage expects them
++        numpy.set_printoptions(legacy='1.13')
++    except TypeError:
++        # The legacy option is not supported for numpy <1.14, but there we do
++        # not need to adapt the array printing.
++        pass
++
+ 
+ def showwarning_with_traceback(message, category, filename, lineno, file=None, line=None):
+     r"""
