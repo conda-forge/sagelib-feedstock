@@ -28,9 +28,11 @@ source:
     - patches/0007-drop-struct-keyword.patch
     # compatibility with cddlib 0.94j so we can use gfan
     - patches/cddlib-094j.patch
+    # upgrade to sympy as we ship that version in conda-forge 1.2
+    - patches/sympy-12.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
