@@ -28,9 +28,11 @@ source:
     - patches/0007-drop-struct-keyword.patch
     # compatibility with cddlib 0.94j so we can use gfan
     - patches/cddlib-094j.patch
+    # upgrade to sympy as we ship that version in conda-forge 1.2
+    - patches/sympy-12.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
@@ -82,6 +84,7 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - pari 2.9.5
     - pkgconfig
+    - pkg-config
     - planarity 3.*
     - ppl 1.2
     - pynac 0.7.22
