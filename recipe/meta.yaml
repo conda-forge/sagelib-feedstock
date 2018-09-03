@@ -84,6 +84,7 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - pari 2.9.5
     - pkgconfig
+    - pkg-config
     - planarity 3.*
     - ppl 1.2
     - pynac 0.7.22
