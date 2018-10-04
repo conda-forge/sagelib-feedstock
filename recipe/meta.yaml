@@ -30,6 +30,8 @@ source:
     - patches/cddlib-094j.patch
     # print like numpy 1.13 even if we are running > 1.13
     - patches/numpy113-printing.patch
+    # upgrade to sympy as we ship that version in conda-forge 1.2
+    - patches/sympy-12.patch
 
 build:
   number: 2
@@ -84,6 +86,7 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - pari 2.9.5
     - pkgconfig
+    - pkg-config
     - planarity 3.*
     - ppl 1.2
     - pynac 0.7.22
