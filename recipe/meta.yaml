@@ -28,6 +28,8 @@ source:
     - patches/0007-drop-struct-keyword.patch
     # compatibility with cddlib 0.94j so we can use gfan
     - patches/cddlib-094j.patch
+    # print like numpy 1.13 even if we are running > 1.13
+    - patches/numpy113-printing.patch
     # upgrade to sympy as we ship that version in conda-forge 1.2
     - patches/sympy-12.patch
 
