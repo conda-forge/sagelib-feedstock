@@ -10,11 +10,9 @@ some point) and it actually causes a compile error with c++11.
  src/sage/libs/eclib/wrap.cpp | 16 ++++++++--------
  1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/src/sage/libs/eclib/wrap.cpp b/src/sage/libs/eclib/wrap.cpp
-index 5fd5693b53..84da3d7f9a 100644
 --- a/src/sage/libs/eclib/wrap.cpp
 +++ b/src/sage/libs/eclib/wrap.cpp
-@@ -73,17 +73,17 @@ char* Curvedata_repr(struct Curvedata* curve)
+@@ -73,17 +73,17 @@
    return stringstream_to_char(instore);
  }
  
@@ -35,7 +33,7 @@ index 5fd5693b53..84da3d7f9a 100644
  {
    return height_constant(*curve);
  }
-@@ -133,8 +133,8 @@ char* Curvedata_isogeny_class(struct Curvedata* E, int verbose)
+@@ -133,8 +133,8 @@
  
  
  int mw_process(struct Curvedata* curve, struct mw* m,
@@ -46,7 +44,7 @@ index 5fd5693b53..84da3d7f9a 100644
  {
    Point P(*curve, *x, *y, *z);
    if (!P.isvalid())
-@@ -188,7 +188,7 @@ int mw_rank(struct mw* m)
+@@ -188,7 +188,7 @@
  }
  
  /* Returns index and unsat long array, which user must deallocate */
@@ -55,7 +53,7 @@ index 5fd5693b53..84da3d7f9a 100644
                         long sat_bd, int odd_primes_only)
  {
    vector<long> v;
-@@ -238,12 +238,12 @@ char* two_descent_get_basis(struct two_descent* t)
+@@ -238,12 +238,12 @@
    return p2point_vector_to_str(t->getbasis());
  }
  
@@ -70,6 +68,3 @@ index 5fd5693b53..84da3d7f9a 100644
  {
    return t->getcertain();
  }
--- 
-2.18.0
-
