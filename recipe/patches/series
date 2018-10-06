@@ -1,0 +1,12 @@
+# We keep a series file for quilt around to help with rebasing patches and also
+# to apply these patches when running automated tests at
+# https://gitlab.com/saraedum/conda-sagelib-tests/pipelines
+Fix-cython-bug.patch
+sage-env.patch
+disable-sage-location.patch
+0006-no-spkg-doctest.patch
+fix_cache_file_length.patch
+use-sages-ratpoints.patch
+0007-drop-struct-keyword.patch
+cddlib-094j.patch
+sympy-12.patch
