@@ -32,7 +32,7 @@ source:
     - patches/sympy-12.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
@@ -80,7 +80,8 @@ requirements:
     - mpc 1.1.*
     - mpfi 1.5.*
     - mpfr
-    - ntl
+    # we need at least 11.2.0 as our earlier builds of ntl do not correctly export their run requirements
+    - ntl >=11.2.0
     - {{ pin_compatible('numpy') }}
     - pari 2.9.5
     - pkgconfig
