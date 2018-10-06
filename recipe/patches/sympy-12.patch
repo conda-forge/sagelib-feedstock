@@ -1,8 +1,6 @@
 Upgrade to sympy 1.2
 
 see https://trac.sagemath.org/ticket/26117 for the upstream issue
-diff --git a/build/pkgs/sympy/checksums.ini b/build/pkgs/sympy/checksums.ini
-index 17c6faf..c052050 100644
 --- a/build/pkgs/sympy/checksums.ini
 +++ b/build/pkgs/sympy/checksums.ini
 @@ -1,4 +1,4 @@
@@ -13,16 +11,11 @@ index 17c6faf..c052050 100644
 +sha1=7f149e0fab7dc0572fa2396c055decceaf384e03
 +md5=11b24840f5740bb03feddb7d60c18a67
 +cksum=1213046999
-diff --git a/build/pkgs/sympy/package-version.txt b/build/pkgs/sympy/package-version.txt
-index 7316ed6..d5b3ae3 100644
 --- a/build/pkgs/sympy/package-version.txt
 +++ b/build/pkgs/sympy/package-version.txt
 @@ -1 +1 @@
 -1.1.1.p0
 +1.2.p0
-diff --git a/build/pkgs/sympy/patches/prec-to-precision-in-core-numbers.patch b/build/pkgs/sympy/patches/prec-to-precision-in-core-numbers.patch
-deleted file mode 100644
-index df66661..00000000
 --- a/build/pkgs/sympy/patches/prec-to-precision-in-core-numbers.patch
 +++ /dev/null
 @@ -1,24 +0,0 @@
@@ -50,11 +43,9 @@ index df66661..00000000
 --- 
 -2.15.1
 -
-diff --git a/src/sage/functions/gamma.py b/src/sage/functions/gamma.py
-index de4cd27..2701c9c 100644
 --- a/src/sage/functions/gamma.py
 +++ b/src/sage/functions/gamma.py
-@@ -516,9 +516,9 @@ class Function_gamma_inc_lower(BuiltinFunction):
+@@ -516,9 +516,9 @@
              sage: gamma_inc_lower(2,377/79)
              -456/79*e^(-377/79) + 1
              sage: gamma_inc_lower(3,x)
@@ -66,11 +57,9 @@ index de4cd27..2701c9c 100644
          """
          if y == 0:
              return 0
-diff --git a/src/sage/interfaces/sympy.py b/src/sage/interfaces/sympy.py
-index 1288ca6..a6f2823 100644
 --- a/src/sage/interfaces/sympy.py
 +++ b/src/sage/interfaces/sympy.py
-@@ -324,8 +324,9 @@ def _sympysage_derivative(self):
+@@ -324,8 +324,9 @@
          sage: assert diff(f(x),x) == sympy_diff._sage_()
      """
      from sage.calculus.functional import derivative
@@ -82,7 +71,7 @@ index 1288ca6..a6f2823 100644
  
  def _sympysage_order(self):
      """
-@@ -504,7 +505,7 @@ def _sympysage_piecewise(self):
+@@ -504,7 +505,7 @@
  
          sage: _ = var('y, z')
          sage: (x^y - z).integrate(y, algorithm="sympy")
@@ -91,11 +80,9 @@ index 1288ca6..a6f2823 100644
      """
      from sage.functions.other import cases
      return cases([(p.cond._sage_(),p.expr._sage_()) for p in self.args])
-diff --git a/src/sage/symbolic/expression_conversions.py b/src/sage/symbolic/expression_conversions.py
-index dd8986f..7eed50a 100644
 --- a/src/sage/symbolic/expression_conversions.py
 +++ b/src/sage/symbolic/expression_conversions.py
-@@ -815,7 +815,7 @@ class SympyConverter(Converter):
+@@ -815,7 +815,7 @@
              sage: df_sage = f_sage.diff(x, 2, y, 1); df_sage
              diff(f_sage(x, y), x, x, y)
              sage: df_sympy = df_sage._sympy_(); df_sympy
@@ -104,11 +91,9 @@ index dd8986f..7eed50a 100644
              sage: df_sympy == f_sympy.diff(x, 2, y, 1)
              True
          """
-diff --git a/src/sage/symbolic/integration/integral.py b/src/sage/symbolic/integration/integral.py
-index 9818af4..86357a0 100644
 --- a/src/sage/symbolic/integration/integral.py
 +++ b/src/sage/symbolic/integration/integral.py
-@@ -521,7 +521,7 @@ def integrate(expression, v=None, a=None, b=None, algorithm=None, hold=False):
+@@ -521,7 +521,7 @@
          sage: (x^y - z).integrate(y)
          -y*z + x^y/log(x)
          sage: (x^y - z).integrate(y, algorithm="sympy")
@@ -117,11 +102,9 @@ index 9818af4..86357a0 100644
  
      We integrate the above function in Maple now::
  
-diff --git a/src/sage/symbolic/relation.py b/src/sage/symbolic/relation.py
-index 89ff688..8926279 100644
 --- a/src/sage/symbolic/relation.py
 +++ b/src/sage/symbolic/relation.py
-@@ -914,13 +914,13 @@ def solve(f, *args, **kwds):
+@@ -916,13 +916,13 @@
      print them::
  
          sage: solve(sinh(x) - 2*cosh(x),x,algorithm='sympy')

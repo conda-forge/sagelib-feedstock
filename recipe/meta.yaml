@@ -82,7 +82,7 @@ requirements:
     - mpc 1.1.*
     - mpfi 1.5.*
     - mpfr
-    - ntl
+    - ntl 10.3.0
     - {{ pin_compatible('numpy') }}
     - pari 2.9.5
     - pkgconfig
@@ -145,7 +145,8 @@ requirements:
     - mpc 1.1.*
     - mpfi 1.5.*
     - mpfr
-    - ntl
+    # ntl 10.3.0 does not export run dependencies so we need to pin manually
+    - ntl 10.3.0
     - {{ pin_compatible('numpy') }}
     - pari 2.9.5
     - pkgconfig

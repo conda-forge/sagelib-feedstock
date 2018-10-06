@@ -1,8 +1,6 @@
-diff --git a/src/sage/misc/package.py b/src/sage/misc/package.py
-index 6242d2d357..4ebda265a2 100644
 --- a/src/sage/misc/package.py
 +++ b/src/sage/misc/package.py
-@@ -211,55 +211,11 @@ def list_packages(*pkg_types, **opts):
+@@ -210,55 +210,11 @@
          sage: list_packages('pip', exclude_pip=True)
          {}
      """
@@ -63,7 +61,7 @@ index 6242d2d357..4ebda265a2 100644
  
  
  def installed_packages(exclude_pip=True):
-@@ -280,13 +236,11 @@ def installed_packages(exclude_pip=True):
+@@ -279,13 +235,11 @@
  
          :func:`sage.misc.package.list_packages`
      """

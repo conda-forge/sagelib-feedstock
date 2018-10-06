@@ -7,18 +7,13 @@ Subject: [PATCH] Fix cython bug
  src/setup.py | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/src/setup.py b/src/setup.py
-index 4d20a0f..25d9d79 100755
 --- a/src/setup.py
 +++ b/src/setup.py
-@@ -409,6 +409,7 @@ class sage_build_ext(build_ext):
+@@ -367,6 +367,7 @@
              compiler_directives=self.cython_directives,
              compile_time_env=self.compile_time_env,
              create_extension=self.create_extension,
 +            include_path=sys.path,
              # Debugging
-             gdb_debug=debug,
-             output_dir=SAGE_CYTHONIZED,
--- 
-2.7.4
-
+             gdb_debug=self.debug,
+             output_dir=os.path.join(self.build_lib, "sage"),
