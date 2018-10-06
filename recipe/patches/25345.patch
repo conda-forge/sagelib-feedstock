@@ -1,11 +1,9 @@
 Backport of https://trac.sagemath.org/ticket/25345
 
 to reduce some noise in https://github.com/conda-forge/sagelib-feedstock/issues/19
-diff --git a/src/doc/common/conf.py b/src/doc/common/conf.py
-index 4dcd3e16ad..07e6244f2e 100644
 --- a/src/doc/common/conf.py
 +++ b/src/doc/common/conf.py
-@@ -607,9 +607,9 @@ def call_intersphinx(app, env, node, contnode):
+@@ -621,9 +621,9 @@
      Check that the link from the thematic tutorials to the reference
      manual is relative, see :trac:`20118`::
  
@@ -18,11 +16,9 @@ index 4dcd3e16ad..07e6244f2e 100644
          ....:     if "padics" in line:
          ....:         sys.stdout.write(line)
          <li><a class="reference external" href="../reference/padics/sage/rings/padics/tutorial.html#sage-rings-padics-tutorial" title="(in Sage Reference Manual: p-Adics v...)"><span>Introduction to the -adics</span></a></li>
-diff --git a/src/doc/en/developer/doctesting.rst b/src/doc/en/developer/doctesting.rst
-index bd57c43270..db85554656 100644
 --- a/src/doc/en/developer/doctesting.rst
 +++ b/src/doc/en/developer/doctesting.rst
-@@ -659,7 +659,7 @@ function in the global namespace, passing it either a string or a module::
+@@ -659,7 +659,7 @@
      sage: run_doctests(sage.combinat.affine_permutation)
      Running doctests with ID 2018-02-07-13-23-13-89fe17b1.
      Git branch: develop
@@ -31,7 +27,7 @@ index bd57c43270..db85554656 100644
      Doctesting 1 file.
      sage -t /opt/sage/sage_stable/src/sage/combinat/affine_permutation.py
          [338 tests, 4.32 s]
-@@ -799,7 +799,7 @@ optional packages.
+@@ -799,7 +799,7 @@
  
  By default, Sage only runs doctests that are not marked with the ``optional`` tag.  This is equivalent to running ::
  
@@ -40,7 +36,7 @@ index bd57c43270..db85554656 100644
      Running doctests with ID 2012-06-21-16-18-30-a368a200.
      Doctesting 1 file.
      sage -t src/sage/rings/real_mpfr.pyx
-@@ -813,7 +813,7 @@ By default, Sage only runs doctests that are not marked with the ``optional`` ta
+@@ -813,7 +813,7 @@
  
  If you want to also run tests that require magma, you can do the following::
  
@@ -49,7 +45,7 @@ index bd57c43270..db85554656 100644
      Running doctests with ID 2012-06-21-16-18-30-a00a7319
      Doctesting 1 file.
      sage -t src/sage/rings/real_mpfr.pyx
-@@ -825,7 +825,7 @@ If you want to also run tests that require magma, you can do the following::
+@@ -825,7 +825,7 @@
          cpu time: 4.0 seconds
          cumulative wall time: 8.4 seconds
  
@@ -58,7 +54,7 @@ index bd57c43270..db85554656 100644
  
      [roed@sage sage-6.0]$ sage -t --optional=magma src/sage/rings/real_mpfr.pyx
      Running doctests with ID 2012-06-21-16-18-33-a2bc1fdf
-@@ -1000,7 +1000,7 @@ appear in real time use the ``--verbose`` flag).  To have doctests run
+@@ -1000,7 +1000,7 @@
  under the control of gdb, use the ``--gdb`` flag::
  
      [roed@sage sage-6.0]$ sage -t --gdb src/sage/schemes/elliptic_curves/constructor.py
@@ -67,11 +63,9 @@ index bd57c43270..db85554656 100644
      GNU gdb 6.8-debian
      Copyright (C) 2008 Free Software Foundation, Inc.
      License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
-diff --git a/src/sage/doctest/control.py b/src/sage/doctest/control.py
-index 7a9e71ae7a..9d972b6585 100644
 --- a/src/sage/doctest/control.py
 +++ b/src/sage/doctest/control.py
-@@ -87,7 +87,7 @@ class DocTestDefaults(SageObject):
+@@ -87,7 +87,7 @@
          self.sagenb = False
          self.long = False
          self.warn_long = None
@@ -80,7 +74,7 @@ index 7a9e71ae7a..9d972b6585 100644
          self.randorder = None
          self.global_iterations = 1  # sage-runtests default is 0
          self.file_iterations = 1    # sage-runtests default is 0
-@@ -351,7 +351,8 @@ class DocTestController(SageObject):
+@@ -343,7 +343,8 @@
                      if not optionaltag_regex.search(o):
                          raise ValueError('invalid optional tag {!r}'.format(o))
  
@@ -90,7 +84,7 @@ index 7a9e71ae7a..9d972b6585 100644
  
          self.options = options
          self.files = args
-@@ -749,7 +750,7 @@ class DocTestController(SageObject):
+@@ -741,7 +742,7 @@
              sage: DC = DocTestController(DD, [dirname])
              sage: DC.expand_files_into_sources()
              sage: sorted(DC.sources[0].options.optional)  # abs tol 1
@@ -99,7 +93,7 @@ index 7a9e71ae7a..9d972b6585 100644
  
          We check that files are skipped appropriately::
  
-@@ -976,7 +977,7 @@ class DocTestController(SageObject):
+@@ -968,7 +969,7 @@
              sage: from sage.doctest.control import DocTestDefaults, DocTestController
              sage: DC = DocTestController(DocTestDefaults(), [])
              sage: DC._optional_tags_string()
@@ -108,11 +102,9 @@ index 7a9e71ae7a..9d972b6585 100644
              sage: DC = DocTestController(DocTestDefaults(optional="all,and,some,more"), [])
              sage: DC._optional_tags_string()
              'all'
-diff --git a/src/sage/misc/sagedoc.py b/src/sage/misc/sagedoc.py
-index 3f45b587b4..0eaf623d7c 100644
 --- a/src/sage/misc/sagedoc.py
 +++ b/src/sage/misc/sagedoc.py
-@@ -18,9 +18,9 @@ TESTS:
+@@ -18,9 +18,9 @@
  Check that argspecs of extension function/methods appear correctly,
  see :trac:`12849`::
  
@@ -125,7 +117,7 @@ index 3f45b587b4..0eaf623d7c 100644
      ....:     for line in fobj:
      ....:         if "#sage.symbolic.expression.Expression.numerical_approx" in line:
      ....:             print(line)
-@@ -800,11 +800,12 @@ def _search_src_or_doc(what, string, extra1='', extra2='', extra3='',
+@@ -790,11 +790,12 @@
  
      ::
  
@@ -141,7 +133,7 @@ index 3f45b587b4..0eaf623d7c 100644
          True
      """
      # process keywords
-@@ -1170,9 +1171,9 @@ def search_doc(string, extra1='', extra2='', extra3='', extra4='',
+@@ -1160,9 +1161,9 @@
      counting the length of ``search_doc('tree',
      interact=False).splitlines()`` gives the number of matches. ::
  
@@ -153,7 +145,7 @@ index 3f45b587b4..0eaf623d7c 100644
          True
      """
      return _search_src_or_doc('doc', string, extra1=extra1, extra2=extra2,
-@@ -1342,9 +1343,9 @@ class _sage_doc:
+@@ -1332,9 +1333,9 @@
  
      EXAMPLES::
  
@@ -165,7 +157,7 @@ index 3f45b587b4..0eaf623d7c 100644
          'Full MatrixSpace of 3 by 3 sparse matrices over Integer Ring'
      """
      def __init__(self):
-@@ -1504,9 +1505,9 @@ class _sage_doc:
+@@ -1494,9 +1495,9 @@
  
          EXAMPLES::
  

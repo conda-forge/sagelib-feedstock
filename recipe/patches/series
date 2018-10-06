@@ -10,3 +10,4 @@ use-sages-ratpoints.patch
 0007-drop-struct-keyword.patch
 cddlib-094j.patch
 sympy-12.patch
+25345.patch
