@@ -30,11 +30,13 @@ source:
     - patches/cddlib-094j.patch
     # upgrade to sympy as we ship that version in conda-forge 1.2
     - patches/sympy-12.patch
+    # upgrade to numpy 1.15.2
+    - patches/25260.patch
     # disable doctests that require built HTML documentation
     - patches/25345.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
