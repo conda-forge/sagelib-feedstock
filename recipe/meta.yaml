@@ -32,6 +32,8 @@ source:
     - patches/sympy-12.patch
     # upgrade to numpy 1.15.2
     - patches/25260.patch
+    # disable doctests that require built HTML documentation
+    - patches/25345.patch
 
 build:
   number: 4
