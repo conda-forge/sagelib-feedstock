@@ -34,7 +34,7 @@ source:
     - patches/25260.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
