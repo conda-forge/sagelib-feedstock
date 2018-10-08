@@ -34,9 +34,11 @@ source:
     - patches/25260.patch
     # disable doctests that require built HTML documentation
     - patches/25345.patch
+    # fix introspection with ? and ??
+    - patches/25786.patch
 
 build:
-  number: 4
+  number: 5
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
