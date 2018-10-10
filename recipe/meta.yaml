@@ -90,8 +90,6 @@ requirements:
     - mpc 1.1.*
     - mpfi 1.5.*
     - mpfr
-    # Since we apply 26326, we can only work with NetworkX 2.2
-    - networkx 2.2
     - ntl 10.3.0
     - {{ pin_compatible('numpy') }}
     - pari 2.9.5
@@ -155,6 +153,8 @@ requirements:
     - mpc 1.1.*
     - mpfi 1.5.*
     - mpfr
+    # Since we apply 26326, we can only work with NetworkX 2.2
+    - networkx 2.2
     # ntl 10.3.0 does not export run dependencies so we need to pin manually
     - ntl 10.3.0
     - {{ pin_compatible('numpy') }}
