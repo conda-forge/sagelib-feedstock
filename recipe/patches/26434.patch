@@ -1,0 +1,193 @@
+Do not require installed_packages() to render threejs
+
+see https://trac.sagemath.org/ticket/26434
+--- a/src/sage/repl/rich_output/backend_ipython.py
++++ b/src/sage/repl/rich_output/backend_ipython.py
+@@ -397,33 +397,6 @@
+         """
+         return True
+ 
+-    def threejs_offline_scripts(self):
+-        """
+-        Three.js scripts for the IPython command line
+-
+-        OUTPUT:
+-
+-        String containing script tags
+-
+-        EXAMPLES::
+-
+-            sage: from sage.repl.rich_output.backend_ipython import BackendIPythonCommandline
+-            sage: backend = BackendIPythonCommandline()
+-            sage: backend.threejs_offline_scripts()
+-            '...<script ...</script>...'
+-        """
+-        from sage.env import SAGE_SHARE
+-
+-        scripts = [os.path.join(SAGE_SHARE, 'threejs', script)
+-                   for script in ['three.min.js', 'OrbitControls.js']]
+-
+-        if sys.platform == 'cygwin':
+-            import cygwin
+-            scripts = [cygwin.cygpath(script, 'w') for script in scripts]
+-
+-        return '\n'.join('<script src="{0}"></script>'.format(script)
+-                         for script in scripts)
+-
+ 
+ IFRAME_TEMPLATE = \
+ """
+@@ -581,28 +554,3 @@
+             }, {})
+         else:
+             raise TypeError('rich_output type not supported')
+-
+-    def threejs_offline_scripts(self):
+-        """
+-        Three.js scripts for the IPython notebook
+-
+-        OUTPUT:
+-
+-        String containing script tags
+-
+-        EXAMPLES::
+-
+-            sage: from sage.repl.rich_output.backend_ipython import BackendIPythonNotebook
+-            sage: backend = BackendIPythonNotebook()
+-            sage: backend.threejs_offline_scripts()
+-            '...<script src="/nbextensions/threejs/three.min...<\\/script>...'
+-        """
+-        from sage.repl.rich_output import get_display_manager
+-        CDN_scripts = get_display_manager().threejs_scripts(online=True)
+-        return """
+-<script src="/nbextensions/threejs/three.min.js"></script>
+-<script src="/nbextensions/threejs/OrbitControls.js"></script>
+-<script>
+-  if ( !window.THREE ) document.write('{}');
+-</script>
+-        """.format(CDN_scripts.replace('</script>', r'<\/script>'))
+--- a/src/sage/repl/rich_output/backend_sagenb.py
++++ b/src/sage/repl/rich_output/backend_sagenb.py
+@@ -452,21 +452,3 @@
+             url='cell://' + filename,
+             link_attrs='class="file_link"',
+         ))
+-
+-    def threejs_offline_scripts(self):
+-        """
+-        Three.js scripts for the Sage notebook
+-
+-        OUTPUT:
+-
+-        String containing script tags
+-
+-        EXAMPLES::
+-
+-            sage: from sage.repl.rich_output.backend_sagenb import BackendSageNB
+-            sage: backend = BackendSageNB()
+-            sage: backend.threejs_offline_scripts()
+-            '...<script ...</script>...'
+-        """
+-        from sage.repl.rich_output import get_display_manager
+-        return get_display_manager().threejs_scripts(online=True)
+--- a/src/sage/repl/rich_output/display_manager.py
++++ b/src/sage/repl/rich_output/display_manager.py
+@@ -26,6 +26,7 @@
+ 
+ # ****************************************************************************
+ #       Copyright (C) 2015 Volker Braun <vbraun.name@gmail.com>
++#                     2018 Julian Rüth <julian.rueth@fsfe.org>
+ #
+ #  Distributed under the terms of the GNU General Public License (GPL)
+ #  as published by the Free Software Foundation; either version 2 of
+@@ -33,8 +34,9 @@
+ #                  http://www.gnu.org/licenses/
+ # ****************************************************************************
+ 
+-
+ import warnings
++import os
++import sys
+ 
+ from sage.structure.sage_object import SageObject
+ from sage.repl.rich_output.output_basic import (
+@@ -715,47 +717,52 @@
+         buf = OutputBuffer.from_file(filename)
+         return output_container(buf)
+ 
+-    def threejs_scripts(self, online):
++    def threejs_scripts(self, from_cdn=True):
+         """
+-        Return Three.js script tags for the current backend.
++        Return three.js script tags for the current backend.
+ 
+         INPUT:
+ 
+-        - ``online`` -- Boolean determining script usage context
+-
+-        OUTPUT:
+-
+-        String containing script tags
+-
+-        .. NOTE::
+-
+-            This base method handles ``online=True`` case only, serving CDN
+-            script tags. Location of scripts for offline usage is
+-            backend-specific.
++        - ``from_cdn`` -- a boolean (default: ``True``); wheter
++          to serve the scripts from a content delivery network
+ 
+         EXAMPLES::
+ 
+             sage: from sage.repl.rich_output import get_display_manager
+-            sage: get_display_manager().threejs_scripts(online=True)
++            sage: get_display_manager().threejs_scripts(from_cdn=True)
+             '...<script src="https://cdn.rawgit.com/mrdoob/three.js/...'
+-            sage: get_display_manager().threejs_scripts(online=False)
+-            Traceback (most recent call last):
+-            ...
+-            ValueError: current backend does not support
+-            offline threejs graphics
++            sage: get_display_manager().threejs_scripts(from_cdn=False)
++            '...THREE...'
++
+         """
+-        if online:
+-            from sage.misc.package import installed_packages
+-            version = installed_packages()['threejs'].split('.')[0]
++        version = 'r80'
++
++        # make sure we do not forget to upgrade the hard-coded version number above when we upgrade the SPKG
++        from sage.misc.package import installed_packages
++        packages = installed_packages()
++        if 'threejs' in packages:
++            spkg_version = packages['threejs'].split('.')[0]
++            if spkg_version != version:
++                raise NotImplementedError("expected version {0} to be installed but found {1}; did you upgrade the threejs SPKG without changing the hard-coded version number in the source code?".format(version, spkg_version))
++
++        if from_cdn:
++            # Serve three.js from GitHub
+             return """
+ <script src="https://cdn.rawgit.com/mrdoob/three.js/{0}/build/three.min.js"></script>
+ <script src="https://cdn.rawgit.com/mrdoob/three.js/{0}/examples/js/controls/OrbitControls.js"></script>
+             """.format(version)
+-        try:
+-            return self._backend.threejs_offline_scripts()
+-        except AttributeError:
+-            raise ValueError(
+-                'current backend does not support offline threejs graphics')
++        else:
++            # Serve three.js from the local system (SPKG)
++            from sage.env import THREEJS_DIR
++            scripts = [os.path.join(THREEJS_DIR, script) for script in ['three.min.js', 'OrbitControls.js']]
++            if sys.platform == 'cygwin':
++                import cygwin
++                scripts = [cygwin.cygpath(script, 'w') for script in scripts]
++            # We emit the full script instead of <script src=...> tags as we do
++            # not know where the scripts reside relative to the webserver root
++            # or whether they are accessible at all; for a related issue see
++            # https://github.com/jupyterhub/jupyterhub/issues/1574.
++            return '\n'.join('<script>{0}</script>'.format(open(script).read()) for script in scripts)
+ 
+     def supported_output(self):
+         """
