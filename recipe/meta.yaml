@@ -38,9 +38,11 @@ source:
     - patches/25786.patch
     # fix threejs display in jupyter
     - patches/26434.patch
+    # make things work with NetworkX 2.2
+    - patches/26326.patch
 
 build:
-  number: 6
+  number: 7
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
@@ -88,6 +90,8 @@ requirements:
     - mpc 1.1.*
     - mpfi 1.5.*
     - mpfr
+    # Since we apply 26326, we can only work with NetworkX 2.2
+    - networkx 2.2
     - ntl 10.3.0
     - {{ pin_compatible('numpy') }}
     - pari 2.9.5
