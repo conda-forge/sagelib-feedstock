@@ -36,9 +36,11 @@ source:
     - patches/25345.patch
     # fix introspection with ? and ??
     - patches/25786.patch
+    # fix threejs display in jupyter
+    - patches/26434.patch
 
 build:
-  number: 5
+  number: 6
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
