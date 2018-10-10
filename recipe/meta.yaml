@@ -153,8 +153,6 @@ requirements:
     - mpc 1.1.*
     - mpfi 1.5.*
     - mpfr
-    # Since we apply 26326, we can only work with NetworkX 2.2
-    - networkx 2.2
     # ntl 10.3.0 does not export run dependencies so we need to pin manually
     - ntl 10.3.0
     - {{ pin_compatible('numpy') }}
@@ -176,6 +174,10 @@ requirements:
     - ipython >=5
     - psutil >=5
     - pexpect >=4
+
+  run_constrained:
+    # Since we apply 26326, we can only work with NetworkX 2.2
+    - networkx 2.2
 
 test:
   requires:
