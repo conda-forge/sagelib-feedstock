@@ -38,11 +38,9 @@ source:
     - patches/25786.patch
     # fix threejs display in jupyter
     - patches/26434.patch
-    # make things work with NetworkX 2.2
-    - patches/26326.patch
 
 build:
-  number: 7
+  number: 8
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
@@ -176,8 +174,8 @@ requirements:
     - pexpect >=4
 
   run_constrained:
-    # Since we apply 26326, we can only work with NetworkX 2.2
-    - networkx 2.2
+    # Without 26326, we can not work with NetworkX 2.2 yet
+    - networkx 2.1
 
 test:
   requires:
