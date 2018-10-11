@@ -1,5 +1,9 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge main
 cxx_compiler:
 - toolchain_cxx
 glpk:
@@ -16,8 +20,6 @@ macos_min_version:
 - '10.9'
 mpfr:
 - '4'
-ntl:
-- 10.3.0
 openblas:
 - 0.2.20
 pin_run_as_build:
