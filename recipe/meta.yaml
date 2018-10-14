@@ -40,9 +40,11 @@ source:
     - patches/26434.patch
     # support sphinx 1.8.1
     - patches/26451.patch
+    # fix R hangs
+    - patches/25806.patch
 
 build:
-  number: 9
+  number: 10
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
