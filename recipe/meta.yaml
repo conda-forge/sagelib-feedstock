@@ -1,6 +1,5 @@
 {% set version = "8.3" %}
 {% set name = "sagelib" %}
-{% set variant = "openblas" %}
 
 package:
   name: {{ name }}
@@ -44,25 +43,26 @@ source:
     - patches/25806.patch
 
 build:
-  number: 10
+  number: 11
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   features:
-    - blas_{{ variant }}
 
 requirements:
   build:
     - libtool
     - automake
   host:
+    - libblas
+    - libcblas
     - {{ compiler('cxx') }}
 
   host:
+    - libblas
+    - libcblas
     - pip
     - setuptools
     - arb 2.13.*
-    - blas 1.1 {{ variant }}
-    - openblas
     - brial 1.2.*
     - cliquer 1.21
     - cypari2 >=1.1.4
@@ -123,8 +123,6 @@ requirements:
   # the "sage" package (which requires this "sagelib" package.)
   run:
     - arb 2.13.*
-    - blas 1.1 {{ variant }}
-    - openblas
     - brial 1.2.*
     - cliquer 1.21
     - cypari2 1.1.4
