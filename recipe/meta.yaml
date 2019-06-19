@@ -11,14 +11,13 @@ source:
   sha256: 7cd194e15bb4238bd17e085e3b406954823f40e540d6662fb357ba2d785fc013
   patches:
     # don't do sanity checks as we are not in a source build
-    #- patches/sage-env.patch
+    - patches/sage-env.patch
     # disable sage-location since conda handles that and sage-location breaks
     # conda scripts
-    #- patches/disable-sage-location.patch
+    - patches/disable-sage-location.patch
     # fix too long file name
-    #- patches/fix_cache_file_length.patch
-    # fix a compile error with c++11
-    #- patches/0007-drop-struct-keyword.patch
+    - patches/fix_cache_file_length.patch
+    - patches/26932.diff
 
 build:
   number: 0
