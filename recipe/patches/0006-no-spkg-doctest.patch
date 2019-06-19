@@ -1,7 +1,9 @@
+diff --git a/src/sage/misc/package.py b/src/sage/misc/package.py
+index ff74259f49..0b1b441dcb 100644
 --- a/src/sage/misc/package.py
 +++ b/src/sage/misc/package.py
-@@ -210,55 +210,11 @@
-         sage: list_packages('pip', exclude_pip=True)
+@@ -217,56 +217,11 @@ def list_packages(*pkg_types, **opts):
+         sage: list_packages('pip', exclude_pip=True)  # optional - build
          {}
      """
 -    if not pkg_types:
@@ -19,6 +21,7 @@
 -    installed = installed_packages(exclude_pip)
 -
 -    pkgs = {}
+-    SAGE_PKGS = sage.env.SAGE_PKGS
 -    for p in os.listdir(SAGE_PKGS):
 -        try:
 -            f = open(os.path.join(SAGE_PKGS, p, "type"))
@@ -56,21 +59,21 @@
 +    # Without https://trac.sagemath.org/ticket/20382 Sage has no way of detecting
 +    # which packages are available in this conda environment. This is mostly used
 +    # to decide which optional doctests so run, so it is safe to pretend that no
-+    # packages are available.
++    # packages are installed.
 +    return {}
  
  
  def installed_packages(exclude_pip=True):
-@@ -279,13 +235,11 @@
+@@ -287,13 +242,11 @@ def installed_packages(exclude_pip=True):
  
          :func:`sage.misc.package.list_packages`
      """
--    from sage.env import SAGE_SPKG_INST
 -    installed = {}
 -    if not exclude_pip:
 -        installed.update(pip_installed_packages())
 -    # Sage packages should override pip packages (Trac #23997)
--    installed.update(pkgname_split(pkgname) for pkgname in os.listdir(SAGE_SPKG_INST))
+-    installed.update(pkgname_split(pkgname)
+-                     for pkgname in os.listdir(sage.env.SAGE_SPKG_INST))
 -    return installed
 +    # Without https://trac.sagemath.org/ticket/20382 Sage has no way of detecting
 +    # which packages are available in this conda environment. This is mostly used

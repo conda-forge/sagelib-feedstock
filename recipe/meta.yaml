@@ -1,6 +1,5 @@
-{% set version = "8.3" %}
+{% set version = "8.8.rc1" %}
 {% set name = "sagelib" %}
-{% set variant = "openblas" %}
 
 package:
   name: {{ name }}
@@ -9,110 +8,93 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: 41fd0b4eb820f7a1274e12294b6fbdbbf60d0027bff98c22fdc84da140964929
+  sha256: 7cd194e15bb4238bd17e085e3b406954823f40e540d6662fb357ba2d785fc013
   patches:
-    # sage patches cython to include sys.path, workaround that
-    - patches/Fix-cython-bug.patch
+    - patches/0006-no-spkg-doctest.patch
     # don't do sanity checks as we are not in a source build
     - patches/sage-env.patch
     # disable sage-location since conda handles that and sage-location breaks
     # conda scripts
     - patches/disable-sage-location.patch
-    # mostly remove SPKG interface until we have #20382 (Sage 8.3)
-    - patches/0006-no-spkg-doctest.patch
     # fix too long file name
     - patches/fix_cache_file_length.patch
-    # undo upgrade to an unreleased PARI
-    - patches/use-sages-ratpoints.patch
-    # fix a compile error with c++11
-    - patches/0007-drop-struct-keyword.patch
-    # compatibility with cddlib 0.94j so we can use gfan
-    - patches/cddlib-094j.patch
-    # upgrade to sympy as we ship that version in conda-forge 1.2
-    - patches/sympy-12.patch
-    # upgrade to numpy 1.15.2
-    - patches/25260.patch
-    # disable doctests that require built HTML documentation
-    - patches/25345.patch
-    # fix introspection with ? and ??
-    - patches/25786.patch
-    # fix threejs display in jupyter
-    - patches/26434.patch
-    # support sphinx 1.8.1
-    - patches/26451.patch
-    # fix R hangs
-    - patches/25806.patch
+    - patches/26932.diff
 
 build:
-  number: 10
+  number: 0
   skip: true  # [win]
   skip: true  # [py3k and py<36]
-  features:
-    - blas_{{ variant }}
 
 requirements:
   build:
     - libtool
     - automake
-  host:
     - {{ compiler('cxx') }}
-
+    - {{ compiler('c') }}
   host:
     - pip
     - setuptools
-    - arb 2.13.*
-    - blas 1.1 {{ variant }}
-    - openblas
-    - brial 1.2.*
-    - cliquer 1.21
-    - cypari2 >=1.1.4
-    - cysignals 1.7.*
-    - cython >=0.28.2
-    - ecl 16.1.*
-    - eclib >=20171002
-    - ecm 7.*
+    - libblas
+    - libcblas
+    - liblapack
+    - liblapacke
+    - arb           2.16.*
+    - brial         1.2.*
+    - libbrial      1.2.*
+    - cliquer       1.21.*
+    - cypari2       2.1.*
+    - cysignals     1.10.*
+    - cython        0.29.*
+    # There are issues with ecl 16.1.3
+    - ecl           16.1.2
+    - eclib         20190226
+    - ecm           7.*
     - future
+    - gap-core      4.10.*
     - glpk
     - gmp
+    - gmpy2         2.1.*
     - gsl
-    - iml 1.0.*
-    - jinja2 2.10.*
-    - jupyter_core 4.*
-    - lcalc 1.23
-    - lrcalc 1.2
-    - libflint 2.5.*
-    - libgap 4.8.6
-    - libgd 2.2.*
+    - iml           1.0.*
+    - jinja2        2.10.*
+    - jupyter_core  4.*
+    - lcalc         1.23
+    - lrcalc        1.2
+    - libbraiding   1.0
+    - libflint      2.5.*
+    - libgd         2.2.*
+    - libhomfly     1.02.*
     - libpng
-    - linbox 1.5.*
+    - linbox        1.6.*
     - givaro
     - fflas-ffpack
-    - m4ri >=20140914
-    - m4rie >=20150908
-    - mpc 1.1.*
-    - mpfi 1.5.*
+    - m4ri          20140914
+    - m4rie         20150908
+    - mpc           1.1.*
+    - mpfi          1.5.*
     - mpfr
-    - ntl 10.3.0
-    - {{ pin_compatible('numpy') }}
-    - pari 2.9.5
+    - ntl
+    - numpy
+    - pari
     - pkgconfig
     - pkg-config
-    - planarity 3.*
-    - ppl 1.2
-    - pynac 0.7.22
+    - planarity     3.*
+    - ppl           1.2
+    - pplpy         0.8.*
+    - pynac         0.7.25
     - python
-    - ratpoints 2.1.*
+    - ratpoints     2.1.*
     - readline
-    - rw 0.7
-    - singular 4.1.*
+    - rw            0.7
+    - singular
     - six
-    - symmetrica 2.0
+    - symmetrica    2.0
     - zlib
-    - zn_poly 0.9
+    - zn_poly       0.9.*
     # sageruntime deps
-    - ipython >=5
-    - psutil >=5
-    - pexpect >=4
+    - ipython       >=5,<6
+    - psutil        >=5
+    - pexpect       >=4
 
   # We can not include all actual runtime dependencies of Sage here as some of
   # them require Sage to build, such as some of the database packages.
@@ -122,69 +104,67 @@ requirements:
   # things do not work. To get all the standard dependencies of Sage, install
   # the "sage" package (which requires this "sagelib" package.)
   run:
-    - arb 2.13.*
-    - blas 1.1 {{ variant }}
-    - openblas
-    - brial 1.2.*
-    - cliquer 1.21
-    - cypari2 1.1.4
-    - cysignals 1.7.*
-    - cython >=0.28.2
-    - ecl 16.1.*
-    - eclib >=20171002
-    - ecm 7.*
+    - arb
+    - {{ pin_compatible("libbrial", max_pin="x.x") }}
+    - {{ pin_compatible("cliquer", max_pin="x.x") }}
+    - {{ pin_compatible("cypari2") }}
+    - {{ pin_compatible("cysignals") }}
+    - {{ pin_compatible("cython") }}
+    - {{ pin_compatible("ecl", max_pin="x.x") }}
+    - eclib
+    - {{ pin_compatible("ecm") }}
     - future
+    - {{ pin_compatible("gap-core", max_pin="x.x") }}
     - glpk
     - gmp
+    - {{ pin_compatible("gmpy2", max_pin="x.x") }}
     - gsl
-    - iml 1.0.*
-    - jinja2 2.10.*
-    - jupyter_core 4.*
-    - lcalc 1.23
-    - lrcalc 1.2
-    - libflint 2.5.*
-    - libgap 4.8.6
-    - libgd 2.2.*
+    - {{ pin_compatible("iml", max_pin="x.x") }}
+    - {{ pin_compatible("jinja2", max_pin="x.x") }}
+    - {{ pin_compatible("jupyter_core") }}
+    - {{ pin_compatible("lcalc", max_pin="x.x") }}
+    - {{ pin_compatible("lrcalc", max_pin="x.x") }}
+    - {{ pin_compatible("libbraiding", max_pin="x.x") }}
+    - {{ pin_compatible("libflint", max_pin="x.x") }}
+    - {{ pin_compatible("libgd", max_pin="x.x") }}
+    - {{ pin_compatible("libhomfly", max_pin="x.x") }}
     - libpng
-    - linbox 1.5.*
+    - {{ pin_compatible("linbox", max_pin="x.x") }}
     - givaro
     - fflas-ffpack
     - matplotlib
-    - m4ri >=20140914
-    - m4rie >=20150908
-    - mpc 1.1.*
-    - mpfi 1.5.*
+    - m4ri
+    - {{ pin_compatible("m4rie") }}
+    - mpc
+    - mpfi
     - mpfr
-    # ntl 10.3.0 does not export run dependencies so we need to pin manually
-    - ntl 10.3.0
-    - {{ pin_compatible('numpy') }}
-    - pari 2.9.5
+    - ntl
+    - {{ pin_compatible("numpy") }}
+    - pari
     - pkgconfig
-    - planarity 3.*
-    - ppl 1.2
-    - pynac 0.7.22
+    - {{ pin_compatible("planarity") }}
+    - {{ pin_compatible("ppl", max_pin="x.x") }}
+    - {{ pin_compatible("pplpy", max_pin="x.x") }}
+    - {{ pin_compatible("pynac", max_pin="x.x.x") }}
     - python
-    - ratpoints 2.1.*
+    - {{ pin_compatible("ratpoints", max_pin="x.x") }}
     - readline
-    - rw 0.7
-    - singular 4.1.*
+    - {{ pin_compatible("rw", max_pin="x.x") }}
+    - singular
     - six
-    - symmetrica 2.0
+    - {{ pin_compatible("symmetrica", max_pin="x.x") }}
     - zlib
-    - zn_poly 0.9
+    - {{ pin_compatible("zn_poly", max_pin="x.x") }}
     # sageruntime deps
-    - ipython >=5
-    - psutil >=5
-    - pexpect >=4
-
-  run_constrained:
-    # Without 26326, we can not work with NetworkX 2.2 yet
-    - networkx 2.1
+    - ipython       >=5,<6
+    - psutil        >=5
+    - pexpect       >=4
 
 test:
   requires:
     # Sage's doctesting framework uses a pretty printing command from sympy
     - sympy
+    - ipywidgets
   source_files:
     - src/sage/version.py
   imports:
