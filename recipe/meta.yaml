@@ -10,6 +10,7 @@ source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
   sha256: 7cd194e15bb4238bd17e085e3b406954823f40e540d6662fb357ba2d785fc013
   patches:
+    - patches/0006-no-spkg-doctest.patch
     # don't do sanity checks as we are not in a source build
     - patches/sage-env.patch
     # disable sage-location since conda handles that and sage-location breaks
@@ -39,6 +40,7 @@ requirements:
     - liblapacke
     - arb           2.16.*
     - brial         1.2.*
+    - libbrial      1.2.*
     - cliquer       1.21.*
     - cypari2       2.1.*
     - cysignals     1.10.*
@@ -47,7 +49,7 @@ requirements:
     - eclib         20190226
     - ecm           7.*
     - future
-    - gap           4.10.*
+    - gap-core      4.10.*
     - glpk
     - gmp
     - gmpy2         2.1.*
@@ -102,7 +104,7 @@ requirements:
   # the "sage" package (which requires this "sagelib" package.)
   run:
     - arb
-    - {{ pin_compatible("brial", max_pin="x.x") }}
+    - {{ pin_compatible("libbrial", max_pin="x.x") }}
     - {{ pin_compatible("cliquer", max_pin="x.x") }}
     - {{ pin_compatible("cypari2") }}
     - {{ pin_compatible("cysignals") }}
@@ -111,7 +113,7 @@ requirements:
     - eclib
     - {{ pin_compatible("ecm") }}
     - future
-    - {{ pin_compatible("gap", max_pin="x.x") }}
+    - {{ pin_compatible("gap-core", max_pin="x.x") }}
     - glpk
     - gmp
     - {{ pin_compatible("gmpy2", max_pin="x.x") }}
@@ -161,6 +163,7 @@ test:
   requires:
     # Sage's doctesting framework uses a pretty printing command from sympy
     - sympy
+    - ipywidgets
   source_files:
     - src/sage/version.py
   imports:
