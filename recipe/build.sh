@@ -52,3 +52,4 @@ cp "$RECIPE_DIR/activate/activate.sh" "$PREFIX/etc/conda/activate.d/sage-activat
 cp "$RECIPE_DIR/activate/deactivate.sh" "$PREFIX/etc/conda/deactivate.d/sage-deactivate.sh"
 
 ln -s $PREFIX/bin/python $PREFIX/bin/sage-python23
+rm $PREFIX/lib64
