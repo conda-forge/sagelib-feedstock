@@ -21,7 +21,7 @@ source:
     - patches/26932.diff
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   skip: true  # [py3k and py<36]
 
@@ -86,7 +86,7 @@ requirements:
     - ratpoints     2.1.*
     - readline
     - rw            0.7
-    - singular
+    - singular      4.1.1
     - six
     - symmetrica    2.0
     - zlib
