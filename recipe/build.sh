@@ -41,10 +41,10 @@ python -u setup.py build
 python -u setup.py install >/dev/null 2>&1
 
 # TODO: Add these in corresponding packages
-#rm "$PREFIX/share/jupyter/kernels/sagemath/doc"
-#rm "$PREFIX/share/jupyter/nbextensions/mathjax"
-#rm "$PREFIX/share/jupyter/nbextensions/jsmol"
-#rm "$PREFIX/share/jupyter/nbextensions/threejs"
+rm "$PREFIX/share/jupyter/kernels/sagemath/doc"
+rm "$PREFIX/share/jupyter/nbextensions/mathjax"
+rm "$PREFIX/share/jupyter/nbextensions/jsmol"
+rm "$PREFIX/share/jupyter/nbextensions/threejs"
 
 mkdir -p "$PREFIX/etc/conda/activate.d"
 mkdir -p "$PREFIX/etc/conda/deactivate.d"
