@@ -1,4 +1,4 @@
-{% set version = "8.8.rc1" %}
+{% set version = "8.8" %}
 {% set name = "sagelib" %}
 
 package:
@@ -8,7 +8,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: 7cd194e15bb4238bd17e085e3b406954823f40e540d6662fb357ba2d785fc013
+  sha256: d012ff4f0f34e086fcaf576e25220fc647826116c69b62b887bc0b8ced5c1e9f
   patches:
     - patches/0006-no-spkg-doctest.patch
     # don't do sanity checks as we are not in a source build
@@ -21,7 +21,7 @@ source:
     - patches/26932.diff
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
   skip: true  # [py3k and py<36]
 
