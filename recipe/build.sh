@@ -53,3 +53,5 @@ cp "$RECIPE_DIR/activate/deactivate.sh" "$PREFIX/etc/conda/deactivate.d/sage-dea
 
 ln -s $PREFIX/bin/python $PREFIX/bin/sage-python23
 rm $PREFIX/lib64
+
+echo "$PREFIX" > "$PREFIX/lib/sage-current-location.txt"

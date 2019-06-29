@@ -2,7 +2,6 @@
 # to apply these patches when running automated tests at
 # https://gitlab.com/saraedum/conda-sagelib-tests/pipelines
 0006-no-spkg-doctest.patch
-disable-sage-location.patch
 sage-env.patch
 26932.diff
 fix_cache_file_length.patch
