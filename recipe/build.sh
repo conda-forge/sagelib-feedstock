@@ -16,7 +16,7 @@ export SAGE_EXTCODE="$SAGE_SHARE/sage/ext"
 export SAGE_SPKG_INST="$SAGE_LOCAL/var/lib/sage/installed"
 export SAGE_DOC="$SAGE_SHARE/doc/sage"
 export SAGE_ROOT=`pwd`
-
+export MATHJAX_DIR="$SAGE_LOCAL/lib/python*/site-packages/notebook/static/components/MathJax"
 
 ln -s "$PREFIX" local
 export SAGE_NUM_THREADS=$CPU_COUNT
@@ -42,9 +42,6 @@ python -u setup.py install >/dev/null 2>&1
 
 # TODO: Add these in corresponding packages
 rm "$PREFIX/share/jupyter/kernels/sagemath/doc"
-rm "$PREFIX/share/jupyter/nbextensions/mathjax"
-rm "$PREFIX/share/jupyter/nbextensions/jsmol"
-rm "$PREFIX/share/jupyter/nbextensions/threejs"
 
 mkdir -p "$PREFIX/etc/conda/activate.d"
 mkdir -p "$PREFIX/etc/conda/deactivate.d"
