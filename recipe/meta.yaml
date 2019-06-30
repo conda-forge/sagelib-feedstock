@@ -16,6 +16,7 @@ source:
     - patches/26932.diff
     - patches/28007.diff
     - patches/28086.diff
+    - patches/28038.diff
 
 build:
   number: 0
@@ -166,6 +167,7 @@ test:
     # Sage's doctesting framework uses a pretty printing command from sympy
     - sympy
     - ipywidgets
+    - pip
   source_files:
     - src/sage/version.py
   imports:
