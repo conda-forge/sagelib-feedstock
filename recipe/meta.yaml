@@ -10,7 +10,6 @@ source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
   sha256: d012ff4f0f34e086fcaf576e25220fc647826116c69b62b887bc0b8ced5c1e9f
   patches:
-    - patches/0006-no-spkg-doctest.patch
     - patches/28083.diff
     - patches/25786.patch
     - patches/28014.patch

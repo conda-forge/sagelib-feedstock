@@ -55,3 +55,6 @@ ln -s $PREFIX/bin/python $PREFIX/bin/sage-python23
 rm $PREFIX/lib64
 
 echo "$PREFIX" > "$PREFIX/lib/sage-current-location.txt"
+
+mkdir -p "$PREFIX/var/lib/sage/installed"
+touch "$PREFIX/var/lib/sage/installed/.conda"
