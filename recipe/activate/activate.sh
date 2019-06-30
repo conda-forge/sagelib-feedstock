@@ -12,5 +12,4 @@ fi
 
 export SAGE_ROOT="$CONDA_PREFIX"
 export SAGE_LOCAL="$CONDA_PREFIX"
-export MATHJAX_DIR="$SAGE_LOCAL/lib/python*/site-packages/notebook/static/components/MathJax"
-export SAGE_PKGS="$PREFIX/var/lib/sage/installed"
+export SAGE_PKGS="$CONDA_PREFIX/var/lib/sage/installed"
