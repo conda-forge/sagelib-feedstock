@@ -11,11 +11,12 @@ source:
   sha256: d012ff4f0f34e086fcaf576e25220fc647826116c69b62b887bc0b8ced5c1e9f
   patches:
     - patches/0006-no-spkg-doctest.patch
-    # don't do sanity checks as we are not in a source build
-    - patches/sage-env.patch
-    # fix too long file name
-    - patches/fix_cache_file_length.patch
+    - patches/28083.diff
+    - patches/25786.patch
+    - patches/28014.patch
     - patches/26932.diff
+    - patches/28007.diff
+    - patches/28086.diff
 
 build:
   number: 0

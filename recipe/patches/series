@@ -2,6 +2,9 @@
 # to apply these patches when running automated tests at
 # https://gitlab.com/saraedum/conda-sagelib-tests/pipelines
 0006-no-spkg-doctest.patch
-sage-env.patch
+28083.diff
 26932.diff
-fix_cache_file_length.patch
+28014.patch
+25786.patch
+28007.diff
+28086.diff

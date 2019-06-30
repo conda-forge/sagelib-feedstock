@@ -12,5 +12,7 @@ fi
 
 export SAGE_ROOT="$CONDA_PREFIX"
 export SAGE_LOCAL="$CONDA_PREFIX"
+export THREEJS_DIR="$SAGE_LOCAL/lib/node_modules/three"
+export JSMOL_DIR="$SAGE_LOCAL/share/jmol/jsmol"
+export MATHJAX_DIR="$SAGE_LOCAL/lib/python*/site-packages/notebook/static/components/MathJax"
 
-#source "$CONDA_PREFIX/bin/sage-env"
