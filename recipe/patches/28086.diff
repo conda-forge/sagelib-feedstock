@@ -8,7 +8,7 @@ index f76be0d..6fdd232 100644
          if online:
 -            from sage.misc.package import installed_packages
 -            version = installed_packages()['threejs'].split('.')[0]
-+            import sage.env, re
++            import sage.env, re, os
 +            with open(os.path.join(sage.env.THREEJS_DIR, 'build', 'three.min.js')) as f:
 +                text = f.read()
 +            version = re.search("REVISION=\"(\d+)\"", text).group(1)
