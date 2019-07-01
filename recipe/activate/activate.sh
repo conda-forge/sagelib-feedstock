@@ -13,3 +13,4 @@ fi
 export SAGE_ROOT="$CONDA_PREFIX"
 export SAGE_LOCAL="$CONDA_PREFIX"
 export SAGE_PKGS="$CONDA_PREFIX/var/lib/sage/installed"
+export SAGE_DOC_SRC="$CONDA_PREFIX/share/sage/docsrc"
