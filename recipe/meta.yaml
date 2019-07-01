@@ -1,4 +1,4 @@
-{% set version = "8.8.rc1" %}
+{% set version = "8.8" %}
 {% set name = "sagelib" %}
 
 package:
@@ -8,20 +8,18 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: 7cd194e15bb4238bd17e085e3b406954823f40e540d6662fb357ba2d785fc013
+  sha256: d012ff4f0f34e086fcaf576e25220fc647826116c69b62b887bc0b8ced5c1e9f
   patches:
-    - patches/0006-no-spkg-doctest.patch
-    # don't do sanity checks as we are not in a source build
-    - patches/sage-env.patch
-    # disable sage-location since conda handles that and sage-location breaks
-    # conda scripts
-    - patches/disable-sage-location.patch
-    # fix too long file name
-    - patches/fix_cache_file_length.patch
+    - patches/28083.diff
+    - patches/25786.patch
+    - patches/28014.patch
     - patches/26932.diff
+    - patches/28007.diff
+    - patches/28086.diff
+    - patches/28038.diff
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
   skip: true  # [py3k and py<36]
 
@@ -95,6 +93,10 @@ requirements:
     - ipython       >=5,<6
     - psutil        >=5
     - pexpect       >=4
+    # for the symlinks
+    - three.js
+    - notebook      >=5.7.6,<6
+    - jmol
 
   # We can not include all actual runtime dependencies of Sage here as some of
   # them require Sage to build, such as some of the database packages.
@@ -165,6 +167,7 @@ test:
     # Sage's doctesting framework uses a pretty printing command from sympy
     - sympy
     - ipywidgets
+    - pip
   source_files:
     - src/sage/version.py
   imports:

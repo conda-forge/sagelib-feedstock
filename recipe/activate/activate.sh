@@ -12,5 +12,4 @@ fi
 
 export SAGE_ROOT="$CONDA_PREFIX"
 export SAGE_LOCAL="$CONDA_PREFIX"
-
-#source "$CONDA_PREFIX/bin/sage-env"
+export SAGE_PKGS="$CONDA_PREFIX/var/lib/sage/installed"
