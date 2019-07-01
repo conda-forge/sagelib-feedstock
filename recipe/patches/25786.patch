@@ -60,7 +60,7 @@ index 4270294..fa62413 100644
  from sphinx.application import Sphinx
  
  
-@@ -82,12 +81,35 @@ def sphinxify(docstring, format='html'):
+@@ -82,12 +81,38 @@ def sphinxify(docstring, format='html'):
      with open(rst_name, 'w') as filed:
          filed.write(docstring)
  
@@ -71,6 +71,9 @@ index 4270294..fa62413 100644
 +    os.makedirs(confdir)
 +    with open(os.path.join(confdir, 'conf.py'), 'w') as filed:
 +        filed.write(r"""
++import sys, sage.env
++sys.path.append(sage.env.SAGE_DOC_SRC)
++from common.conf import *
 +extensions = ['sphinx.ext.autodoc', 'sphinx.ext.mathjax', 'sphinx.ext.todo', 'sphinx.ext.extlinks']
 +
 +templates_path = ['templates']
