@@ -1,4 +1,4 @@
-{% set version = "8.8" %}
+{% set version = "8.9.beta5" %}
 {% set name = "sagelib" %}
 
 package:
@@ -8,18 +8,10 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: d012ff4f0f34e086fcaf576e25220fc647826116c69b62b887bc0b8ced5c1e9f
-  patches:
-    - patches/28083.diff
-    - patches/25786.patch
-    - patches/28014.patch
-    - patches/26932.diff
-    - patches/28007.diff
-    - patches/28086.diff
-    - patches/28038.diff
+  sha256: 5ef7bde2bb666a52e88c167e8fff8aff8aa51b328d38602de1fb53f919a4de89
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
   skip: true  # [py3k and py<36]
 
@@ -37,6 +29,7 @@ requirements:
     - liblapack
     - liblapacke
     - arb           2.16.*
+    - boost-cpp
     - brial         1.2.*
     - libbrial      1.2.*
     - cliquer       1.21.*
