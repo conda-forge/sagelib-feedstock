@@ -29,6 +29,7 @@ requirements:
     - liblapack
     - liblapacke
     - arb           2.16.*
+    - boost-cpp
     - brial         1.2.*
     - libbrial      1.2.*
     - cliquer       1.21.*
