@@ -7,9 +7,9 @@ c_compiler:
 c_compiler_version:
 - '4'
 channel_sources:
-- conda-forge,defaults
+- conda-forge/label/sagedev,conda-forge,defaults
 channel_targets:
-- conda-forge main
+- conda-forge sagedev
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
