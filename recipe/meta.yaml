@@ -11,7 +11,7 @@ source:
   sha256: 5ef7bde2bb666a52e88c167e8fff8aff8aa51b328d38602de1fb53f919a4de89
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py3k and py<36]
 
@@ -127,7 +127,6 @@ requirements:
     - {{ pin_compatible("linbox", max_pin="x.x") }}
     - givaro
     - fflas-ffpack
-    - matplotlib
     - m4ri
     - {{ pin_compatible("m4rie") }}
     - mpc
@@ -136,7 +135,6 @@ requirements:
     - ntl
     - {{ pin_compatible("numpy") }}
     - pari
-    - pkgconfig
     - {{ pin_compatible("planarity") }}
     - {{ pin_compatible("ppl", max_pin="x.x") }}
     - {{ pin_compatible("pplpy", max_pin="x.x") }}
