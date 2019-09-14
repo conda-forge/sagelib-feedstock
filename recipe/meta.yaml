@@ -11,7 +11,7 @@ source:
   sha256: 2a0bdd12f974fe15ecc5307e11a966b0f363f4b233a780b856bd3d59de6e9550
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py3k and py<36]
 
@@ -57,8 +57,8 @@ requirements:
     - libhomfly     1.02.*
     - libpng
     - linbox        1.6.*
-    - givaro
-    - fflas-ffpack
+    - givaro        4.1.*
+    - fflas-ffpack  2.4.*
     - m4ri          20140914
     - m4rie         20150908
     - mpc           1.1.*
@@ -72,7 +72,7 @@ requirements:
     - planarity     3.*
     - ppl           1.2
     - pplpy         0.8.*
-    - pynac         0.7.25
+    - pynac         0.7.26
     - python
     - ratpoints     2.1.*
     - readline
