@@ -59,11 +59,6 @@ touch "$PREFIX/var/lib/sage/installed/.conda"
 
 mkdir -p "$PREFIX/share/sage/docsrc"
 cp -r "$SRC_DIR/src/doc/common" "$PREFIX/share/sage/docsrc/"
-
-mv $PREFIX/bin/sage-env $PREFIX/bin/sage-env2
-echo '#!/bin/bash' > $PREFIX/bin/sage-env
-echo 'export SAGE_LOCAL=${SAGE_LOCAL:-'${PREFIX}'}' >> $PREFIX/bin/sage-env
-echo 'export SAGE_ROOT=${SAGE_ROOT:-'${PREFIX}'}' >> $PREFIX/bin/sage-env
-echo 'export SAGE_DOC_SRC=$SAGE_LOCAL/share/sage/docsrc' >> $PREFIX/bin/sage-env
-chmod +x $SAGE_LOCAL/bin/sage-env
-
+sed -i.bak 's@export SAGE_DOC_SRC=.*@export SAGE_DOC_SRC="$SAGE_LOCAL/share/sage/docsrc"@g' $PREFIX/bin/sage-env
+sed -i.bak 's@dpkg-architecture@dpkg-architecture2@g' $PREFIX/bin/sage-env
+rm $PREFIX/bin/sage-env.bak
