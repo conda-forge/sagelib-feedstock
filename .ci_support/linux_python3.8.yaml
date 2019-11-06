@@ -1,19 +1,19 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '10.9'
 boost_cpp:
 - 1.70.0
 c_compiler:
-- clang
+- gcc
 c_compiler_version:
-- '9'
+- '7'
 channel_sources:
 - conda-forge/label/sagedev,conda-forge,defaults
 channel_targets:
 - conda-forge sagedev
 cxx_compiler:
-- clangxx
+- gxx
 cxx_compiler_version:
-- '9'
+- '7'
+docker_image:
+- condaforge/linux-anvil-comp7
 glpk:
 - '4.65'
 gmp:
@@ -30,10 +30,6 @@ liblapacke:
 - 3.8.0 *netlib
 libpng:
 - '1.6'
-macos_machine:
-- x86_64-apple-darwin13.4.0
-macos_min_version:
-- '10.9'
 mpfr:
 - '4'
 ntl:
@@ -61,7 +57,7 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- '2.7'
+- '3.8'
 readline:
 - '8.0'
 singular:
