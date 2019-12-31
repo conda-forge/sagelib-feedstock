@@ -18,6 +18,7 @@ export SAGE_DOC="$SAGE_SHARE/doc/sage"
 export SAGE_ROOT=`pwd`
 export MATHJAX_DIR="$SAGE_LOCAL/lib/python$PY_VER/site-packages/notebook/static/components/MathJax"
 
+ln -s "$PREFIX/bin/python" "$PREFIX/bin/sage-system-python"
 ln -s "$PREFIX" local
 export SAGE_NUM_THREADS=$CPU_COUNT
 
