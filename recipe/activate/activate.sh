@@ -10,7 +10,10 @@ if [[ -n "$SAGE_LOCAL" ]]; then
     export _CONDA_SAGE_LOCAL=$SAGE_LOCAL
 fi
 
+if [[ -n "$SAGE_PKGS" ]]; then
+    export _CONDA_SAGE_PKGS=$SAGE_PKGS
+fi
+
 export SAGE_ROOT="$CONDA_PREFIX"
 export SAGE_LOCAL="$CONDA_PREFIX"
 export SAGE_PKGS="$CONDA_PREFIX/var/lib/sage/installed"
-export SAGE_DOC_SRC="$CONDA_PREFIX/share/sage/docsrc"

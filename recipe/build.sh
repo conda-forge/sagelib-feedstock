@@ -18,6 +18,7 @@ export SAGE_DOC="$SAGE_SHARE/doc/sage"
 export SAGE_ROOT=`pwd`
 export MATHJAX_DIR="$SAGE_LOCAL/lib/python$PY_VER/site-packages/notebook/static/components/MathJax"
 
+ln -s "$PREFIX/bin/python" "$PREFIX/bin/sage-system-python"
 ln -s "$PREFIX" local
 export SAGE_NUM_THREADS=$CPU_COUNT
 
@@ -56,9 +57,3 @@ echo "$PREFIX" > "$PREFIX/lib/sage-current-location.txt"
 
 mkdir -p "$PREFIX/var/lib/sage/installed"
 touch "$PREFIX/var/lib/sage/installed/.conda"
-
-mkdir -p "$PREFIX/share/sage/docsrc"
-cp -r "$SRC_DIR/src/doc/common" "$PREFIX/share/sage/docsrc/"
-sed -i.bak 's@export SAGE_DOC_SRC=.*@export SAGE_DOC_SRC="$SAGE_LOCAL/share/sage/docsrc"@g' $PREFIX/bin/sage-env
-sed -i.bak 's@dpkg-architecture@dpkg-architecture2@g' $PREFIX/bin/sage-env
-rm $PREFIX/bin/sage-env.bak
