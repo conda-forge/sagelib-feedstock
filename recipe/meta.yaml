@@ -1,4 +1,4 @@
-{% set version = "8.9" %}
+{% set version = "9.0" %}
 {% set name = "sagelib" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: 4f9f18a08142fed69342b58ffc6221ec16fe8daf1042086b351e1308489ec5d4
+  sha256: 6f5d42b306a2c03073dd95086f80602bd1a0b929b8ad19c6d219c8ca8e96da26
 
 build:
   number: 0
@@ -38,7 +38,7 @@ requirements:
     - cython        0.29.*
     # There are issues with ecl 16.1.3
     - ecl           16.1.2
-    - eclib         20190226
+    - eclib         20190909
     - ecm           7.*
     - future
     - gap-core      4.10.*
