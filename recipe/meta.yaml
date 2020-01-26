@@ -10,7 +10,7 @@ source:
   sha256: 6f5d42b306a2c03073dd95086f80602bd1a0b929b8ad19c6d219c8ca8e96da26
 
 build:
-  number: 0
+  number: 2
   skip: true  # [win]
   skip: true  # [py3k and py<36]
 
@@ -35,7 +35,7 @@ requirements:
     - cliquer       1.21.*
     - cypari2       2.1.*
     - cysignals     1.10.*
-    - cython        0.29.*
+    - cython        >=0.29.12
     # There are issues with ecl 16.1.3
     - ecl           16.1.2
     - eclib         20190909
@@ -56,7 +56,7 @@ requirements:
     - libgd         2.2.*
     - libhomfly     1.02.*
     - libpng
-    - linbox        1.6.*
+    - linbox        >=1.6.3
     - givaro        4.1.*
     - fflas-ffpack  2.4.*
     - m4ri          20140914
@@ -83,13 +83,13 @@ requirements:
     - zlib
     - zn_poly       0.9.*
     # sageruntime deps
-    - ipython       >=5,<6
+    - ipython       >=5.8.0,<6
     - psutil        >=5
-    - pexpect       >=4
+    - pexpect       >=4.6.0,<5
     # for the symlinks
     - three.js
     - notebook      >=5.7.6,<6
-    - jmol
+    - jmol          >=14.6.1,<15
 
   # We can not include all actual runtime dependencies of Sage here as some of
   # them require Sage to build, such as some of the database packages.
@@ -149,9 +149,9 @@ requirements:
     - zlib
     - {{ pin_compatible("zn_poly", max_pin="x.x") }}
     # sageruntime deps
-    - ipython       >=5,<6
+    - ipython       >=5.8.0,<6
     - psutil        >=5
-    - pexpect       >=4
+    - pexpect       >=4.6.0,<5
 
 test:
   requires:
