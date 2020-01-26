@@ -10,7 +10,7 @@ source:
   sha256: 6f5d42b306a2c03073dd95086f80602bd1a0b929b8ad19c6d219c8ca8e96da26
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py3k and py<36]
 
@@ -28,7 +28,7 @@ requirements:
     - libcblas
     - liblapack
     - liblapacke
-    - arb           2.16.*
+    - arb           2.17.*
     - boost-cpp
     - brial         1.2.*
     - libbrial      1.2.*
