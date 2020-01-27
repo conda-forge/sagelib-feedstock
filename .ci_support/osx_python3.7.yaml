@@ -1,5 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
+arb:
+- '2.17'
 boost_cpp:
 - 1.70.0
 c_compiler:
