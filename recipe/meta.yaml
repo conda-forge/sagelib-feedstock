@@ -10,7 +10,7 @@ source:
   sha256: 6f5d42b306a2c03073dd95086f80602bd1a0b929b8ad19c6d219c8ca8e96da26
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
   skip: true  # [py3k and py<36]
 
@@ -77,7 +77,7 @@ requirements:
     - ratpoints     2.1.*
     - readline
     - rw            0.7
-    - singular      4.1.1
+    - singular      4.1.1.*
     - six
     - symmetrica    2.0
     - zlib
