@@ -35,7 +35,7 @@ libpng:
 mpfr:
 - '4'
 ntl:
-- 11.3.2
+- 11.4.3
 numpy:
 - '1.14'
 pari:
