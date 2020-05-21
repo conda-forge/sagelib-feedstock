@@ -20,6 +20,7 @@ requirements:
     - automake
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
+    - {{ compiler('fortran') }}
     - make
   host:
     - pip
