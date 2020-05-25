@@ -29,10 +29,6 @@ cd src
 # move the scripts
 cp bin/* "$SAGE_LOCAL/bin/"
 
-# move the extcode
-mkdir -p "$SAGE_SHARE/sage"
-cp -r ext "$SAGE_SHARE/sage/ext"
-
 mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
 
