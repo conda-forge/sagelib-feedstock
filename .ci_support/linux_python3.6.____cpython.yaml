@@ -16,6 +16,10 @@ cxx_compiler_version:
 - '7'
 docker_image:
 - condaforge/linux-anvil-comp7
+fortran_compiler:
+- gfortran
+fortran_compiler_version:
+- '7'
 glpk:
 - '4.65'
 gmp:
@@ -35,7 +39,7 @@ libpng:
 mpfr:
 - '4'
 ntl:
-- 11.3.2
+- 11.4.3
 numpy:
 - '1.14'
 pari:
