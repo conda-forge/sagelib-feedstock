@@ -24,6 +24,7 @@ sed -i.bak "s/@LINBOXSAGE_LIBS@//g" $PREFIX/lib/pkgconfig/linbox.pc
 make configure
 ./configure --prefix="$PREFIX" --with-python="$CONDA_PY"
 
+set -x
 cd src
 # move the scripts
 cp bin/* "$SAGE_LOCAL/bin/"
@@ -32,9 +33,7 @@ mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
 
 python -u setup.py build
-# With the output of the install target we often exceeds Travis' limit of 4MB logs.
-# Usually this contains nothing interesting, so just remove it completely.
-python -u setup.py install >/dev/null 2>&1
+python -u setup.py install
 
 mkdir -p "$PREFIX/etc/conda/activate.d"
 mkdir -p "$PREFIX/etc/conda/deactivate.d"
