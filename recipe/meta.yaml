@@ -37,7 +37,7 @@ requirements:
     - cliquer       1.21.*
     - cypari2       2.1.*
     - cysignals     1.10.*
-    - cython        >=0.29.12
+    - cython        0.29.12
     # There are issues with ecl 16.1.3
     - ecl           16.1.2
     - eclib         20190909
@@ -54,15 +54,15 @@ requirements:
     - lcalc         1.23
     - lrcalc        1.2
     - libbraiding   1.0
-    - libflint      2.5.*
+    - libflint
     - libgd         2.2.*
     - libhomfly     1.02.*
     - libpng
     - linbox        >=1.6.3
     - givaro        4.1.*
     - fflas-ffpack  2.4.*
-    - m4ri          20140914
-    - m4rie         20150908
+    - m4ri
+    - m4rie
     - mpc           1.1.*
     - mpfi          1.5.*
     - mpfr
@@ -128,7 +128,7 @@ requirements:
     - {{ pin_compatible("linbox", max_pin="x.x") }}
     - givaro
     - fflas-ffpack
-    - m4ri
+    - {{ pin_compatible("m4ri") }}
     - {{ pin_compatible("m4rie") }}
     - mpc
     - mpfi
