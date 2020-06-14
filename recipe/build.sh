@@ -20,7 +20,7 @@ ln -s "$PREFIX" local
 export SAGE_NUM_THREADS=$CPU_COUNT
 
 sed -i.bak "s/@LINBOXSAGE_LIBS@//g" $PREFIX/lib/pkgconfig/linbox.pc
-mkdir -p "${SAGE_EXTCODE}"
+mkdir -p "${SAGE_EXTCODE}/notebook-ipython"
 
 make configure
 ./configure --prefix="$PREFIX" --with-python="$CONDA_PY"
