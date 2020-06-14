@@ -22,6 +22,8 @@ ln -s "$PREFIX/bin/python" "$PREFIX/bin/sage-system-python"
 ln -s "$PREFIX" local
 export SAGE_NUM_THREADS=$CPU_COUNT
 
+ls -al "$PREFIX"
+
 make configure
 ./configure --prefix="$PREFIX" --with-python="$CONDA_PY"
 
