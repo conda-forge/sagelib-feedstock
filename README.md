@@ -5,7 +5,7 @@ Home: https://www.sagemath.org
 
 Package license: GPLv2+
 
-Feedstock license: BSD 3-Clause
+Feedstock license: BSD-3-Clause
 
 Summary: Open Source Mathematical Software
 
