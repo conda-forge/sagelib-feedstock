@@ -87,12 +87,12 @@ requirements:
     - zlib
     - zn_poly       0.9.*
     # sageruntime deps
-    - ipython       >=5.8.0,<6
-    - psutil        >=5
-    - pexpect       >=4.6.0,<5
+    - ipython       >=7.3,<8
+    - psutil        >=5.2
+    - pexpect       >=4.8.0,<5
     # for the symlinks
     - three.js
-    - notebook      >=5.7.6,<6
+    - notebook      >=6.1,<7
     - jmol          >=14.6.1,<15
 
   # We can not include all actual runtime dependencies of Sage here as some of
@@ -153,9 +153,9 @@ requirements:
     - zlib
     - {{ pin_compatible("zn_poly", max_pin="x.x") }}
     # sageruntime deps
-    - ipython       >=5.8.0,<6
-    - psutil        >=5
-    - pexpect       >=4.6.0,<5
+    - ipython       >=7.3,<8
+    - psutil        >=5.2
+    - pexpect       >=4.8.0,<5
 
 test:
   requires:
