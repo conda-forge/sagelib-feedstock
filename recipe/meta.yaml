@@ -45,6 +45,7 @@ requirements:
     - ecm           7.*
     - future
     - gap-core      4.10.*
+    - giac          1.5.*
     - glpk
     - gmp
     - gmpy2         2.1.*
@@ -112,6 +113,7 @@ requirements:
     - {{ pin_compatible("ecm") }}
     - future
     - {{ pin_compatible("gap-core", max_pin="x.x") }}
+    - {{ pin_compatible("giac", max_pin="x.x") }}
     - glpk
     - gmp
     - {{ pin_compatible("gmpy2", max_pin="x.x") }}
