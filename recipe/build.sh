@@ -2,9 +2,9 @@
 
 export CXXFLAGS="$CXXFLAGS -Wno-unused-function -Wno-unused-variable"
 export CFLAGS="$CFLAGS -Wno-unused-function -Wno-unused-variable"
-export CC=$(basename CC)
-export CXX=$(basename CXX)
-export FC=$(basename FC)
+export CC=$(basename $CC)
+export CXX=$(basename $CXX)
+export FC=$(basename $FC)
 
 export SAGE_LOCAL="$PREFIX"
 export SAGE_PKGS=`pwd`/build/pkgs
