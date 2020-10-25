@@ -1,8 +1,10 @@
 #!/bin/bash
 
-export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
 export CXXFLAGS="$CXXFLAGS -Wno-unused-function -Wno-unused-variable"
 export CFLAGS="$CFLAGS -Wno-unused-function -Wno-unused-variable"
+export CC=$(basename CC)
+export CXX=$(basename CXX)
+export FC=$(basename FC)
 
 export SAGE_LOCAL="$PREFIX"
 export SAGE_PKGS=`pwd`/build/pkgs
@@ -27,8 +29,6 @@ make configure
 
 set -x
 cd src
-# move the scripts
-cp bin/* "$SAGE_LOCAL/bin/"
 
 mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
