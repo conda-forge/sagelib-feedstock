@@ -80,7 +80,7 @@ requirements:
     - python
     - ratpoints     2.1.*
     - readline
-    - rw            0.7
+    - rw            0.8
     - singular      4.1.1.*
     - six
     - symmetrica    2.0
