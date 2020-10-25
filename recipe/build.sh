@@ -23,7 +23,7 @@ sed -i.bak "s/@LINBOXSAGE_LIBS@//g" $PREFIX/lib/pkgconfig/linbox.pc
 mkdir -p "${SAGE_EXTCODE}/notebook-ipython"
 
 make configure
-./configure --prefix="$PREFIX" --with-python="$CONDA_PY"
+./configure --prefix="$PREFIX" --with-python="$PYTHON"
 
 set -x
 cd src
