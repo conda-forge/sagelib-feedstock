@@ -24,6 +24,7 @@ requirements:
     - {{ compiler('fortran') }}
     - make
     - pkg-config
+    - gettext
   host:
     - pip
     - setuptools
