@@ -46,5 +46,9 @@ rm $PREFIX/lib64
 
 echo "$PREFIX" > "$PREFIX/lib/sage-current-location.txt"
 
+cat "$PREFIX/bin/sage-env-config"
+sed -i.bak "s@$SRC_DIR@$PREFIX@g" "$PREFIX/bin/sage-env-config"
+rm "$PREFIX/bin/sage-env-config.bak"
+
 mkdir -p "$PREFIX/var/lib/sage/installed"
 touch "$PREFIX/var/lib/sage/installed/.conda"
