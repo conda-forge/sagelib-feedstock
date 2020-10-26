@@ -3,4 +3,4 @@ channel_sources:
 channel_targets:
 - conda-forge sagedev
 fortran_compiler_version:
-- *
+- '*'
