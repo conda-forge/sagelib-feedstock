@@ -21,7 +21,6 @@ export MATHJAX_DIR="$SAGE_LOCAL/lib/python$PY_VER/site-packages/notebook/static/
 ln -s "$PREFIX" local
 export SAGE_NUM_THREADS=$CPU_COUNT
 
-sed -i.bak "s/@LINBOXSAGE_LIBS@//g" $PREFIX/lib/pkgconfig/linbox.pc
 mkdir -p "${SAGE_EXTCODE}/notebook-ipython"
 
 make configure
