@@ -2,5 +2,3 @@ channel_sources:
 - conda-forge/label/sagedev,conda-forge,defaults
 channel_targets:
 - conda-forge sagedev
-fortran_compiler_version:
-- '*'
