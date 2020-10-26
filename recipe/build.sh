@@ -1,8 +1,10 @@
 #!/bin/bash
 
-export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
 export CXXFLAGS="$CXXFLAGS -Wno-unused-function -Wno-unused-variable"
 export CFLAGS="$CFLAGS -Wno-unused-function -Wno-unused-variable"
+export CC=$(basename $CC)
+export CXX=$(basename $CXX)
+export FC=$(basename $FC)
 
 export SAGE_LOCAL="$PREFIX"
 export SAGE_PKGS=`pwd`/build/pkgs
@@ -19,16 +21,13 @@ export MATHJAX_DIR="$SAGE_LOCAL/lib/python$PY_VER/site-packages/notebook/static/
 ln -s "$PREFIX" local
 export SAGE_NUM_THREADS=$CPU_COUNT
 
-sed -i.bak "s/@LINBOXSAGE_LIBS@//g" $PREFIX/lib/pkgconfig/linbox.pc
 mkdir -p "${SAGE_EXTCODE}/notebook-ipython"
 
 make configure
-./configure --prefix="$PREFIX" --with-python="$CONDA_PY"
+./configure --prefix="$PREFIX" --with-python="$PYTHON"
 
 set -x
 cd src
-# move the scripts
-cp bin/* "$SAGE_LOCAL/bin/"
 
 mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
@@ -45,6 +44,10 @@ echo 'export MATHJAX_DIR="$SAGE_LOCAL/lib/python'$PY_VER'/site-packages/notebook
 rm $PREFIX/lib64
 
 echo "$PREFIX" > "$PREFIX/lib/sage-current-location.txt"
+
+cat "$PREFIX/bin/sage-env-config"
+sed -i.bak "s@$SRC_DIR@$PREFIX@g" "$PREFIX/bin/sage-env-config"
+rm "$PREFIX/bin/sage-env-config.bak"
 
 mkdir -p "$PREFIX/var/lib/sage/installed"
 touch "$PREFIX/var/lib/sage/installed/.conda"
