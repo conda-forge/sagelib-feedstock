@@ -13,6 +13,11 @@ build:
   number: 1
   skip: true  # [win]
   skip: true  # [py3k and py<36]
+  ignore_run_exports:
+    - libgfortran
+    - libgfortran4
+    - libgfortran5
+    - libgfortran-ng
 
 requirements:
   build:
