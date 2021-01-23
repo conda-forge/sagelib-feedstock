@@ -180,7 +180,7 @@ test:
 
 about:
   home: https://www.sagemath.org
-  license: GPLv2+
+  license: GPL-2.0-or-later
   license_file: COPYING.txt
   summary: Open Source Mathematical Software
   dev_url: https://trac.sagemath.org
