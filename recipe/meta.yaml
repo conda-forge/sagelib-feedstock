@@ -1,4 +1,4 @@
-{% set version = "9.2" %}
+{% set version = "9.4" %}
 {% set name = "sagelib" %}
 
 package:
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: edc89776461247cf74a16473851378e70a2de867309978ca2346ef6f93af0f90
+  sha256: 7236e43d22cc35bfbd2836b1a1459483cdd94d0fa63c55d2d37adac35461d460
 
 build:
-  number: 3
+  number: 0
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   ignore_run_exports:
