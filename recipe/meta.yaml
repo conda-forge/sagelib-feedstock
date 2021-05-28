@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: 7236e43d22cc35bfbd2836b1a1459483cdd94d0fa63c55d2d37adac35461d460
+  sha256: d3b104a83e140cda563ae0b44fa3ec2b3545660f120fab78dde6ceb5fb1ed991
 
 build:
   number: 0
