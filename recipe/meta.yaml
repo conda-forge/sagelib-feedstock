@@ -41,15 +41,15 @@ requirements:
     - boost-cpp
     - brial         1.2.*
     - libbrial      1.2.*
-    - cliquer       1.21.*
+    - cliquer       1.22.*
     - cypari2       2.1.*
     - cysignals     1.10.*
     - cython
-    - ecl           20.4.*
-    - eclib         20190909
+    - ecl           21.2.*
+    - eclib         20210503
     - ecm           7.*
     - future
-    - gap-core      4.10.*
+    - gap-core      4.11.*
     - giac          1.5.*
     - glpk
     - gmp
