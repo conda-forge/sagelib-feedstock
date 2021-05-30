@@ -85,20 +85,20 @@ requirements:
     - python
     - ratpoints     2.1.*
     - readline
-    - rw            0.8
-    - singular      4.1.1.*
+    - rw            0.9
+    - singular
     - six
     - symmetrica    2.0
     - zlib
     - zn_poly       0.9.*
     # sageruntime deps
-    - ipython       >=7.3,<8
+    - ipython       >=7.16,<8
     - psutil        >=5.2
     - pexpect       >=4.8.0,<5
     # for the symlinks
     - three.js
     - notebook      >=6.1,<7
-    - jmol          >=14.6.1,<15
+    - jmol          >=14.29.52,<15
 
   # We can not include all actual runtime dependencies of Sage here as some of
   # them require Sage to build, such as some of the database packages.
@@ -158,7 +158,7 @@ requirements:
     - zlib
     - {{ pin_compatible("zn_poly", max_pin="x.x") }}
     # sageruntime deps
-    - ipython       >=7.3,<8
+    - ipython       >=7.16,<8
     - psutil        >=5.2
     - pexpect       >=4.8.0,<5
 
