@@ -10,7 +10,7 @@ source:
   sha256: edc89776461247cf74a16473851378e70a2de867309978ca2346ef6f93af0f90
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   ignore_run_exports:
