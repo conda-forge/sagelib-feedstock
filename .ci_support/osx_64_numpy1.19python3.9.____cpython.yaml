@@ -67,9 +67,9 @@ pin_run_as_build:
 python:
 - 3.9.* *_cpython
 readline:
-- '8.0'
+- '8'
 singular:
-- 4.1.2
+- 4.2.0.p3
 target_platform:
 - osx-64
 zip_keys:
