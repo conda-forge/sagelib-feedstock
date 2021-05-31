@@ -1,30 +1,9 @@
-commit 57a5e2a22ec023bff68ad5fcaa6bda9590fd6c46
+commit a089bf7954dfd24446279ce5f9ab77c838f062e7
 Author: Isuru Fernando <isuruf@gmail.com>
 Date:   Mon May 31 01:48:54 2021 -0500
 
     allow cross compiling
 
-diff --git a/build/pkgs/boost/spkg-configure.m4 b/build/pkgs/boost/spkg-configure.m4
-index 73d231f15a..6203bbc50a 100644
---- a/build/pkgs/boost/spkg-configure.m4
-+++ b/build/pkgs/boost/spkg-configure.m4
-@@ -6,6 +6,15 @@ SAGE_SPKG_CONFIGURE([boost], [
-     ]], [[
-       boost::program_options::error err("Error message");
-       return 0;
--    ]])], [], [sage_spkg_install_boost=yes])
-+    ]])], [], [sage_spkg_install_boost=yes], [
-+    dnl cross. don't run, just link
-+    AC_LINK_IFELSE([
-+    AC_LANG_PROGRAM(
-+      [[#include <boost/program_options/errors.hpp>
-+      ]], [[
-+        boost::program_options::error err("Error message");
-+        return 0;
-+      ]])], [], [sage_spkg_install_boost=yes]
-+    )])
-  ])
- ])
 diff --git a/build/pkgs/brial/spkg-configure.m4 b/build/pkgs/brial/spkg-configure.m4
 index a0f00838c7..6a94a42721 100644
 --- a/build/pkgs/brial/spkg-configure.m4
@@ -267,7 +246,7 @@ index c7fd821f59..901e27f19e 100644
    m4_popdef([SAGE_SQLITE3_MIN_VERSION_MINOR])
    m4_popdef([SAGE_SQLITE3_MIN_VERSION_MICRO])
 diff --git a/build/pkgs/symmetrica/spkg-configure.m4 b/build/pkgs/symmetrica/spkg-configure.m4
-index 7dc77df703..e3ab2b611a 100644
+index 7dc77df703..0a9b0d5c37 100644
 --- a/build/pkgs/symmetrica/spkg-configure.m4
 +++ b/build/pkgs/symmetrica/spkg-configure.m4
 @@ -21,7 +21,8 @@ dnl check for one of its many functions
@@ -276,7 +255,7 @@ index 7dc77df703..e3ab2b611a 100644
  	 [AC_MSG_RESULT([buggy version. Sage will build its own.])
 -		         sage_spkg_install_symmetrica=yes])
 +		         sage_spkg_install_symmetrica=yes],
-+	 [AC_MSG_RESULT([cross compiling. Assume not buggy.])]
++	 [AC_MSG_RESULT([cross compiling. Assume not buggy.])])
       ], [sage_spkg_install_symmetrica=yes])
      ], [sage_spkg_install_symmetrica=yes])
      AC_LANG_POP(C)
