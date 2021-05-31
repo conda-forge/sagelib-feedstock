@@ -1,83 +1,84 @@
-From 1f0b74f20bb3e444fc1fdfa3fb92b33c5b5cb06e Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Wed, 10 Mar 2021 09:47:38 +0000
-Subject: [PATCH 01/18] #31443: update eclib package metadata
-
----
- build/pkgs/eclib/checksums.ini       | 8 ++++----
- build/pkgs/eclib/package-version.txt | 2 +-
- 2 files changed, 5 insertions(+), 5 deletions(-)
-
 diff --git a/build/pkgs/eclib/checksums.ini b/build/pkgs/eclib/checksums.ini
-index 4daaf05d8b5..4e8b74dd38b 100644
+index 4daaf05d8b..8342f43b6d 100644
 --- a/build/pkgs/eclib/checksums.ini
 +++ b/build/pkgs/eclib/checksums.ini
-@@ -1,4 +1,4 @@
+@@ -1,4 +1,5 @@
 -tarball=eclib-20190909.tar.bz2
 -sha1=0e994c0de95ef03ef19ad5030a2cacbb83c76bbd
 -md5=1a67217a7fa762646d43c7bec8a73028
 -cksum=4240278408
-+tarball=eclib-20210308.tar.bz2
-+sha1=1ffefad598683ff95c6ad90be42488a8255e8e98
-+md5=b284ea7df077ca680c9cd93fe3bd353b
-+cksum=2985037614
++tarball=eclib-VERSION.tar.bz2
++sha1=b8e1bd10a28341fcd8146cf12fc38a12c798c555
++md5=d54562480e1ebd73ae3f343b949dfa66
++cksum=2657346485
++upstream_url=https://github.com/JohnCremona/eclib/releases/download/VERSION/eclib-VERSION.tar.bz2
 diff --git a/build/pkgs/eclib/package-version.txt b/build/pkgs/eclib/package-version.txt
-index 4defdea11fc..73aebd5f103 100644
+index 4defdea11f..891293d2df 100644
 --- a/build/pkgs/eclib/package-version.txt
 +++ b/build/pkgs/eclib/package-version.txt
 @@ -1 +1 @@
 -20190909
-+20210308
-
-From 5fce79f65d4a5071a5fccd210a99cd07bdc8b30d Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Thu, 11 Mar 2021 16:02:47 +0000
-Subject: [PATCH 02/18] #31443: update eclib package metadata again
-
----
- build/pkgs/eclib/checksums.ini       | 8 ++++----
- build/pkgs/eclib/package-version.txt | 2 +-
- 2 files changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/build/pkgs/eclib/checksums.ini b/build/pkgs/eclib/checksums.ini
-index 4e8b74dd38b..b37bff93c05 100644
---- a/build/pkgs/eclib/checksums.ini
-+++ b/build/pkgs/eclib/checksums.ini
-@@ -1,4 +1,4 @@
--tarball=eclib-20210308.tar.bz2
--sha1=1ffefad598683ff95c6ad90be42488a8255e8e98
--md5=b284ea7df077ca680c9cd93fe3bd353b
--cksum=2985037614
-+tarball=eclib-20210310.tar.bz2
-+sha1=73437ac8deae94f00e7713405b3251d9c81f95e4
-+md5=4ac988bc46869866f076f7bea0fdaa6b
-+cksum=2130748042
-diff --git a/build/pkgs/eclib/package-version.txt b/build/pkgs/eclib/package-version.txt
-index 73aebd5f103..3384f6c7325 100644
---- a/build/pkgs/eclib/package-version.txt
-+++ b/build/pkgs/eclib/package-version.txt
-@@ -1 +1 @@
--20210308
-+20210310
-
-From a46b6f9d9b3b2fb8a9ba0587dd6b71991cd0fec9 Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Thu, 11 Mar 2021 16:04:30 +0000
-Subject: [PATCH 03/18] #31443: adapt eclib library interface for version
- v20210310
-
----
- src/sage/libs/eclib/__init__.pxd |   8 +-
- src/sage/libs/eclib/interface.py | 397 ++++++++++++++-----------------
- src/sage/libs/eclib/mwrank.pyx   | 227 +++++++++---------
- src/sage/libs/eclib/newforms.pyx |   1 +
- src/sage/libs/eclib/t            |   0
- src/sage/libs/eclib/wrap.cpp     |  10 +-
- 6 files changed, 313 insertions(+), 330 deletions(-)
- create mode 100644 src/sage/libs/eclib/t
-
++20210503
+diff --git a/build/pkgs/eclib/spkg-configure.m4 b/build/pkgs/eclib/spkg-configure.m4
+index 8cb8ed01ea..4bced5f44e 100644
+--- a/build/pkgs/eclib/spkg-configure.m4
++++ b/build/pkgs/eclib/spkg-configure.m4
+@@ -1,23 +1,19 @@
+ SAGE_SPKG_CONFIGURE([eclib], [
+-    SAGE_SPKG_DEPCHECK([ntl pari flint], [
+-        dnl header types.h appeared in v20180710
+-        AC_CHECK_HEADER([eclib/types.h], [
+-          AC_MSG_CHECKING([whether we can link and run a program using eclib])
+-          ECLIB_SAVED_LIBS="$LIBS"
+-          LIBS="$LIBS -lec"
+-          AC_RUN_IFELSE([
+-            AC_LANG_PROGRAM([[#include <eclib/version.h>]
+-                             [#include <eclib/interface.h>]],
+-                      [[set_bit_precision(42); /* test for versions >= v20190226 */
+-                        show_version();
+-                        return 0;]]
+-            )], [AC_MSG_RESULT([yes; use eclib from the system])], [
+-            AC_MSG_RESULT([no; install eclib])
+-            sage_spkg_install_eclib=yes
+-            LIBS="$ECLIB_SAVED_LIBS"
+-          ])
+-        ], [sage_spkg_install_eclib=yes])
+-      AC_PATH_PROG([MWRANK], [mwrank])
++  SAGE_SPKG_DEPCHECK([ntl pari flint], [
++    dnl Trac #31443: use existing eclib only if the version reported by pkg-config is correct
++    m4_pushdef([SAGE_ECLIB_VER],["20210503"])
++    PKG_CHECK_MODULES([ECLIB], [eclib = SAGE_ECLIB_VER], [
++      AC_CACHE_CHECK([for mwrank version == SAGE_ECLIB_VER], [ac_cv_path_MWRANK], [
++        AC_PATH_PROGS_FEATURE_CHECK([MWRANK], [mwrank], [
++            mwrank_version=`$ac_path_MWRANK -V 2>&1`
++            AX_COMPARE_VERSION([$mwrank_version], [eq], [SAGE_ECLIB_VER], [
++                ac_cv_path_MWRANK="$ac_path_MWRANK"
++            ])
++        ])
++      ])
+       AS_IF([test -z "$ac_cv_path_MWRANK"], [sage_spkg_install_eclib=yes])
+-    ])
++    ], [
++    sage_spkg_install_eclib=yes])
++  ])
++  m4_popdef([SAGE_ECLIB_VER])
+ ])
+diff --git a/condarc.yml b/condarc.yml
+index 9538902cac..eff8e3d560 100644
+--- a/condarc.yml
++++ b/condarc.yml
+@@ -1,6 +1,6 @@
+-# For the environment.yml to reliably use the conda-forge packages,
+-# need to set this option.  See https://github.com/conda-forge/sagelib-feedstock/issues/87
++# For the environment.yml to reliably use the qwe-forge packages,
++# need to set this option.  See https://github.com/qwe-forge/sagelib-feedstock/issues/87
+ channel_priority: strict
+ channels:
+-  - conda-forge
++  - qwe-forge
+   - defaults
 diff --git a/src/sage/libs/eclib/__init__.pxd b/src/sage/libs/eclib/__init__.pxd
-index 3f99f998a50..d44d4fba865 100644
+index 3f99f998a5..d44d4fba86 100644
 --- a/src/sage/libs/eclib/__init__.pxd
 +++ b/src/sage/libs/eclib/__init__.pxd
 @@ -12,9 +12,11 @@ from libcpp.pair cimport pair
@@ -96,10 +97,10 @@ index 3f99f998a50..d44d4fba865 100644
  cdef extern from "eclib/xmod.h": pass
  cdef extern from "eclib/svector.h": pass
 diff --git a/src/sage/libs/eclib/interface.py b/src/sage/libs/eclib/interface.py
-index e8984567205..493b5f13470 100644
+index e898456720..a163cc3109 100644
 --- a/src/sage/libs/eclib/interface.py
 +++ b/src/sage/libs/eclib/interface.py
-@@ -21,17 +21,16 @@
+@@ -21,17 +21,16 @@ Check that ``eclib`` is imported as needed::
      sage: [k for k in sys.modules if k.startswith("sage.libs.eclib")]
      []
      sage: EllipticCurve('11a1').mwrank_curve()
@@ -129,7 +130,7 @@ index e8984567205..493b5f13470 100644
          sage: e.ainvs()
          [0, 0, 0, 3, -4]
  
-@@ -127,6 +126,7 @@ def __init__(self, ainvs, verbose=False):
+@@ -127,6 +126,7 @@ class mwrank_EllipticCurve(SageObject):
  
          # place holders
          self.__saturate = -2  # not yet saturated
@@ -137,7 +138,7 @@ index e8984567205..493b5f13470 100644
  
      def __reduce__(self):
          r"""
-@@ -137,12 +137,9 @@ def __reduce__(self):
+@@ -137,12 +137,9 @@ class mwrank_EllipticCurve(SageObject):
              sage: E = mwrank_EllipticCurve([0,0,1,-7,6])
              sage: E.__reduce__()
              (<class 'sage.libs.eclib.interface.mwrank_EllipticCurve'>, ([0, 0, 1, -7, 6], False))
@@ -150,7 +151,7 @@ index e8984567205..493b5f13470 100644
      def set_verbose(self, verbose):
          """
          Set the verbosity of printing of output by the :meth:`two_descent()` and
-@@ -247,53 +244,27 @@ def __repr__(self):
+@@ -247,53 +244,27 @@ class mwrank_EllipticCurve(SageObject):
  
              sage: E = mwrank_EllipticCurve([0,-1,1,0,0])
              sage: E.__repr__()
@@ -222,7 +223,7 @@ index e8984567205..493b5f13470 100644
          r"""
          Compute 2-descent data for this curve.
  
-@@ -374,16 +345,14 @@ def two_descent(self,
+@@ -374,16 +345,14 @@ class mwrank_EllipticCurve(SageObject):
          second_limit = int(second_limit)
          n_aux = int(n_aux)
          second_descent = int(second_descent)    # convert from bool to (int) 0 or 1
@@ -245,7 +246,7 @@ index e8984567205..493b5f13470 100644
          if not self.__descent.ok():
              raise RuntimeError("A 2-descent did not complete successfully.")
          self.__saturate = -2  # not yet saturated
-@@ -398,11 +367,9 @@ def __two_descent_data(self):
+@@ -398,11 +367,9 @@ class mwrank_EllipticCurve(SageObject):
              sage: E._mwrank_EllipticCurve__two_descent_data()
              <sage.libs.eclib.mwrank._two_descent object at ...>
          """
@@ -259,7 +260,7 @@ index e8984567205..493b5f13470 100644
  
      def conductor(self):
          """
-@@ -565,22 +532,24 @@ def regulator(self):
+@@ -565,22 +532,24 @@ class mwrank_EllipticCurve(SageObject):
          R = self.__two_descent_data().regulator()
          return float(R)
  
@@ -292,7 +293,7 @@ index e8984567205..493b5f13470 100644
  
              sage: E = mwrank_EllipticCurve([0, 0, 0, -1002231243161, 0])
              sage: E.gens()
-@@ -599,7 +568,7 @@ def saturate(self, bound=-1):
+@@ -599,7 +568,7 @@ class mwrank_EllipticCurve(SageObject):
          """
          bound = int(bound)
          if self.__saturate < bound:
@@ -301,7 +302,7 @@ index e8984567205..493b5f13470 100644
              self.__saturate = bound
  
      def gens(self):
-@@ -613,8 +582,7 @@ def gens(self):
+@@ -613,8 +582,7 @@ class mwrank_EllipticCurve(SageObject):
              [[0, -1, 1]]
          """
          self.saturate()
@@ -399,7 +400,7 @@ index e8984567205..493b5f13470 100644
          P4 = [-1:3:1]    = -1*P1 + -1*P2 + -1*P3 (mod torsion)
          P4 = [0:2:1]     = 2*P1 + 0*P2 + 1*P3 (mod torsion)
          P4 = [2:13:8]    = -3*P1 + 1*P2 + -1*P3 (mod torsion)
-@@ -878,7 +818,7 @@ def __reduce__(self):
+@@ -878,7 +818,7 @@ class mwrank_MordellWeil(SageObject):
              sage: E = mwrank_EllipticCurve([0,0,1,-7,6])
              sage: EQ = mwrank_MordellWeil(E)
              sage: EQ.__reduce__()
@@ -408,7 +409,7 @@ index e8984567205..493b5f13470 100644
          """
          return mwrank_MordellWeil, (self.__curve, self.__verbose, self.__pp, self.__maxr)
  
-@@ -902,12 +842,10 @@ def __repr__(self):
+@@ -902,12 +842,10 @@ class mwrank_MordellWeil(SageObject):
          """
          return "Subgroup of Mordell-Weil group: %s"%self.__mw
  
@@ -424,7 +425,7 @@ index e8984567205..493b5f13470 100644
  
          INPUT:
  
-@@ -915,8 +853,9 @@ def process(self, v, sat=0):
+@@ -915,8 +853,9 @@ class mwrank_MordellWeil(SageObject):
            list of triples of integers, which define points on the
            curve.
  
@@ -436,7 +437,7 @@ index e8984567205..493b5f13470 100644
  
          OUTPUT:
  
-@@ -939,11 +878,11 @@ def process(self, v, sat=0):
+@@ -939,11 +878,11 @@ class mwrank_MordellWeil(SageObject):
              sage: EQ.points()
              [[1, -1, 1], [-2, 3, 1], [-14, 25, 8]]
  
@@ -450,7 +451,7 @@ index e8984567205..493b5f13470 100644
              P1 = [1547:-2967:343]         is generator number 1
              ...
              Gained index 5, new generators = [ [-2:3:1] [-14:25:8] [1:-1:1] ]
-@@ -956,7 +895,7 @@ def process(self, v, sat=0):
+@@ -956,7 +895,7 @@ class mwrank_MordellWeil(SageObject):
  
              sage: E = mwrank_EllipticCurve([0,0,1,-7,6])
              sage: EQ = mwrank_MordellWeil(E)
@@ -459,7 +460,7 @@ index e8984567205..493b5f13470 100644
              P1 = [1547:-2967:343]         is generator number 1
              P2 = [2707496766203306:864581029138191:2969715140223272]      is generator number 2
              P3 = [-13422227300:-49322830557:12167000000]          is generator number 3
-@@ -965,55 +904,92 @@ def process(self, v, sat=0):
+@@ -965,55 +904,92 @@ class mwrank_MordellWeil(SageObject):
              sage: EQ.regulator()
              375.42920288254555
              sage: EQ.saturate(2)  # points were not 2-saturated
@@ -573,7 +574,7 @@ index e8984567205..493b5f13470 100644
  
      def regulator(self):
          """
-@@ -1091,23 +1067,21 @@ def rank(self):
+@@ -1091,23 +1067,21 @@ class mwrank_MordellWeil(SageObject):
          """
          return self.__mw.rank()
  
@@ -607,7 +608,7 @@ index e8984567205..493b5f13470 100644
  
          OUTPUT:
  
-@@ -1115,40 +1089,35 @@ def saturate(self, max_prime=-1, odd_primes_only=False):
+@@ -1115,40 +1089,35 @@ class mwrank_MordellWeil(SageObject):
  
          - ``ok`` (bool) -- ``True`` if and only if the saturation was
            provably successful at all primes attempted.  If the default
@@ -643,7 +644,7 @@ index e8984567205..493b5f13470 100644
 -           saturate up to, and that prime might be smaller than ``max_prime``.
 +          In versions up to v20190909, ``eclib`` used floating point
 +          methods based on elliptic logarithms to divide points, and
-+          did not compute the precision necessary, which could casue
++          did not compute the precision necessary, which could cause
 +          failures. Since v20210310, ``eclib`` uses exact method based
 +          on division polynomials, which should mean that such
 +          failures does not happen.
@@ -666,7 +667,7 @@ index e8984567205..493b5f13470 100644
  
          EXAMPLES::
  
-@@ -1160,7 +1129,7 @@ def saturate(self, max_prime=-1, odd_primes_only=False):
+@@ -1160,7 +1129,7 @@ class mwrank_MordellWeil(SageObject):
          automatic saturation at this stage we set the parameter
          ``sat`` to 0 (which is in fact the default)::
  
@@ -675,7 +676,7 @@ index e8984567205..493b5f13470 100644
              P1 = [1547:-2967:343]         is generator number 1
              P2 = [2707496766203306:864581029138191:2969715140223272]      is generator number 2
              P3 = [-13422227300:-49322830557:12167000000]          is generator number 3
-@@ -1172,12 +1141,12 @@ def saturate(self, max_prime=-1, odd_primes_only=False):
+@@ -1172,12 +1141,12 @@ class mwrank_MordellWeil(SageObject):
          Now we saturate at `p=2`, and gain index 2::
  
              sage: EQ.saturate(2)  # points were not 2-saturated
@@ -691,7 +692,7 @@ index e8984567205..493b5f13470 100644
              sage: EQ
              Subgroup of Mordell-Weil group: [[-2:3:1], [2707496766203306:864581029138191:2969715140223272], [-13422227300:-49322830557:12167000000]]
              sage: EQ.regulator()
-@@ -1186,12 +1155,12 @@ def saturate(self, max_prime=-1, odd_primes_only=False):
+@@ -1186,12 +1155,12 @@ class mwrank_MordellWeil(SageObject):
          Now we saturate at `p=3`, and gain index 3::
  
              sage: EQ.saturate(3)  # points were not 3-saturated
@@ -707,7 +708,7 @@ index e8984567205..493b5f13470 100644
              sage: EQ
              Subgroup of Mordell-Weil group: [[-2:3:1], [-14:25:8], [-13422227300:-49322830557:12167000000]]
              sage: EQ.regulator()
-@@ -1200,12 +1169,12 @@ def saturate(self, max_prime=-1, odd_primes_only=False):
+@@ -1200,12 +1169,12 @@ class mwrank_MordellWeil(SageObject):
          Now we saturate at `p=5`, and gain index 5::
  
              sage: EQ.saturate(5)  # points were not 5-saturated
@@ -723,7 +724,7 @@ index e8984567205..493b5f13470 100644
              sage: EQ
              Subgroup of Mordell-Weil group: [[-2:3:1], [-14:25:8], [1:-1:1]]
              sage: EQ.regulator()
-@@ -1215,7 +1184,8 @@ def saturate(self, max_prime=-1, odd_primes_only=False):
+@@ -1215,7 +1184,8 @@ class mwrank_MordellWeil(SageObject):
          the points are now provably saturated at all primes::
  
              sage: EQ.saturate()   # points are now saturated
@@ -733,7 +734,7 @@ index e8984567205..493b5f13470 100644
              Checking saturation at [ 2 3 ]
              Checking 2-saturation
              Points were proved 2-saturated (max q used = 11)
-@@ -1229,7 +1199,7 @@ def saturate(self, max_prime=-1, odd_primes_only=False):
+@@ -1229,7 +1199,7 @@ class mwrank_MordellWeil(SageObject):
  
              sage: E = mwrank_EllipticCurve([0,0,1,-7,6])
              sage: EQ = mwrank_MordellWeil(E)
@@ -742,7 +743,7 @@ index e8984567205..493b5f13470 100644
              P1 = [1547:-2967:343]         is generator number 1
              ...
              Gained index 5, new generators = [ [-2:3:1] [-14:25:8] [1:-1:1] ]
-@@ -1242,7 +1212,8 @@ def saturate(self, max_prime=-1, odd_primes_only=False):
+@@ -1242,7 +1212,8 @@ class mwrank_MordellWeil(SageObject):
          verify that full saturation has been done::
  
              sage: EQ.saturate()
@@ -752,7 +753,7 @@ index e8984567205..493b5f13470 100644
              Checking saturation at [ 2 3 ]
              Checking 2-saturation
              Points were proved 2-saturated (max q used = 11)
-@@ -1255,8 +1226,9 @@ def saturate(self, max_prime=-1, odd_primes_only=False):
+@@ -1255,8 +1226,9 @@ class mwrank_MordellWeil(SageObject):
          index of the points in their saturation is at most 3, then
          proves saturation at 2 and at 3, by reducing the points modulo
          all primes of good reduction up to 11, respectively 13.
@@ -763,7 +764,7 @@ index e8984567205..493b5f13470 100644
          return bool(ok), int(str(index)), unsat
  
      def search(self, height_limit=18, verbose=False):
-@@ -1271,9 +1243,9 @@ def search(self, height_limit=18, verbose=False):
+@@ -1271,9 +1243,9 @@ class mwrank_MordellWeil(SageObject):
  
          .. note::
  
@@ -775,7 +776,7 @@ index e8984567205..493b5f13470 100644
            bound and increasing it by just 1 increases the running time
            by (roughly) `\exp(1.5)=4.5`, so searching up to even 20
            takes a very long time.
-@@ -1320,8 +1292,10 @@ def search(self, height_limit=18, verbose=False):
+@@ -1320,8 +1292,10 @@ class mwrank_MordellWeil(SageObject):
              Subgroup of Mordell-Weil group: [[4413270:10381877:27000]]
          """
          height_limit = float(height_limit)
@@ -788,7 +789,7 @@ index e8984567205..493b5f13470 100644
  
          moduli_option = 0  # Use Stoll's sieving program... see strategies in ratpoints-1.4.c
  
-@@ -1352,5 +1326,4 @@ def points(self):
+@@ -1352,5 +1326,4 @@ class mwrank_MordellWeil(SageObject):
              [[1, -1, 1], [-2, 3, 1], [-14, 25, 8]]
  
          """
@@ -796,7 +797,7 @@ index e8984567205..493b5f13470 100644
 -        return [[Integer(x), Integer(y), Integer(z)] for (x,y,z) in L]
 +        return self.__mw.getbasis()
 diff --git a/src/sage/libs/eclib/mwrank.pyx b/src/sage/libs/eclib/mwrank.pyx
-index b82831dc5fd..ce5090c80d5 100644
+index b82831dc5f..ce5090c80d 100644
 --- a/src/sage/libs/eclib/mwrank.pyx
 +++ b/src/sage/libs/eclib/mwrank.pyx
 @@ -28,6 +28,7 @@ from cysignals.signals cimport sig_on, sig_off
@@ -1214,7 +1215,7 @@ index b82831dc5fd..ce5090c80d5 100644
  
      def getbasis(self):
 diff --git a/src/sage/libs/eclib/newforms.pyx b/src/sage/libs/eclib/newforms.pyx
-index b50b6061aa2..96263cd0be9 100644
+index b50b6061aa..96263cd0be 100644
 --- a/src/sage/libs/eclib/newforms.pyx
 +++ b/src/sage/libs/eclib/newforms.pyx
 @@ -140,6 +140,7 @@ cdef class ECModularSymbol:
@@ -1225,11 +1226,8 @@ index b50b6061aa2..96263cd0be9 100644
  
          EXAMPLES::
  
-diff --git a/src/sage/libs/eclib/t b/src/sage/libs/eclib/t
-new file mode 100644
-index 00000000000..e69de29bb2d
 diff --git a/src/sage/libs/eclib/wrap.cpp b/src/sage/libs/eclib/wrap.cpp
-index 58c18ab67b6..28e6da869b4 100644
+index 58c18ab67b..28e6da869b 100644
 --- a/src/sage/libs/eclib/wrap.cpp
 +++ b/src/sage/libs/eclib/wrap.cpp
 @@ -178,11 +178,11 @@ int mw_rank(struct mw* m)
@@ -1259,22 +1257,46 @@ index 58c18ab67b6..28e6da869b4 100644
  }
  
  double two_descent_regulator(struct two_descent* t)
-
-From 453c793d1f17096695d7ee2cf53d6e0c9c462338 Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Thu, 11 Mar 2021 16:06:15 +0000
-Subject: [PATCH 04/18] #31443: simplify/improve saturation method for elliptic
- curves over Q
-
----
- .../elliptic_curves/ell_rational_field.py     | 93 ++++++++++---------
- 1 file changed, 51 insertions(+), 42 deletions(-)
-
+diff --git a/src/sage/schemes/elliptic_curves/ell_modular_symbols.py b/src/sage/schemes/elliptic_curves/ell_modular_symbols.py
+index a32f64ea47..30a61e1635 100644
+--- a/src/sage/schemes/elliptic_curves/ell_modular_symbols.py
++++ b/src/sage/schemes/elliptic_curves/ell_modular_symbols.py
+@@ -298,19 +298,27 @@ class ModularSymbolECLIB(ModularSymbol):
+             sage: m(0)
+             1/5
+ 
+-        If ``nap`` is too small, the normalization in eclib may be incorrect.  See :trac:`31317`::
++        If ``nap`` is too small, the normalization in eclib used to be
++        incorrect (see :trac:`31317`), but since ``eclib`` version
++        v20210310 the value of ``nap`` is increased automatically by
++        ``eclib``::
+ 
+             sage: from sage.schemes.elliptic_curves.ell_modular_symbols import ModularSymbolECLIB
+             sage: E = EllipticCurve('1590g1')
+             sage: m = ModularSymbolECLIB(E, sign=+1, nap=300)
+             sage: [m(a/5) for a in [1..4]]
+-            [1001/153, -1001/153, -1001/153, 1001/153]
++            [13/2, -13/2, -13/2, 13/2]
+ 
+-        Those values are incorrect.  The correct values are::
++        These values are correct, and increasing ``nap`` has no
++        effect.  The correct values may verified by the numerical
++        implementation::
+ 
+             sage: m = ModularSymbolECLIB(E, sign=+1, nap=400)
+             sage: [m(a/5) for a in [1..4]]
+             [13/2, -13/2, -13/2, 13/2]
++            sage: m = E.modular_symbol(implementation='num')
++            sage: [m(a/5) for a in [1..4]]
++            [13/2, -13/2, -13/2, 13/2]
+ 
+         """
+         from sage.libs.eclib.newforms import ECModularSymbol
 diff --git a/src/sage/schemes/elliptic_curves/ell_rational_field.py b/src/sage/schemes/elliptic_curves/ell_rational_field.py
-index a792afce8dc..c894cbc766b 100644
+index eea4c88330..874589b7ff 100644
 --- a/src/sage/schemes/elliptic_curves/ell_rational_field.py
 +++ b/src/sage/schemes/elliptic_curves/ell_rational_field.py
-@@ -779,7 +779,7 @@ def mwrank_curve(self, verbose=False):
+@@ -779,7 +779,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
              sage: E = EllipticCurve('11a1')
              sage: EE = E.mwrank_curve()
              sage: EE
@@ -1283,16 +1305,50 @@ index a792afce8dc..c894cbc766b 100644
              sage: type(EE)
              <class 'sage.libs.eclib.interface.mwrank_EllipticCurve'>
              sage: EE.isogeny_class()
-@@ -2525,7 +2525,7 @@ def regulator(self, proof=None, precision=53, **kwds):
+@@ -1283,22 +1283,21 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
+             sage: [Mminus(1/i) for i in [1..11]]
+             [0, 0, 1/2, 1/2, 0, 0, -1/2, -1/2, 0, 0, 0]
+ 
+-        With the default 'eclib' implementation, if ``nap`` is too
+-        small, the normalization may be computed incorrectly.  See
+-        :trac:`31317`::
++        With older version of eclib, in the default 'eclib'
++        implementation, if ``nap`` is too small, the normalization may
++        be computed incorrectly (see :trac:`31317`).  This was fixed
++        in eclib version v20210310, since now eclib increase ``nap``
++        automatically. The following used to give incorrect results.
++        See :trac:`31443`::
+ 
+             sage: E = EllipticCurve('1590g1')
+             sage: m = E.modular_symbol(nap=300)
+             sage: [m(a/5) for a in [1..4]]
+-            [1001/153, -1001/153, -1001/153, 1001/153]
++            [13/2, -13/2, -13/2, 13/2]
+ 
+-        Those values are incorrect.  The correct values may be
+-        obtained by increasing ``nap``, as verified by the numerical
++        These values are correct, as verified by the numerical
+         implementation::
+ 
+-            sage: m = E.modular_symbol(nap=400)
+-            sage: [m(a/5) for a in [1..4]]
+-            [13/2, -13/2, -13/2, 13/2]
+             sage: m = E.modular_symbol(implementation='num')
+             sage: [m(a/5) for a in [1..4]]
+             [13/2, -13/2, -13/2, 13/2]
+@@ -2525,9 +2524,8 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
          assert reg.parent() is R
          return reg
  
 -    def saturation(self, points, verbose=False, max_prime=0, odd_primes_only=False):
+-        """
+-        Given a list of rational points on E, compute the saturation in
 +    def saturation(self, points, verbose=False, max_prime=-1, min_prime=2):
-         """
-         Given a list of rational points on E, compute the saturation in
++        """Given a list of rational points on E, compute the saturation in
          E(Q) of the subgroup they generate.
-@@ -2538,17 +2538,24 @@ def saturation(self, points, verbose=False, max_prime=0, odd_primes_only=False):
+ 
+         INPUT:
+@@ -2538,17 +2536,24 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
          -  ``verbose (bool)`` - (default: ``False``), if ``True``, give
             verbose output
  
@@ -1318,13 +1374,13 @@ index a792afce8dc..c894cbc766b 100644
 +           ``min_prime`` both to `p`.  One situation where this is
 +           useful is after mapping saturated points from another
 +           elliptic curve by a `p`-isogeny, since the images may not
-+           be `p`-saturated but with be saturated at all other primes.
++           be `p`-saturated but will be saturated at all other primes.
  
 +        OUTPUT:
  
          -  ``saturation (list)`` - points that form a basis for
             the saturation
-@@ -2559,12 +2566,32 @@ def saturation(self, points, verbose=False, max_prime=0, odd_primes_only=False):
+@@ -2559,12 +2564,32 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
          -  ``regulator (real with default precision)`` -
             regulator of saturated points.
  
@@ -1351,7 +1407,7 @@ index a792afce8dc..c894cbc766b 100644
 +           The computed index of saturation may be large, in which
 +           case saturation may take a long time.  For example, the
 +           rank 4 curve ``EllipticCurve([0,1,1,-9872,374262])`` has a
-+           saturation index bound of 86682 and takes around 15 minutes
++           saturation index bound of 11816 and takes around 40 seconds
 +           to prove saturation.
  
 -        ALGORITHM: Uses Cremona's ``mwrank`` package. With ``max_prime=0``,
@@ -1362,7 +1418,7 @@ index a792afce8dc..c894cbc766b 100644
  
          EXAMPLES::
  
-@@ -2577,7 +2604,9 @@ def saturation(self, points, verbose=False, max_prime=0, odd_primes_only=False):
+@@ -2577,7 +2602,9 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
  
          TESTS:
  
@@ -1373,7 +1429,7 @@ index a792afce8dc..c894cbc766b 100644
  
              sage: E = EllipticCurve([1, 0, 1, -977842, -372252745])
              sage: P = E([-192128125858676194585718821667542660822323528626273/336995568430319276695106602174283479617040716649, 70208213492933395764907328787228427430477177498927549075405076353624188436/195630373799784831667835900062564586429333568841391304129067339731164107, 1])
-@@ -2585,7 +2614,7 @@ def saturation(self, points, verbose=False, max_prime=0, odd_primes_only=False):
+@@ -2585,7 +2612,7 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
              113.302910926080
              sage: E.saturation([P])
              ([(-192128125858676194585718821667542660822323528626273/336995568430319276695106602174283479617040716649 : 70208213492933395764907328787228427430477177498927549075405076353624188436/195630373799784831667835900062564586429333568841391304129067339731164107 : 1)], 1, 113.302910926080)
@@ -1382,7 +1438,7 @@ index a792afce8dc..c894cbc766b 100644
              sage: 2*Q == 2*P
              True
              sage: ind
-@@ -2634,36 +2663,16 @@ def saturation(self, points, verbose=False, max_prime=0, odd_primes_only=False):
+@@ -2634,36 +2661,16 @@ class EllipticCurve_rational_field(EllipticCurve_number_field):
          c = Emin.mwrank_curve()
          from sage.libs.eclib.all import mwrank_MordellWeil
          mw = mwrank_MordellWeil(c, verbose)
@@ -1425,573 +1481,3 @@ index a792afce8dc..c894cbc766b 100644
  
      def CPS_height_bound(self):
          r"""
-
-From 4ba267ac16722b3eee43d2b4ed73840c366a8bec Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Tue, 16 Mar 2021 14:26:10 +0000
-Subject: [PATCH 05/18] #31443: fix two doctest output now that eclib no longer
- gives incorrect results
-
----
- .../elliptic_curves/ell_modular_symbols.py      | 14 +++++++++++---
- .../elliptic_curves/ell_rational_field.py       | 17 ++++++++---------
- 2 files changed, 19 insertions(+), 12 deletions(-)
-
-diff --git a/src/sage/schemes/elliptic_curves/ell_modular_symbols.py b/src/sage/schemes/elliptic_curves/ell_modular_symbols.py
-index a32f64ea47b..30a61e1635c 100644
---- a/src/sage/schemes/elliptic_curves/ell_modular_symbols.py
-+++ b/src/sage/schemes/elliptic_curves/ell_modular_symbols.py
-@@ -298,19 +298,27 @@ def __init__(self, E, sign, nap=1000):
-             sage: m(0)
-             1/5
- 
--        If ``nap`` is too small, the normalization in eclib may be incorrect.  See :trac:`31317`::
-+        If ``nap`` is too small, the normalization in eclib used to be
-+        incorrect (see :trac:`31317`), but since ``eclib`` version
-+        v20210310 the value of ``nap`` is increased automatically by
-+        ``eclib``::
- 
-             sage: from sage.schemes.elliptic_curves.ell_modular_symbols import ModularSymbolECLIB
-             sage: E = EllipticCurve('1590g1')
-             sage: m = ModularSymbolECLIB(E, sign=+1, nap=300)
-             sage: [m(a/5) for a in [1..4]]
--            [1001/153, -1001/153, -1001/153, 1001/153]
-+            [13/2, -13/2, -13/2, 13/2]
- 
--        Those values are incorrect.  The correct values are::
-+        These values are correct, and increasing ``nap`` has no
-+        effect.  The correct values may verified by the numerical
-+        implementation::
- 
-             sage: m = ModularSymbolECLIB(E, sign=+1, nap=400)
-             sage: [m(a/5) for a in [1..4]]
-             [13/2, -13/2, -13/2, 13/2]
-+            sage: m = E.modular_symbol(implementation='num')
-+            sage: [m(a/5) for a in [1..4]]
-+            [13/2, -13/2, -13/2, 13/2]
- 
-         """
-         from sage.libs.eclib.newforms import ECModularSymbol
-diff --git a/src/sage/schemes/elliptic_curves/ell_rational_field.py b/src/sage/schemes/elliptic_curves/ell_rational_field.py
-index c894cbc766b..5a563898e68 100644
---- a/src/sage/schemes/elliptic_curves/ell_rational_field.py
-+++ b/src/sage/schemes/elliptic_curves/ell_rational_field.py
-@@ -1283,22 +1283,21 @@ def modular_symbol(self, sign=+1, normalize=None, implementation='eclib', nap=0)
-             sage: [Mminus(1/i) for i in [1..11]]
-             [0, 0, 1/2, 1/2, 0, 0, -1/2, -1/2, 0, 0, 0]
- 
--        With the default 'eclib' implementation, if ``nap`` is too
--        small, the normalization may be computed incorrectly.  See
--        :trac:`31317`::
-+        With older version of eclib, in the default 'eclib'
-+        implementation, if ``nap`` is too small, the normalization may
-+        be computed incorrectly (see :trac:`31317`).  This was fixed
-+        in eclib version v20210310, since now eclib increase ``nap``
-+        automatically. The following used to give incorrect results.
-+        See :trac:`31443`::
- 
-             sage: E = EllipticCurve('1590g1')
-             sage: m = E.modular_symbol(nap=300)
-             sage: [m(a/5) for a in [1..4]]
--            [1001/153, -1001/153, -1001/153, 1001/153]
-+            [13/2, -13/2, -13/2, 13/2]
- 
--        Those values are incorrect.  The correct values may be
--        obtained by increasing ``nap``, as verified by the numerical
-+        These values are correct, as verified by the numerical
-         implementation::
- 
--            sage: m = E.modular_symbol(nap=400)
--            sage: [m(a/5) for a in [1..4]]
--            [13/2, -13/2, -13/2, 13/2]
-             sage: m = E.modular_symbol(implementation='num')
-             sage: [m(a/5) for a in [1..4]]
-             [13/2, -13/2, -13/2, 13/2]
-
-From f4752618381fc589d3b992d67cd29e9a9c7086d5 Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Wed, 17 Mar 2021 10:14:23 +0000
-Subject: [PATCH 06/18] added upstream_url to eclib's checksums.ini
-
----
- build/pkgs/eclib/checksums.ini | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/build/pkgs/eclib/checksums.ini b/build/pkgs/eclib/checksums.ini
-index b37bff93c05..e639bc3f395 100644
---- a/build/pkgs/eclib/checksums.ini
-+++ b/build/pkgs/eclib/checksums.ini
-@@ -2,3 +2,4 @@ tarball=eclib-20210310.tar.bz2
- sha1=73437ac8deae94f00e7713405b3251d9c81f95e4
- md5=4ac988bc46869866f076f7bea0fdaa6b
- cksum=2130748042
-+upstream_url=https://github.com/JohnCremona/eclib/archive/VERSION.tar.gz
-
-From 1bac7138020240bd3b6944e85bfc28676dcca6f1 Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Wed, 17 Mar 2021 15:46:48 +0000
-Subject: [PATCH 07/18] more changes to eclib build setup
-
----
- build/pkgs/eclib/checksums.ini       | 10 +++++-----
- build/pkgs/eclib/package-version.txt |  2 +-
- build/pkgs/eclib/spkg-configure.m4   | 28 ++++++++--------------------
- 3 files changed, 14 insertions(+), 26 deletions(-)
-
-diff --git a/build/pkgs/eclib/checksums.ini b/build/pkgs/eclib/checksums.ini
-index e639bc3f395..7f3e3b9233c 100644
---- a/build/pkgs/eclib/checksums.ini
-+++ b/build/pkgs/eclib/checksums.ini
-@@ -1,5 +1,5 @@
--tarball=eclib-20210310.tar.bz2
--sha1=73437ac8deae94f00e7713405b3251d9c81f95e4
--md5=4ac988bc46869866f076f7bea0fdaa6b
--cksum=2130748042
--upstream_url=https://github.com/JohnCremona/eclib/archive/VERSION.tar.gz
-+tarball=eclib-VERSION.tar.bz2
-+sha1=500c3efcf0c8efbb065bbdb8f05cf8a91b8d5c24
-+md5=9da2bba60ec2920b4524b355aff9333a
-+cksum=1435512890
-+upstream_url=https://github.com/JohnCremona/eclib/archive/eclib-VERSION.tar.bz2
-diff --git a/build/pkgs/eclib/package-version.txt b/build/pkgs/eclib/package-version.txt
-index 3384f6c7325..d52e9bed28f 100644
---- a/build/pkgs/eclib/package-version.txt
-+++ b/build/pkgs/eclib/package-version.txt
-@@ -1 +1 @@
--20210310
-+v20210317
-diff --git a/build/pkgs/eclib/spkg-configure.m4 b/build/pkgs/eclib/spkg-configure.m4
-index 8cb8ed01ea7..e55566b1e73 100644
---- a/build/pkgs/eclib/spkg-configure.m4
-+++ b/build/pkgs/eclib/spkg-configure.m4
-@@ -1,23 +1,11 @@
- SAGE_SPKG_CONFIGURE([eclib], [
-     SAGE_SPKG_DEPCHECK([ntl pari flint], [
--        dnl header types.h appeared in v20180710
--        AC_CHECK_HEADER([eclib/types.h], [
--          AC_MSG_CHECKING([whether we can link and run a program using eclib])
--          ECLIB_SAVED_LIBS="$LIBS"
--          LIBS="$LIBS -lec"
--          AC_RUN_IFELSE([
--            AC_LANG_PROGRAM([[#include <eclib/version.h>]
--                             [#include <eclib/interface.h>]],
--                      [[set_bit_precision(42); /* test for versions >= v20190226 */
--                        show_version();
--                        return 0;]]
--            )], [AC_MSG_RESULT([yes; use eclib from the system])], [
--            AC_MSG_RESULT([no; install eclib])
--            sage_spkg_install_eclib=yes
--            LIBS="$ECLIB_SAVED_LIBS"
--          ])
--        ], [sage_spkg_install_eclib=yes])
--      AC_PATH_PROG([MWRANK], [mwrank])
--      AS_IF([test -z "$ac_cv_path_MWRANK"], [sage_spkg_install_eclib=yes])
--    ])
-+    dnl Trac #31443: use existing eclib only if the version reported by pkg-config is correct
-+    PKG_CHECK_MODULES([ECLIB],
-+                      [eclib = v20210317],
-+                      [sage_spkg_install_eclib=no],
-+                      [sage_spkg_install_eclib=yes])
-+    AC_PATH_PROG([MWRANK], [mwrank])
-+    AS_IF([test -z "$ac_cv_path_MWRANK"], [sage_spkg_install_eclib=yes])
-+  ])
- ])
-
-From 7db4910ebff9e37ccbdadebf0a4e365e064d0c3a Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Thu, 18 Mar 2021 14:01:20 +0000
-Subject: [PATCH 08/18] remove dud empty file
-
----
- src/sage/libs/eclib/t | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- delete mode 100644 src/sage/libs/eclib/t
-
-diff --git a/src/sage/libs/eclib/t b/src/sage/libs/eclib/t
-deleted file mode 100644
-index e69de29bb2d..00000000000
-
-From 28408fc22d9d9525460e74492f9193e54a20bb15 Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Thu, 18 Mar 2021 14:05:41 +0000
-Subject: [PATCH 09/18] correct upstream_url for eclib
-
----
- build/pkgs/eclib/checksums.ini | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/build/pkgs/eclib/checksums.ini b/build/pkgs/eclib/checksums.ini
-index 7f3e3b9233c..80f452946bc 100644
---- a/build/pkgs/eclib/checksums.ini
-+++ b/build/pkgs/eclib/checksums.ini
-@@ -2,4 +2,4 @@ tarball=eclib-VERSION.tar.bz2
- sha1=500c3efcf0c8efbb065bbdb8f05cf8a91b8d5c24
- md5=9da2bba60ec2920b4524b355aff9333a
- cksum=1435512890
--upstream_url=https://github.com/JohnCremona/eclib/archive/eclib-VERSION.tar.bz2
-+upstream_url=https://johncremona.github.io/ftp/eclib-v20210317.tar.bz2
-
-From 573bcf604b3ab69d19716b47627f3b378b0c081f Mon Sep 17 00:00:00 2001
-From: Dima Pasechnik <dima@pasechnik.info>
-Date: Thu, 18 Mar 2021 14:33:31 +0000
-Subject: [PATCH 10/18] fix m4 and tar URL, remove junk
-
----
- build/pkgs/eclib/checksums.ini     |  2 +-
- build/pkgs/eclib/spkg-configure.m4 | 22 +++++++++++++++-------
- src/sage/libs/eclib/t              |  0
- 3 files changed, 16 insertions(+), 8 deletions(-)
- delete mode 100644 src/sage/libs/eclib/t
-
-diff --git a/build/pkgs/eclib/checksums.ini b/build/pkgs/eclib/checksums.ini
-index 7f3e3b9233c..94203b25d9d 100644
---- a/build/pkgs/eclib/checksums.ini
-+++ b/build/pkgs/eclib/checksums.ini
-@@ -2,4 +2,4 @@ tarball=eclib-VERSION.tar.bz2
- sha1=500c3efcf0c8efbb065bbdb8f05cf8a91b8d5c24
- md5=9da2bba60ec2920b4524b355aff9333a
- cksum=1435512890
--upstream_url=https://github.com/JohnCremona/eclib/archive/eclib-VERSION.tar.bz2
-+upstream_url=https://johncremona.github.io/ftp/eclib-VERSION.tar.bz2
-diff --git a/build/pkgs/eclib/spkg-configure.m4 b/build/pkgs/eclib/spkg-configure.m4
-index e55566b1e73..377b66b0711 100644
---- a/build/pkgs/eclib/spkg-configure.m4
-+++ b/build/pkgs/eclib/spkg-configure.m4
-@@ -1,11 +1,19 @@
- SAGE_SPKG_CONFIGURE([eclib], [
--    SAGE_SPKG_DEPCHECK([ntl pari flint], [
-+  SAGE_SPKG_DEPCHECK([ntl pari flint], [
-     dnl Trac #31443: use existing eclib only if the version reported by pkg-config is correct
--    PKG_CHECK_MODULES([ECLIB],
--                      [eclib = v20210317],
--                      [sage_spkg_install_eclib=no],
--                      [sage_spkg_install_eclib=yes])
--    AC_PATH_PROG([MWRANK], [mwrank])
--    AS_IF([test -z "$ac_cv_path_MWRANK"], [sage_spkg_install_eclib=yes])
-+    m4_pushdef([SAGE_ECLIB_VER],["v20210317"])
-+    PKG_CHECK_MODULES([ECLIB], [eclib = SAGE_ECLIB_VER], [
-+      AC_CACHE_CHECK([for mwrank version == SAGE_ECLIB_VER], [ac_cv_path_MWRANK], [
-+        AC_PATH_PROGS_FEATURE_CHECK([MWRANK], [mwrank], [
-+            mwrank_version=`$ac_path_MWRANK -V 2>&1`
-+            AX_COMPARE_VERSION([$mwrank_version], [eq], [SAGE_ECLIB_VER], [
-+                ac_cv_path_MWRANK="$ac_path_MWRANK"
-+            ])
-+        ])
-+      ])
-+      AS_IF([test -z "$ac_cv_path_MWRANK"], [sage_spkg_install_eclib=yes])
-+    ], [
-+    sage_spkg_install_eclib=yes])
-   ])
-+  m4_popdef([SAGE_ECLIB_VER])
- ])
-diff --git a/src/sage/libs/eclib/t b/src/sage/libs/eclib/t
-deleted file mode 100644
-index e69de29bb2d..00000000000
-
-From d32295ffeab20af1781b903fad1139c50527d94d Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Thu, 18 Mar 2021 15:03:17 +0000
-Subject: [PATCH 11/18] fix spkg-configure for eclib
-
----
- build/pkgs/eclib/spkg-configure.m4 | 22 +++++++++++++++-------
- 1 file changed, 15 insertions(+), 7 deletions(-)
-
-diff --git a/build/pkgs/eclib/spkg-configure.m4 b/build/pkgs/eclib/spkg-configure.m4
-index e55566b1e73..377b66b0711 100644
---- a/build/pkgs/eclib/spkg-configure.m4
-+++ b/build/pkgs/eclib/spkg-configure.m4
-@@ -1,11 +1,19 @@
- SAGE_SPKG_CONFIGURE([eclib], [
--    SAGE_SPKG_DEPCHECK([ntl pari flint], [
-+  SAGE_SPKG_DEPCHECK([ntl pari flint], [
-     dnl Trac #31443: use existing eclib only if the version reported by pkg-config is correct
--    PKG_CHECK_MODULES([ECLIB],
--                      [eclib = v20210317],
--                      [sage_spkg_install_eclib=no],
--                      [sage_spkg_install_eclib=yes])
--    AC_PATH_PROG([MWRANK], [mwrank])
--    AS_IF([test -z "$ac_cv_path_MWRANK"], [sage_spkg_install_eclib=yes])
-+    m4_pushdef([SAGE_ECLIB_VER],["v20210317"])
-+    PKG_CHECK_MODULES([ECLIB], [eclib = SAGE_ECLIB_VER], [
-+      AC_CACHE_CHECK([for mwrank version == SAGE_ECLIB_VER], [ac_cv_path_MWRANK], [
-+        AC_PATH_PROGS_FEATURE_CHECK([MWRANK], [mwrank], [
-+            mwrank_version=`$ac_path_MWRANK -V 2>&1`
-+            AX_COMPARE_VERSION([$mwrank_version], [eq], [SAGE_ECLIB_VER], [
-+                ac_cv_path_MWRANK="$ac_path_MWRANK"
-+            ])
-+        ])
-+      ])
-+      AS_IF([test -z "$ac_cv_path_MWRANK"], [sage_spkg_install_eclib=yes])
-+    ], [
-+    sage_spkg_install_eclib=yes])
-   ])
-+  m4_popdef([SAGE_ECLIB_VER])
- ])
-
-From 5a90432220bf69426b4f5c82562891292b07a1b2 Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Thu, 18 Mar 2021 15:32:43 +0000
-Subject: [PATCH 12/18] updated eclib build files to 20210318
-
----
- build/pkgs/eclib/checksums.ini       | 8 ++++----
- build/pkgs/eclib/package-version.txt | 2 +-
- build/pkgs/eclib/spkg-configure.m4   | 2 +-
- 3 files changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/build/pkgs/eclib/checksums.ini b/build/pkgs/eclib/checksums.ini
-index 80f452946bc..1a8e002b78b 100644
---- a/build/pkgs/eclib/checksums.ini
-+++ b/build/pkgs/eclib/checksums.ini
-@@ -1,5 +1,5 @@
- tarball=eclib-VERSION.tar.bz2
--sha1=500c3efcf0c8efbb065bbdb8f05cf8a91b8d5c24
--md5=9da2bba60ec2920b4524b355aff9333a
--cksum=1435512890
--upstream_url=https://johncremona.github.io/ftp/eclib-v20210317.tar.bz2
-+sha1=6954aa9553e61c48ba3f8565ac4ac88b31e761a4
-+md5=26f7d78a4ba7263dbf59ef7466bbce34
-+cksum=4022275109
-+upstream_url=https://johncremona.github.io/ftp/eclib-VERSION.tar.bz2
-diff --git a/build/pkgs/eclib/package-version.txt b/build/pkgs/eclib/package-version.txt
-index d52e9bed28f..5a5e7e1b211 100644
---- a/build/pkgs/eclib/package-version.txt
-+++ b/build/pkgs/eclib/package-version.txt
-@@ -1 +1 @@
--v20210317
-+20210318
-diff --git a/build/pkgs/eclib/spkg-configure.m4 b/build/pkgs/eclib/spkg-configure.m4
-index 377b66b0711..748e6b8bf3e 100644
---- a/build/pkgs/eclib/spkg-configure.m4
-+++ b/build/pkgs/eclib/spkg-configure.m4
-@@ -1,7 +1,7 @@
- SAGE_SPKG_CONFIGURE([eclib], [
-   SAGE_SPKG_DEPCHECK([ntl pari flint], [
-     dnl Trac #31443: use existing eclib only if the version reported by pkg-config is correct
--    m4_pushdef([SAGE_ECLIB_VER],["v20210317"])
-+    m4_pushdef([SAGE_ECLIB_VER],["20210318"])
-     PKG_CHECK_MODULES([ECLIB], [eclib = SAGE_ECLIB_VER], [
-       AC_CACHE_CHECK([for mwrank version == SAGE_ECLIB_VER], [ac_cv_path_MWRANK], [
-         AC_PATH_PROGS_FEATURE_CHECK([MWRANK], [mwrank], [
-
-From 5d9e70a118b4cce4d2b526129a880ca7f4822485 Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Mon, 22 Mar 2021 08:41:23 +0000
-Subject: [PATCH 13/18] #31443: updated upstream tarball URL
-
----
- build/pkgs/eclib/checksums.ini | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/build/pkgs/eclib/checksums.ini b/build/pkgs/eclib/checksums.ini
-index 1a8e002b78b..824f44f53cd 100644
---- a/build/pkgs/eclib/checksums.ini
-+++ b/build/pkgs/eclib/checksums.ini
-@@ -2,4 +2,4 @@ tarball=eclib-VERSION.tar.bz2
- sha1=6954aa9553e61c48ba3f8565ac4ac88b31e761a4
- md5=26f7d78a4ba7263dbf59ef7466bbce34
- cksum=4022275109
--upstream_url=https://johncremona.github.io/ftp/eclib-VERSION.tar.bz2
-+upstream_url=https://github.com/JohnCremona/eclib/releases/download/VERSION/eclib-VERSION.tar.bz2
-\ No newline at end of file
-
-From f564931ed03e8a1d93dab328f256f30353ded1f6 Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Fri, 9 Apr 2021 09:45:24 +0100
-Subject: [PATCH 14/18] updated eclib package version to 20210408 and checksums
-
----
- build/pkgs/eclib/checksums.ini       | 6 +++---
- build/pkgs/eclib/package-version.txt | 2 +-
- 2 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/build/pkgs/eclib/checksums.ini b/build/pkgs/eclib/checksums.ini
-index 7f3e3b9233c..de58a9fbb75 100644
---- a/build/pkgs/eclib/checksums.ini
-+++ b/build/pkgs/eclib/checksums.ini
-@@ -1,5 +1,5 @@
- tarball=eclib-VERSION.tar.bz2
--sha1=500c3efcf0c8efbb065bbdb8f05cf8a91b8d5c24
--md5=9da2bba60ec2920b4524b355aff9333a
--cksum=1435512890
-+sha1=d1c9add8c95ba502440e7d197da0c1e3329adc7d
-+md5=47e2c9b59c1d322709a5d99e438d09cd
-+cksum=2380455615
- upstream_url=https://github.com/JohnCremona/eclib/archive/eclib-VERSION.tar.bz2
-diff --git a/build/pkgs/eclib/package-version.txt b/build/pkgs/eclib/package-version.txt
-index d52e9bed28f..c12f44c8f0c 100644
---- a/build/pkgs/eclib/package-version.txt
-+++ b/build/pkgs/eclib/package-version.txt
-@@ -1 +1 @@
--v20210317
-+20210408
-
-From 07c5a20f8cfe7323fc5afb4c9a7a77472ac4d0b8 Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Fri, 9 Apr 2021 10:45:19 +0100
-Subject: [PATCH 15/18] correct a docstring after eclib upgrade
-
----
- src/sage/schemes/elliptic_curves/ell_rational_field.py | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
-
-diff --git a/src/sage/schemes/elliptic_curves/ell_rational_field.py b/src/sage/schemes/elliptic_curves/ell_rational_field.py
-index 3d5d214109f..874589b7ff3 100644
---- a/src/sage/schemes/elliptic_curves/ell_rational_field.py
-+++ b/src/sage/schemes/elliptic_curves/ell_rational_field.py
-@@ -2525,8 +2525,7 @@ def regulator(self, proof=None, precision=53, **kwds):
-         return reg
- 
-     def saturation(self, points, verbose=False, max_prime=-1, min_prime=2):
--        """
--        Given a list of rational points on E, compute the saturation in
-+        """Given a list of rational points on E, compute the saturation in
-         E(Q) of the subgroup they generate.
- 
-         INPUT:
-@@ -2552,7 +2551,7 @@ def saturation(self, points, verbose=False, max_prime=-1, min_prime=2):
-            ``min_prime`` both to `p`.  One situation where this is
-            useful is after mapping saturated points from another
-            elliptic curve by a `p`-isogeny, since the images may not
--           be `p`-saturated but with be saturated at all other primes.
-+           be `p`-saturated but will be saturated at all other primes.
- 
-         OUTPUT:
- 
-@@ -2588,7 +2587,7 @@ def saturation(self, points, verbose=False, max_prime=-1, min_prime=2):
-            The computed index of saturation may be large, in which
-            case saturation may take a long time.  For example, the
-            rank 4 curve ``EllipticCurve([0,1,1,-9872,374262])`` has a
--           saturation index bound of 86682 and takes around 15 minutes
-+           saturation index bound of 11816 and takes around 40 seconds
-            to prove saturation.
- 
- 
-
-From 9b1dedb02560d1b3fce444e5f88ac14f42786ce9 Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Fri, 9 Apr 2021 12:23:21 +0100
-Subject: [PATCH 16/18] correct typo and update eclib's m4 script
-
----
- build/pkgs/eclib/spkg-configure.m4 | 2 +-
- src/sage/libs/eclib/interface.py   | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/build/pkgs/eclib/spkg-configure.m4 b/build/pkgs/eclib/spkg-configure.m4
-index 748e6b8bf3e..8da0723747d 100644
---- a/build/pkgs/eclib/spkg-configure.m4
-+++ b/build/pkgs/eclib/spkg-configure.m4
-@@ -1,7 +1,7 @@
- SAGE_SPKG_CONFIGURE([eclib], [
-   SAGE_SPKG_DEPCHECK([ntl pari flint], [
-     dnl Trac #31443: use existing eclib only if the version reported by pkg-config is correct
--    m4_pushdef([SAGE_ECLIB_VER],["20210318"])
-+    m4_pushdef([SAGE_ECLIB_VER],["20210408"])
-     PKG_CHECK_MODULES([ECLIB], [eclib = SAGE_ECLIB_VER], [
-       AC_CACHE_CHECK([for mwrank version == SAGE_ECLIB_VER], [ac_cv_path_MWRANK], [
-         AC_PATH_PROGS_FEATURE_CHECK([MWRANK], [mwrank], [
-diff --git a/src/sage/libs/eclib/interface.py b/src/sage/libs/eclib/interface.py
-index 493b5f13470..a163cc31093 100644
---- a/src/sage/libs/eclib/interface.py
-+++ b/src/sage/libs/eclib/interface.py
-@@ -1102,7 +1102,7 @@ def saturate(self, max_prime=-1, min_prime=2):
- 
-           In versions up to v20190909, ``eclib`` used floating point
-           methods based on elliptic logarithms to divide points, and
--          did not compute the precision necessary, which could casue
-+          did not compute the precision necessary, which could cause
-           failures. Since v20210310, ``eclib`` uses exact method based
-           on division polynomials, which should mean that such
-           failures does not happen.
-
-From 3dca4e6c927053770c5e938f5a59be9047602cde Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Thu, 15 Apr 2021 15:20:07 +0100
-Subject: [PATCH 17/18] #31443: undated pkg info for 20210415
-
----
- build/pkgs/eclib/checksums.ini       | 6 +++---
- build/pkgs/eclib/package-version.txt | 2 +-
- build/pkgs/eclib/spkg-configure.m4   | 2 +-
- 3 files changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/build/pkgs/eclib/checksums.ini b/build/pkgs/eclib/checksums.ini
-index 1997cd68c7d..5d12b8a60e0 100644
---- a/build/pkgs/eclib/checksums.ini
-+++ b/build/pkgs/eclib/checksums.ini
-@@ -1,5 +1,5 @@
- tarball=eclib-VERSION.tar.bz2
--sha1=d1c9add8c95ba502440e7d197da0c1e3329adc7d
--md5=47e2c9b59c1d322709a5d99e438d09cd
--cksum=2380455615
-+sha1=2f0ea52fd59352fa0dec8cabf5d513b0f0cf7629
-+md5=2a3d4b37ee5f504d46c010e29040d7a4
-+cksum=2697309856
- upstream_url=https://github.com/JohnCremona/eclib/releases/download/VERSION/eclib-VERSION.tar.bz2
-diff --git a/build/pkgs/eclib/package-version.txt b/build/pkgs/eclib/package-version.txt
-index c12f44c8f0c..e9d3aa7a596 100644
---- a/build/pkgs/eclib/package-version.txt
-+++ b/build/pkgs/eclib/package-version.txt
-@@ -1 +1 @@
--20210408
-+20210415
-diff --git a/build/pkgs/eclib/spkg-configure.m4 b/build/pkgs/eclib/spkg-configure.m4
-index 8da0723747d..edb759d45f5 100644
---- a/build/pkgs/eclib/spkg-configure.m4
-+++ b/build/pkgs/eclib/spkg-configure.m4
-@@ -1,7 +1,7 @@
- SAGE_SPKG_CONFIGURE([eclib], [
-   SAGE_SPKG_DEPCHECK([ntl pari flint], [
-     dnl Trac #31443: use existing eclib only if the version reported by pkg-config is correct
--    m4_pushdef([SAGE_ECLIB_VER],["20210408"])
-+    m4_pushdef([SAGE_ECLIB_VER],["20210415"])
-     PKG_CHECK_MODULES([ECLIB], [eclib = SAGE_ECLIB_VER], [
-       AC_CACHE_CHECK([for mwrank version == SAGE_ECLIB_VER], [ac_cv_path_MWRANK], [
-         AC_PATH_PROGS_FEATURE_CHECK([MWRANK], [mwrank], [
-
-From 9443892b2e86d4edf4f040fa7b1736583ab4c29a Mon Sep 17 00:00:00 2001
-From: John Cremona <john.cremona@gmail.com>
-Date: Wed, 5 May 2021 08:59:07 +0100
-Subject: [PATCH 18/18] #31443: updated eclib tarball to 20210503
-
----
- build/pkgs/eclib/checksums.ini       | 6 +++---
- build/pkgs/eclib/package-version.txt | 2 +-
- build/pkgs/eclib/spkg-configure.m4   | 2 +-
- 3 files changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/build/pkgs/eclib/checksums.ini b/build/pkgs/eclib/checksums.ini
-index 5d12b8a60e0..8342f43b6da 100644
---- a/build/pkgs/eclib/checksums.ini
-+++ b/build/pkgs/eclib/checksums.ini
-@@ -1,5 +1,5 @@
- tarball=eclib-VERSION.tar.bz2
--sha1=2f0ea52fd59352fa0dec8cabf5d513b0f0cf7629
--md5=2a3d4b37ee5f504d46c010e29040d7a4
--cksum=2697309856
-+sha1=b8e1bd10a28341fcd8146cf12fc38a12c798c555
-+md5=d54562480e1ebd73ae3f343b949dfa66
-+cksum=2657346485
- upstream_url=https://github.com/JohnCremona/eclib/releases/download/VERSION/eclib-VERSION.tar.bz2
-diff --git a/build/pkgs/eclib/package-version.txt b/build/pkgs/eclib/package-version.txt
-index e9d3aa7a596..891293d2df1 100644
---- a/build/pkgs/eclib/package-version.txt
-+++ b/build/pkgs/eclib/package-version.txt
-@@ -1 +1 @@
--20210415
-+20210503
-diff --git a/build/pkgs/eclib/spkg-configure.m4 b/build/pkgs/eclib/spkg-configure.m4
-index edb759d45f5..4bced5f44ed 100644
---- a/build/pkgs/eclib/spkg-configure.m4
-+++ b/build/pkgs/eclib/spkg-configure.m4
-@@ -1,7 +1,7 @@
- SAGE_SPKG_CONFIGURE([eclib], [
-   SAGE_SPKG_DEPCHECK([ntl pari flint], [
-     dnl Trac #31443: use existing eclib only if the version reported by pkg-config is correct
--    m4_pushdef([SAGE_ECLIB_VER],["20210415"])
-+    m4_pushdef([SAGE_ECLIB_VER],["20210503"])
-     PKG_CHECK_MODULES([ECLIB], [eclib = SAGE_ECLIB_VER], [
-       AC_CACHE_CHECK([for mwrank version == SAGE_ECLIB_VER], [ac_cv_path_MWRANK], [
-         AC_PATH_PROGS_FEATURE_CHECK([MWRANK], [mwrank], [
