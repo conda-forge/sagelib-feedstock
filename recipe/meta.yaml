@@ -10,7 +10,8 @@ source:
   sha256: d3b104a83e140cda563ae0b44fa3ec2b3545660f120fab78dde6ceb5fb1ed991
   patches:
     - patches/trac31443.patch
-    - patches/cross-compile.patch
+    - patches/trac31885.patch
+    - patches/trac31888.patch
 
 build:
   number: 0
