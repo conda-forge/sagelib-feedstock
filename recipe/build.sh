@@ -35,11 +35,10 @@ cd src
 mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
 
-python -u setup.py build
-python -u setup.py install
+python -m pip install . -vv
 
 cd ../build/pkgs/sage_conf/src
-python -u setup.py install
+python -m pip install . -vv
 
 mkdir -p "$PREFIX/etc/conda/activate.d"
 mkdir -p "$PREFIX/etc/conda/deactivate.d"
