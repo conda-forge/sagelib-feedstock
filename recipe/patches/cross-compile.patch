@@ -1,0 +1,282 @@
+commit 45086bf3136e46f612c7a9fa066905a455984f45
+Author: Isuru Fernando <isuruf@gmail.com>
+Date:   Mon May 31 01:48:54 2021 -0500
+
+    allow cross compiling
+
+diff --git a/build/pkgs/boost/spkg-configure.m4 b/build/pkgs/boost/spkg-configure.m4
+index 73d231f15a..6203bbc50a 100644
+--- a/build/pkgs/boost/spkg-configure.m4
++++ b/build/pkgs/boost/spkg-configure.m4
+@@ -6,6 +6,15 @@ SAGE_SPKG_CONFIGURE([boost], [
+     ]], [[
+       boost::program_options::error err("Error message");
+       return 0;
+-    ]])], [], [sage_spkg_install_boost=yes])
++    ]])], [], [sage_spkg_install_boost=yes], [
++    dnl cross. don't run, just link
++    AC_LINK_IFELSE([
++    AC_LANG_PROGRAM(
++      [[#include <boost/program_options/errors.hpp>
++      ]], [[
++        boost::program_options::error err("Error message");
++        return 0;
++      ]])], [], [sage_spkg_install_boost=yes]
++    )])
+  ])
+ ])
+diff --git a/build/pkgs/brial/spkg-configure.m4 b/build/pkgs/brial/spkg-configure.m4
+index a0f00838c7..6a94a42721 100644
+--- a/build/pkgs/brial/spkg-configure.m4
++++ b/build/pkgs/brial/spkg-configure.m4
+@@ -7,7 +7,7 @@ SAGE_SPKG_CONFIGURE([brial], [
+     AC_LANG_PUSH(C++)
+     SAVED_LIBS=$LIBS
+     LIBS="$LIBS -lbrial -lbrial_groebner"
+-    AC_MSG_CHECKING([if we can link against brial libraries])
++    AC_MSG_CHECKING([if we can link against brial libraries and run])
+     AC_RUN_IFELSE([
+       AC_LANG_PROGRAM([
+         #include <polybori.h>
+@@ -48,11 +48,43 @@ SAGE_SPKG_CONFIGURE([brial], [
+ 	  ], [
+           AC_MSG_RESULT([yes])
+           sage_spkg_install_brial=no
+-      ])
++      ], [AC_MSG_RESULT([cross compiling. Assume yes])
++          sage_spkg_install_brial=no])
+     ],
+     [
+       AC_MSG_RESULT([no])
+       sage_spkg_install_brial=yes
++    ],
++    [
++     AC_MSG_CHECKING([if we can link against brial libraries])
++     AC_LINK_IFELSE([
++       AC_LANG_PROGRAM([
++         #include <polybori.h>
++         #include <polybori/groebner/groebner_alg.h>
++         USING_NAMESPACE_PBORI
++         USING_NAMESPACE_PBORIGB
++
++     class MyConstant : public BooleConstant{
++           public: void negate() { this->m_value = !this->m_value; }
++         };
++       ],[
++         BoolePolyRing r = BoolePolyRing(2, COrderEnums::dlex);
++         ReductionStrategy rs = ReductionStrategy(r);
++         rs.llReduceAll(); // uses groebner lib
++         if (2 != r.nVariables()) { return 1; }
++         if (r.constant(true) == r.constant(false)) { return 2; }
++         MyConstant f = MyConstant();
++         f.negate(); // ensures v1.1.0+ if m_value isn't const
++         if (!f.isOne()) { return 3; }
++         return 0;
++       ])
++       ],[
++         AC_MSG_RESULT([yes])
++         sage_spkg_install_brial=yes
++       ],[
++         AC_MSG_RESULT([no])
++         sage_spkg_install_brial=no
++       ])
+     ])
+     LIBS=$SAVED_LIBS
+     AC_LANG_POP
+diff --git a/build/pkgs/curl/spkg-configure.m4 b/build/pkgs/curl/spkg-configure.m4
+index d88561511b..23ce9dd31f 100644
+--- a/build/pkgs/curl/spkg-configure.m4
++++ b/build/pkgs/curl/spkg-configure.m4
+@@ -20,7 +20,12 @@ SAGE_SPKG_CONFIGURE([curl], [
+ 
+            AC_RUN_IFELSE([AC_LANG_PROGRAM([[#include <curl/curl.h>]],[[
+              curl_easy_setopt(NULL,CURLOPT_URL,NULL);
+-           ]])], sage_libcurl_cv_lib_curl_executable=yes, sage_libcurl_cv_lib_curl_executable=no)
++           ]])], sage_libcurl_cv_lib_curl_executable=yes, sage_libcurl_cv_lib_curl_executable=no, [
++              dnl cross compiling. link only
++              AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <curl/curl.h>]],[[
++               curl_easy_setopt(NULL,CURLOPT_URL,NULL);
++             ]])], sage_libcurl_cv_lib_curl_executable=yes, sage_libcurl_cv_lib_curl_executable=no]
++           )
+       ])
+     AS_IF([test "$sage_libcurl_cv_lib_curl_executable" = "no"], [sage_spkg_install_curl=yes])
+ ])
+diff --git a/build/pkgs/flint/spkg-configure.m4 b/build/pkgs/flint/spkg-configure.m4
+index b697e478d7..de3ad59cc2 100644
+--- a/build/pkgs/flint/spkg-configure.m4
++++ b/build/pkgs/flint/spkg-configure.m4
+@@ -22,7 +22,8 @@ SAGE_SPKG_CONFIGURE([flint], [
+                                   [#endif]])],
+                  [AC_MSG_RESULT([GC not enabled. Good.])],
+ 		        [AC_MSG_RESULT([GC enabled. Incompatible with Sage.])
+-		         sage_spkg_install_flint=yes])
++		         sage_spkg_install_flint=yes],
++                 [AC_MSG_RESULT(["cross compiling. assuming GC is not enabled"])])
+             ], [sage_spkg_install_flint=yes])
+           ], [sage_spkg_install_flint=yes])
+         ], [sage_spkg_install_flint=yes])
+diff --git a/build/pkgs/lcalc/spkg-configure.m4 b/build/pkgs/lcalc/spkg-configure.m4
+index 19a87c8d30..4225eef4e7 100644
+--- a/build/pkgs/lcalc/spkg-configure.m4
++++ b/build/pkgs/lcalc/spkg-configure.m4
+@@ -24,10 +24,22 @@ SAGE_SPKG_CONFIGURE([lcalc], [
+             AC_MSG_RESULT([no; install lcalc])
+             sage_spkg_install_lcalc=yes
+             LIBS=$LCALC_SAVED_LIBS
++            ], [
++               AC_MSG_RESULT([cross compiling; check linking only])
++                 AC_LINK_IFELSE([
++                   AC_LANG_PROGRAM([[#include <Lfunction/L.h>]],
++                             [[initialize_globals();
++                               Complex x;
++                               x = Pi*I;
++                               L_function<int> L4;
++                               return 0;]]
++                   )], [AC_MSG_RESULT([yes; use lcalc from the system])], [
++                   AC_MSG_RESULT([no; install lcalc])
++                   sage_spkg_install_lcalc=yes
++                   LIBS=$LCALC_SAVED_LIBS
++                 ])
++            ])
+           ])
+-               ], [
+-               AC_MSG_RESULT([no. Install lcalc])
+-               sage_spkg_install_lcalc=yes])
+         ])
+     ])
+     m4_popdef([SAGE_LCALC_MINVER])
+diff --git a/build/pkgs/libbraiding/spkg-configure.m4 b/build/pkgs/libbraiding/spkg-configure.m4
+index 81f4d57f22..8fd86aa20e 100644
+--- a/build/pkgs/libbraiding/spkg-configure.m4
++++ b/build/pkgs/libbraiding/spkg-configure.m4
+@@ -24,6 +24,26 @@ SAGE_SPKG_CONFIGURE([libbraiding], [
+   [
+     AC_MSG_RESULT([no])
+     sage_spkg_install_libbraiding=yes
++  ],[
++    AC_LINK_IFELSE([
++      AC_LANG_PROGRAM([
++        #include <braiding.h>
++        #include <list>
++        using namespace Braiding;
++      ],[
++        // Mimic BraidGroup(2)([1,1]).thurston_type() in SageMath.
++        // thurstontype == 1 corresponds to "periodic"
++        if (thurstontype(2, {1,1}) == 1) { return 0; } else { return 1; }
++      ])
++    ],
++    [
++      AC_MSG_RESULT([yes])
++      sage_spkg_install_libbraiding=no
++    ],
++    [
++      AC_MSG_RESULT([no])
++      sage_spkg_install_libbraiding=yes
++    ])
+   ])
+   LIBS=$SAVED_LIBS
+   AC_LANG_POP
+diff --git a/build/pkgs/mpfi/spkg-configure.m4 b/build/pkgs/mpfi/spkg-configure.m4
+index 7805ef4a2d..0cdb10a920 100644
+--- a/build/pkgs/mpfi/spkg-configure.m4
++++ b/build/pkgs/mpfi/spkg-configure.m4
+@@ -28,7 +28,8 @@ SAGE_SPKG_CONFIGURE([mpfi], [
+               else return 1;
+             ]])], [AC_MSG_RESULT([yes])], [
+                    AC_MSG_RESULT([no])
+-                   sage_spkg_install_mpfi=yes])
++                   sage_spkg_install_mpfi=yes],
++                  [AC_MSG_RESULT([cross compiling. assume yes])])
+         AC_LANG_POP(C)], [sage_spkg_install_mpfi=yes])
+     fi
+ 
+diff --git a/build/pkgs/ntl/spkg-configure.m4 b/build/pkgs/ntl/spkg-configure.m4
+index 48e41de6ea..228c672cc4 100644
+--- a/build/pkgs/ntl/spkg-configure.m4
++++ b/build/pkgs/ntl/spkg-configure.m4
+@@ -29,6 +29,10 @@ SAGE_SPKG_CONFIGURE([ntl], [
+             ], [
+                 AC_MSG_RESULT([no])
+                 sage_spkg_install_ntl=yes
++            ], [
++                dnl assume that the person running cross-compiling
++                dnl knows what they are doing
++                AC_MSG_RESULT([yes])
+             ])
+     ])
+ 
+diff --git a/build/pkgs/openblas/spkg-configure.m4 b/build/pkgs/openblas/spkg-configure.m4
+index 912248c474..177bbb1d4f 100644
+--- a/build/pkgs/openblas/spkg-configure.m4
++++ b/build/pkgs/openblas/spkg-configure.m4
+@@ -75,7 +75,8 @@ SAGE_SPKG_CONFIGURE([openblas], [
+                                                    + 100 * ]]SAGE_OPENBLAS_MIN_VERSION_MINOR[[
+                                                          + ]]SAGE_OPENBLAS_MIN_VERSION_MICRO[[)
+                                                return 1;]])
+-                         ], [AS_VAR_SET([HAVE_OPENBLAS], [yes])], [AS_VAR_SET([HAVE_OPENBLAS], [no])])
++                         ], [AS_VAR_SET([HAVE_OPENBLAS], [yes])], [AS_VAR_SET([HAVE_OPENBLAS], [no])],
++                            [AS_VAR_SET([HAVE_OPENBLAS], [yes])])
+                          AC_LANG_POP([C])
+                          AC_MSG_RESULT([$HAVE_OPENBLAS])
+                        ])
+diff --git a/build/pkgs/pari/spkg-configure.m4 b/build/pkgs/pari/spkg-configure.m4
+index 9a1b0c7db8..70d0a8a590 100644
+--- a/build/pkgs/pari/spkg-configure.m4
++++ b/build/pkgs/pari/spkg-configure.m4
+@@ -119,7 +119,8 @@ SAGE_SPKG_CONFIGURE([pari], [
+                   [return vers!=$gp_version;]])],
+                 [AC_MSG_RESULT([libpari's and GP's versions match. Good])],
+ 	        [AC_MSG_RESULT([libpari's version does not match GP's version. Not good])
+-		         sage_spkg_install_pari=yes])
++		         sage_spkg_install_pari=yes],
++                 [AC_MSG_RESULT([cross compiling. Assume they match])])
+               AC_MSG_CHECKING([is GP's version good enough? ])
+               AX_COMPARE_VERSION([$gp_version], [ge], [$SAGE_PARI_MINVER], [
+                   AC_MSG_RESULT([yes])
+@@ -142,13 +143,15 @@ SAGE_SPKG_CONFIGURE([pari], [
+                         [[return strcmp(PARI_MT_ENGINE, "pthread") != 0]])],
+                        [AC_MSG_RESULT([yes. Good])],
+                        [AC_MSG_RESULT([no. Not good])
+-                        sage_spkg_install_pari=yes])
++                        sage_spkg_install_pari=yes],
++                       [AC_MSG_RESULT([cross compiling. Assume yes])])
+                     ],
+                     [AC_MSG_RESULT([libpari's datadir does not match GP's datadir. Not good])
+-                     sage_spkg_install_pari=yes])
++                    sage_spkg_install_pari=yes],
++                    [AC_MSG_RESULT([cross compiling. Assume yes])])
+                  ], [
+                   AC_MSG_RESULT([no])
+-                  sage_spkg_install_pari=yes])
++                  sage_spkg_install_pari=yes], [AC_MSG_RESULT([cross compiling. Assume yes])])
+               AC_LANG_POP()
+         ], [sage_spkg_install_pari=yes])
+       fi dnl end main PARI test
+diff --git a/build/pkgs/sqlite/spkg-configure.m4 b/build/pkgs/sqlite/spkg-configure.m4
+index c7fd821f59..901e27f19e 100644
+--- a/build/pkgs/sqlite/spkg-configure.m4
++++ b/build/pkgs/sqlite/spkg-configure.m4
+@@ -26,7 +26,8 @@ SAGE_SPKG_CONFIGURE([sqlite], [
+                        [AC_MSG_RESULT([yes])],
+                        [AC_MSG_RESULT([no])
+                         LIBS="$SQLITE_SAVED_LIBS"
+-                        sage_spkg_install_sqlite=yes])
++                        sage_spkg_install_sqlite=yes],
++                       [AC_MSG_RESULT([cross compiling. assume yes])])
+   m4_popdef([SAGE_SQLITE3_MIN_VERSION_MAJOR])
+   m4_popdef([SAGE_SQLITE3_MIN_VERSION_MINOR])
+   m4_popdef([SAGE_SQLITE3_MIN_VERSION_MICRO])
+diff --git a/build/pkgs/symmetrica/spkg-configure.m4 b/build/pkgs/symmetrica/spkg-configure.m4
+index 7dc77df703..e3ab2b611a 100644
+--- a/build/pkgs/symmetrica/spkg-configure.m4
++++ b/build/pkgs/symmetrica/spkg-configure.m4
+@@ -21,7 +21,8 @@ dnl check for one of its many functions
+           [ende();]])],
+          [AC_MSG_RESULT([appears to be a well-patched version.])],
+ 	 [AC_MSG_RESULT([buggy version. Sage will build its own.])
+-		         sage_spkg_install_symmetrica=yes])
++		         sage_spkg_install_symmetrica=yes],
++	 [AC_MSG_RESULT([cross compiling. Assume not buggy.])]
+      ], [sage_spkg_install_symmetrica=yes])
+     ], [sage_spkg_install_symmetrica=yes])
+     AC_LANG_POP(C)
