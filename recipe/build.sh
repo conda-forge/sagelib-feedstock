@@ -30,15 +30,15 @@ make configure
 ./configure --prefix="$PREFIX" --with-python="$PYTHON"
 
 set -x
-cd src
 
 mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
 
-python -m pip install . -vv
+cd $SRC_DIR/build/pkgs/sagelib/src
+python setup.py install
 
-cd ../build/pkgs/sage_conf/src
-python -m pip install . -vv
+cd $SRC_DIR/build/pkgs/sage_conf/src
+python setup.py install
 
 mkdir -p "$PREFIX/etc/conda/activate.d"
 mkdir -p "$PREFIX/etc/conda/deactivate.d"
