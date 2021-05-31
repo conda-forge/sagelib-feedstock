@@ -1,4 +1,4 @@
-commit 45086bf3136e46f612c7a9fa066905a455984f45
+commit 57a5e2a22ec023bff68ad5fcaa6bda9590fd6c46
 Author: Isuru Fernando <isuruf@gmail.com>
 Date:   Mon May 31 01:48:54 2021 -0500
 
@@ -84,7 +84,7 @@ index a0f00838c7..6a94a42721 100644
      LIBS=$SAVED_LIBS
      AC_LANG_POP
 diff --git a/build/pkgs/curl/spkg-configure.m4 b/build/pkgs/curl/spkg-configure.m4
-index d88561511b..23ce9dd31f 100644
+index d88561511b..b938bd7547 100644
 --- a/build/pkgs/curl/spkg-configure.m4
 +++ b/build/pkgs/curl/spkg-configure.m4
 @@ -20,7 +20,12 @@ SAGE_SPKG_CONFIGURE([curl], [
@@ -96,7 +96,7 @@ index d88561511b..23ce9dd31f 100644
 +              dnl cross compiling. link only
 +              AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <curl/curl.h>]],[[
 +               curl_easy_setopt(NULL,CURLOPT_URL,NULL);
-+             ]])], sage_libcurl_cv_lib_curl_executable=yes, sage_libcurl_cv_lib_curl_executable=no]
++             ]])], sage_libcurl_cv_lib_curl_executable=yes, sage_libcurl_cv_lib_curl_executable=no)]
 +           )
        ])
      AS_IF([test "$sage_libcurl_cv_lib_curl_executable" = "no"], [sage_spkg_install_curl=yes])
