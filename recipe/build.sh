@@ -23,10 +23,9 @@ export SAGE_NUM_THREADS=$CPU_COUNT
 
 mkdir -p "${SAGE_EXTCODE}/notebook-ipython"
 
+rm $PREFIX/bin/$HOST-pkg-config
 make configure
 ./configure --prefix="$PREFIX" --with-python="$PYTHON"
-
-rm $PREFIX/bin/$HOST-pkg-config
 
 set -x
 cd src
