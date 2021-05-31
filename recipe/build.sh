@@ -26,6 +26,8 @@ mkdir -p "${SAGE_EXTCODE}/notebook-ipython"
 make configure
 ./configure --prefix="$PREFIX" --with-python="$PYTHON"
 
+rm $PREFIX/bin/$HOST-pkg-config
+
 set -x
 cd src
 
