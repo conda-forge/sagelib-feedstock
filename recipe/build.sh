@@ -23,17 +23,22 @@ export SAGE_NUM_THREADS=$CPU_COUNT
 
 mkdir -p "${SAGE_EXTCODE}/notebook-ipython"
 
+rm -f build/pkgs/boost/spkg-configure.m4
+
+rm $PREFIX/bin/$HOST-pkg-config
 make configure
 ./configure --prefix="$PREFIX" --with-python="$PYTHON"
 
 set -x
-cd src
 
 mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
 
-python -u setup.py build
-python -u setup.py install
+cd $SRC_DIR/build/pkgs/sagelib/src
+python setup.py install
+
+cd $SRC_DIR/build/pkgs/sage_conf/src
+python setup.py install
 
 mkdir -p "$PREFIX/etc/conda/activate.d"
 mkdir -p "$PREFIX/etc/conda/deactivate.d"

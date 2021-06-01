@@ -1,0 +1,19 @@
+commit 78862cd565e68e2d35dd6eb48e637cd9e6c255d8
+Author: Isuru Fernando <isuruf@gmail.com>
+Date:   Mon May 31 15:01:42 2021 -0500
+
+    Include submodules in find_namespace_packages
+
+diff --git a/src/setup.py b/src/setup.py
+index df8242c71a..b5738a11dd 100755
+--- a/src/setup.py
++++ b/src/setup.py
+@@ -76,7 +76,7 @@ files_to_exclude = filter_cython_sources(SAGE_SRC, distributions_to_exclude)
+ 
+ log.debug(f"files_to_exclude = {files_to_exclude}")
+ 
+-python_packages = find_namespace_packages(where=SAGE_SRC, include=['sage', 'sage_setup'])
++python_packages = find_namespace_packages(where=SAGE_SRC, include=['sage', 'sage_setup', 'sage.*', 'sage_setup.*'])
+ log.debug(f"python_packages = {python_packages}")
+ 
+ log.info(f"Discovered Python/Cython sources, time: {(time.time() - t):.2f} seconds.")
