@@ -14,7 +14,7 @@ source:
     - patches/trac31888.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   ignore_run_exports:
@@ -70,7 +70,7 @@ requirements:
     - lrcalc        1.2
     - libbraiding   1.1
     - libflint
-    - libgd         2.2.*
+    - libgd         2.3.*
     - libhomfly     1.02.*
     - libpng
     - linbox        >=1.6.3
