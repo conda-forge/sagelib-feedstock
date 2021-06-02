@@ -38,7 +38,7 @@ cd $SRC_DIR/build/pkgs/sagelib/src
 python setup.py install
 
 cd $SRC_DIR/build/pkgs/sage_conf/src
-python setup.py install
+python -m pip install .
 
 mkdir -p "$PREFIX/etc/conda/activate.d"
 mkdir -p "$PREFIX/etc/conda/deactivate.d"
