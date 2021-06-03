@@ -14,7 +14,7 @@ source:
     - patches/trac31888.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   ignore_run_exports:
