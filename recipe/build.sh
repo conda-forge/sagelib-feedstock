@@ -25,6 +25,10 @@ mkdir -p "${SAGE_EXTCODE}/notebook-ipython"
 
 rm -f build/pkgs/boost/spkg-configure.m4
 
+# workaround https://github.com/Singular/Singular/issues/1099
+sed -i.bak 's/256/512/g' Singular/iplib.cc
+sed -i.bak 's/255/511/g' Singular/iplib.cc
+
 rm $PREFIX/bin/$HOST-pkg-config
 make configure
 ./configure --prefix="$PREFIX" --with-python="$PYTHON"
