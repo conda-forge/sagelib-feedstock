@@ -40,6 +40,9 @@ python setup.py install
 cd $SRC_DIR/build/pkgs/sage_conf/src
 python setup.py install --single-version-externally-managed --record record.txt
 
+cd $SRC_DIR/build/pkgs/sage_docbuild/src
+python setup.py install --single-version-externally-managed --record record.txt
+
 mkdir -p "$PREFIX/etc/conda/activate.d"
 mkdir -p "$PREFIX/etc/conda/deactivate.d"
 cp "$RECIPE_DIR/activate/activate.sh" "$PREFIX/etc/conda/activate.d/sage-activate.sh"
