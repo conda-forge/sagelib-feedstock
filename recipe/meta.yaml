@@ -14,7 +14,7 @@ source:
     - patches/trac31888.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   ignore_run_exports:
@@ -64,7 +64,7 @@ requirements:
     - gmpy2         2.1.*
     - gsl
     - iml           1.0.*
-    - jinja2        2.11.*
+    - jinja2        3.0.*
     - jupyter_core  4.*
     - lcalc         1.23
     - lrcalc        1.2
