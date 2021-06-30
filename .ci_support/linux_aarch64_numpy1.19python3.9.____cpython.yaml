@@ -49,7 +49,7 @@ ntl:
 numpy:
 - '1.19'
 pari:
-- '2.11'
+- '2.13'
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
