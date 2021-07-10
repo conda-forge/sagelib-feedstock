@@ -14,7 +14,7 @@ source:
     - patches/trac31888.patch
 
 build:
-  number: 4
+  number: 5
   skip: true  # [win]
   skip: true  # [py3k and py<36]
   ignore_run_exports:
@@ -69,7 +69,7 @@ requirements:
     - lcalc         1.23
     - lrcalc        1.2
     - libbraiding   1.1
-    - libflint
+    - libflint      2.7.* *_ntl_*
     - libgd         2.3.*
     - libhomfly     1.02.*
     - libpng
@@ -138,6 +138,7 @@ requirements:
     - {{ pin_compatible("lrcalc", max_pin="x.x") }}
     - {{ pin_compatible("libbraiding", max_pin="x.x") }}
     - {{ pin_compatible("libflint", max_pin="x.x") }}
+    - libflint      2.7.* *_ntl_*
     - {{ pin_compatible("libgd", max_pin="x.x") }}
     - {{ pin_compatible("libhomfly", max_pin="x.x") }}
     - libpng
