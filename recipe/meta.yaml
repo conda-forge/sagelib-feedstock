@@ -30,6 +30,7 @@ requirements:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cython                                 # [build_platform != target_platform]
+    - memory-allocator                       # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
   host:
     - pip
@@ -72,6 +73,7 @@ requirements:
     - fflas-ffpack  2.4.*
     - m4ri
     - m4rie
+    - memory-allocator
     - mpc           1.1.*
     - mpfi          1.5.*
     - mpfr
@@ -142,6 +144,7 @@ requirements:
     - fflas-ffpack
     - {{ pin_compatible("m4ri") }}
     - {{ pin_compatible("m4rie") }}
+    - memory-allocator
     - mpc
     - mpfi
     - mpfr
