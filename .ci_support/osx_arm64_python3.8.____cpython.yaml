@@ -1,7 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '11.0'
 arb:
-- '2.19'
+- '2.20'
 boost_cpp:
 - 1.74.0
 c_compiler:
@@ -30,6 +30,8 @@ libblas:
 - 3.9 *netlib
 libcblas:
 - 3.9 *netlib
+libflint:
+- '2.8'
 liblapack:
 - 3.9 *netlib
 liblapacke:

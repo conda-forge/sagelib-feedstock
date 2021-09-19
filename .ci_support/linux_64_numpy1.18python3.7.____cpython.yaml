@@ -1,5 +1,5 @@
 arb:
-- '2.19'
+- '2.20'
 boost_cpp:
 - 1.74.0
 c_compiler:
@@ -32,6 +32,8 @@ libblas:
 - 3.8 *netlib
 libcblas:
 - 3.8 *netlib
+libflint:
+- '2.8'
 liblapack:
 - 3.8 *netlib
 liblapacke:

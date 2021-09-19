@@ -1,4 +1,4 @@
-{% set version = "9.3" %}
+{% set version = "9.4" %}
 {% set name = "sagelib" %}
 
 package:
@@ -7,21 +7,14 @@ package:
 
 source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: d3b104a83e140cda563ae0b44fa3ec2b3545660f120fab78dde6ceb5fb1ed991
-  patches:
-    - patches/trac31443.patch
-    - patches/trac31885.patch
-    - patches/trac31888.patch
+  sha256: 47190f37e679c2483dadc13112595bacb399dfe4c4a0cde18d3627f5b2db0ea5
 
 build:
-  number: 6
+  number: 0
   skip: true  # [win]
-  skip: true  # [py3k and py<36]
-  ignore_run_exports:
-    - libgfortran
-    - libgfortran4
-    - libgfortran5
-    - libgfortran-ng
+  skip: true  # [py3k and py<37]
+  ignore_run_exports_from:
+    - {{ compiler('fortran') }}
 
 requirements:
   build:
@@ -37,6 +30,7 @@ requirements:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cython                                 # [build_platform != target_platform]
+    - memory-allocator                       # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
   host:
     - pip
@@ -54,10 +48,10 @@ requirements:
     - cysignals     1.10.*
     - cython
     - ecl           21.2.*
-    - eclib         20210503
+    - eclib         20210625
     - ecm           7.*
     - future
-    - gap-core      4.11.*
+    - gap-core      4.11.1
     - giac          1.6.*
     - glpk
     - gmp
@@ -69,7 +63,8 @@ requirements:
     - lcalc         1.23
     - lrcalc        1.2
     - libbraiding   1.1
-    - libflint      2.7.* *_ntl_*
+    - libflint
+    - libflint      * *_ntl_*
     - libgd         2.3.*
     - libhomfly     1.02.*
     - libpng
@@ -78,6 +73,7 @@ requirements:
     - fflas-ffpack  2.4.*
     - m4ri
     - m4rie
+    - memory-allocator
     - mpc           1.1.*
     - mpfi          1.5.*
     - mpfr
@@ -89,7 +85,7 @@ requirements:
     - planarity     3.*
     - ppl           1.2
     - pplpy         0.8.*
-    - pynac         0.7.27
+    - pynac         0.7.29
     - python
     - ratpoints     2.1.*
     - readline
@@ -138,7 +134,8 @@ requirements:
     - {{ pin_compatible("lrcalc", max_pin="x.x") }}
     - {{ pin_compatible("libbraiding", max_pin="x.x") }}
     - {{ pin_compatible("libflint", max_pin="x.x") }}
-    - libflint      2.7.* *_ntl_*
+    - libflint
+    - libflint      * *_ntl_*
     - {{ pin_compatible("libgd", max_pin="x.x") }}
     - {{ pin_compatible("libhomfly", max_pin="x.x") }}
     - libpng
@@ -147,6 +144,7 @@ requirements:
     - fflas-ffpack
     - {{ pin_compatible("m4ri") }}
     - {{ pin_compatible("m4rie") }}
+    - memory-allocator
     - mpc
     - mpfi
     - mpfr
