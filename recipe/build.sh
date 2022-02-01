@@ -34,6 +34,10 @@ set -x
 mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
 
+
+cd $SRC_DIR/build/pkgs/sage_setup/src
+python setup.py install --single-version-externally-managed --record record.txt
+
 cd $SRC_DIR/build/pkgs/sagelib/src
 python setup.py install
 
