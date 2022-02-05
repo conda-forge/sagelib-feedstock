@@ -45,7 +45,7 @@ requirements:
     - libbrial      1.2.*
     - cliquer       1.22.*
     - cypari2       2.1.*
-    - cysignals     1.10.*
+    - cysignals     1.11.*
     - cython
     - ecl           21.2.*
     - eclib         20210625
