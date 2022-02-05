@@ -1,0 +1,26 @@
+From b2868848bd80af4c182e6fc2dc4c15ded94c3cfe Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Julian=20R=C3=BCth?= <julian.rueth@fsfe.org>
+Date: Fri, 4 Feb 2022 23:38:44 -0500
+Subject: [PATCH] Do not limit python version
+
+Python 3.10 should be mostly supported, see https://trac.sagemath.org/ticket/30766.
+---
+ build/pkgs/python3/spkg-configure.m4 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/build/pkgs/python3/spkg-configure.m4 b/build/pkgs/python3/spkg-configure.m4
+index 1a835b37a0a..b3e3fc2ff88 100644
+--- a/build/pkgs/python3/spkg-configure.m4
++++ b/build/pkgs/python3/spkg-configure.m4
+@@ -1,7 +1,7 @@
+ SAGE_SPKG_CONFIGURE([python3], [
+    m4_pushdef([MIN_VERSION],               [3.7.0])
+    m4_pushdef([MIN_NONDEPRECATED_VERSION], [3.7.0])
+-   m4_pushdef([LT_VERSION],                [3.10.0])
++   m4_pushdef([LT_VERSION],                [4.0.0])
+    AC_ARG_WITH([python],
+                [AS_HELP_STRING([--with-python=PYTHON3],
+                                [Python 3 executable to use for the Sage venv; default: python3])])
+-- 
+2.35.1
+
