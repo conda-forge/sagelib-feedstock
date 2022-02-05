@@ -98,7 +98,7 @@ requirements:
     - zlib
     - zn_poly       0.9.*
     # sageruntime deps
-    - ipython       >=7.16,<8
+    - ipython       >=7.29,<8
     - psutil        >=5.2
     - pexpect       >=4.8.0,<5
     # for the symlinks
@@ -167,7 +167,7 @@ requirements:
     - zlib
     - {{ pin_compatible("zn_poly", max_pin="x.x") }}
     # sageruntime deps
-    - ipython       >=7.16,<8
+    - ipython       >=7.29,<8
     - psutil        >=5.2
     - pexpect       >=4.8.0,<5
 
