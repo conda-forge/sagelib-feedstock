@@ -156,6 +156,7 @@ requirements:
     - {{ pin_compatible("planarity") }}
     - {{ pin_compatible("ppl", max_pin="x.x") }}
     - {{ pin_compatible("pplpy", max_pin="x.x") }}
+    - primecountpy
     - {{ pin_compatible("pynac", max_pin="x.x.x") }}
     - python
     - {{ pin_compatible("ratpoints", max_pin="x.x") }}
