@@ -74,7 +74,7 @@ requirements:
     - m4ri
     - m4rie
     - memory-allocator
-    - mpc           1.1.*
+    - mpc           1.2.*
     - mpfi          1.5.*
     - mpfr
     - ntl
