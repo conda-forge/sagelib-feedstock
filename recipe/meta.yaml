@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
   sha256: 8d70a3b26080802c5b2e33dda4c23795d494d8216a0c2ecfcd608ebab0e64ff6
+  patches:  # [build_platform != target_platform]
+  - singular.patch  # [build_platform != target_platform]
 
 build:
   number: 0
