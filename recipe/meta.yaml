@@ -103,7 +103,7 @@ requirements:
     - pexpect       >=4.8.0,<5
     # for the symlinks
     - three.js
-    - notebook      >=6.1,<7
+    - notebook      >=6.4.6,<7
     - jmol          >=14.29.52,<15
 
   # We can not include all actual runtime dependencies of Sage here as some of
