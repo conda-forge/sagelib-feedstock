@@ -1,4 +1,0 @@
-# We keep a series file for quilt around to help with rebasing patches and also
-# to apply these patches when running automated tests at
-# https://gitlab.com/saraedum/conda-sagelib-tests/pipelines
-trac31443.patch
