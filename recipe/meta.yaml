@@ -12,7 +12,7 @@ source:
   - singular.patch  # [build_platform != target_platform]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py3k and py<37]
   ignore_run_exports_from:
@@ -171,6 +171,8 @@ requirements:
     - ipython       >=7.29,<8
     - psutil        >=5.2
     - pexpect       >=4.8.0,<5
+  run_constrained:
+    - {{ pin_compatible("three.js") }}
 
 test:
   requires:
