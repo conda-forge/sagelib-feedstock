@@ -63,3 +63,7 @@ rm "$PREFIX/bin/sage-env-config.bak"
 
 mkdir -p "$PREFIX/var/lib/sage/installed"
 touch "$PREFIX/var/lib/sage/installed/.conda"
+
+three_js_version=$(cat $PREFIX/share/threejs/version)
+mkdir -p $PREFIX/share/threejs-sage/r$three_js_version
+ln -sf $PREFIX/share/threejs/build/three.min.js $PREFIX/share/threejs-sage/r$three_js_version/three.min.js
