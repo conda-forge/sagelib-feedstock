@@ -12,7 +12,7 @@ source:
   - singular.patch  # [build_platform != target_platform]
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   skip: true  # [py3k and py<37]
   ignore_run_exports_from:
@@ -87,7 +87,6 @@ requirements:
     - planarity     3.*
     - ppl           1.2
     - pplpy         0.8.*
-    - pynac         0.7.29
     - python
     - ratpoints     2.1.*
     - readline
@@ -157,7 +156,6 @@ requirements:
     - {{ pin_compatible("ppl", max_pin="x.x") }}
     - {{ pin_compatible("pplpy", max_pin="x.x") }}
     - primecountpy
-    - {{ pin_compatible("pynac", max_pin="x.x.x") }}
     - python
     - {{ pin_compatible("ratpoints", max_pin="x.x") }}
     - readline
