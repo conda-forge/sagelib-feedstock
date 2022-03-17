@@ -2,6 +2,6 @@ __migrator:
   build_number: 1
   kind: version
   migration_number: 1
-arb:
-- '2.22'
-migrator_ts: 1643154237.4409828
+migrator_ts: 1644122594.106261
+singular:
+- 4.2.1.p3

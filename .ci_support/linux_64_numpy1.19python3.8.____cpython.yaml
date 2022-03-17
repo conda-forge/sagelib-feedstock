@@ -5,7 +5,7 @@ boost_cpp:
 c_compiler:
 - gcc
 c_compiler_version:
-- '9'
+- '10'
 cdt_name:
 - cos6
 channel_sources:
@@ -15,13 +15,13 @@ channel_targets:
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '9'
+- '10'
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '9'
+- '10'
 glpk:
 - '4.65'
 gmp:
@@ -45,7 +45,7 @@ mpfr:
 ntl:
 - 11.4.3
 numpy:
-- '1.18'
+- '1.19'
 pari:
 - 2.13.* *_pthread
 pin_run_as_build:
@@ -67,11 +67,11 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- 3.7.* *_cpython
+- 3.8.* *_cpython
 readline:
 - '8'
 singular:
-- 4.2.0.p3
+- 4.2.1.p3
 target_platform:
 - linux-64
 zip_keys:
