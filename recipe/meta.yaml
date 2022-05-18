@@ -63,7 +63,7 @@ requirements:
     - jinja2        3.0.*
     - jupyter_core  4.*
     - lcalc         2.0.*
-    - lrcalc        1.2
+    - lrcalc        2.1
     - libbraiding   1.1
     - libflint
     - libflint      * *_ntl_*
