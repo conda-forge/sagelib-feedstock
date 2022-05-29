@@ -27,15 +27,15 @@ gmp:
 gsl:
 - '2.7'
 libblas:
-- 3.8 *netlib
+- 3.9 *netlib
 libcblas:
-- 3.8 *netlib
+- 3.9 *netlib
 libflint:
 - '2.8'
 liblapack:
-- 3.8 *netlib
+- 3.9 *netlib
 liblapacke:
-- 3.8 *netlib
+- 3.9 *netlib
 libpng:
 - '1.6'
 macos_machine:
