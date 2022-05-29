@@ -9,7 +9,7 @@ source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
   sha256: c6225d48f70ac955fceed5c1fddfdd7294001d460b43a686329d5d44d836f6a3
   patches:  # [build_platform != target_platform]
-    - singular.patch # [build_platform != target_platform]
+    - singular.patch  # [build_platform != target_platform]
 
 build:
   number: 0
