@@ -65,8 +65,7 @@ requirements:
     - lcalc         2.0.*
     - lrcalc        2.1
     - libbraiding   1.1
-    - libflint
-    - libflint      * *_ntl_*
+    - libflint      {{ libflint }} *_ntl_*
     - libgd         2.3.*
     - libhomfly     1.02.*
     - libpng
@@ -134,9 +133,7 @@ requirements:
     - {{ pin_compatible("lcalc", max_pin="x.x") }}
     - {{ pin_compatible("lrcalc", max_pin="x.x") }}
     - {{ pin_compatible("libbraiding", max_pin="x.x") }}
-    - {{ pin_compatible("libflint", max_pin="x.x") }}
-    - libflint
-    - libflint      * *_ntl_*
+    - libflint      {{ libflint }} *_ntl_*
     - {{ pin_compatible("libgd", max_pin="x.x") }}
     - {{ pin_compatible("libhomfly", max_pin="x.x") }}
     - libpng
