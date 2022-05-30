@@ -65,7 +65,10 @@ requirements:
     - lcalc         2.0.*
     - lrcalc        2.1
     - libbraiding   1.1
-    - libflint      {{ libflint }}.* *_ntl_*
+    # trying to merge the two folllowing lines into one doesn't work because of a
+    # conda-build bug
+    - libflint
+    - libflint      * *_ntl_*
     - libgd         2.3.*
     - libhomfly     1.02.*
     - libpng
@@ -133,7 +136,7 @@ requirements:
     - {{ pin_compatible("lcalc", max_pin="x.x") }}
     - {{ pin_compatible("lrcalc", max_pin="x.x") }}
     - {{ pin_compatible("libbraiding", max_pin="x.x") }}
-    - libflint      {{ libflint }}.* *_ntl_*
+    - libflint  * *_ntl_*
     - {{ pin_compatible("libgd", max_pin="x.x") }}
     - {{ pin_compatible("libhomfly", max_pin="x.x") }}
     - libpng
