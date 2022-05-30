@@ -12,7 +12,7 @@ source:
     - singular.patch  # [build_platform != target_platform]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py3k and py<37]
   ignore_run_exports_from:
@@ -151,7 +151,6 @@ requirements:
     - mpfr
     - ntl
     - {{ pin_compatible("numpy") }}
-    - pari
     - {{ pin_compatible("planarity") }}
     - {{ pin_compatible("ppl", max_pin="x.x") }}
     - {{ pin_compatible("pplpy", max_pin="x.x") }}
@@ -188,6 +187,8 @@ test:
     - sage -c 1+1
     # too many doctests fail still but we test that the doctesting framework works by testing a trivial file
     - sage -tp src/sage/version.py
+    # Test that #135 has been resolved
+    - sage -c 'import sage.modular.multiple_zeta'
 
 about:
   home: https://www.sagemath.org
