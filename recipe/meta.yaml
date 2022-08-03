@@ -94,6 +94,7 @@ requirements:
     - readline
     - rw            0.9
     - singular
+    - sirocco
     - six
     - symmetrica    2.0
     - zlib
@@ -161,7 +162,6 @@ requirements:
     - readline
     - {{ pin_compatible("rw", max_pin="x.x") }}
     - singular
-    - sirocco
     - six
     - {{ pin_compatible("symmetrica", max_pin="x.x") }}
     - zlib
