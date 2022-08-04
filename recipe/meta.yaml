@@ -162,6 +162,7 @@ requirements:
     - readline
     - {{ pin_compatible("rw", max_pin="x.x") }}
     - singular
+    - {{ pin_compatible("sirocco") }}
     - six
     - {{ pin_compatible("symmetrica", max_pin="x.x") }}
     - zlib
@@ -182,6 +183,7 @@ test:
     - pip
   source_files:
     - src/sage/version.py
+    - src/sabe/libs/sirocco.pyx
   imports:
     - sage
   commands:
@@ -189,6 +191,7 @@ test:
     - sage -c 1+1
     # too many doctests fail still but we test that the doctesting framework works by testing a trivial file
     - sage -tp src/sage/version.py
+    - sage -tp src/sage/libs/sirocco.pyx
 
 about:
   home: https://www.sagemath.org
