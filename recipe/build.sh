@@ -27,7 +27,10 @@ rm -f build/pkgs/boost/spkg-configure.m4
 
 rm $PREFIX/bin/$HOST-pkg-config
 make configure
-./configure --prefix="$PREFIX" --with-python="$PYTHON"
+./configure \
+  --prefix="$PREFIX" \
+  --with-python="$PYTHON" \
+  --enable-sirocco
 
 set -x
 
