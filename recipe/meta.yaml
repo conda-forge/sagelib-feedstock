@@ -183,7 +183,7 @@ test:
     - pip
   source_files:
     - src/sage/version.py
-    - src/sabe/libs/sirocco.pyx
+    - src/sage/libs/sirocco.pyx
   imports:
     - sage
   commands:
