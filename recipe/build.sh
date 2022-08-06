@@ -30,6 +30,7 @@ make configure
 ./configure \
   --prefix="$PREFIX" \
   --with-python="$PYTHON" \
+  --wiht-system-pkgconf=no \
   --enable-sirocco
 
 set -x
