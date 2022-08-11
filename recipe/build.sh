@@ -25,7 +25,7 @@ mkdir -p "${SAGE_EXTCODE}/notebook-ipython"
 
 rm -f build/pkgs/boost/spkg-configure.m4
 
-#rm $PREFIX/bin/$HOST-pkg-config
+rm $PREFIX/bin/$HOST-pkg-config
 make configure
 ./configure \
   --prefix="$PREFIX" \
@@ -67,4 +67,3 @@ rm "$PREFIX/bin/sage-env-config.bak"
 mkdir -p "$PREFIX/var/lib/sage/installed"
 touch "$PREFIX/var/lib/sage/installed/.conda"
 
-rm $PREFIX/bin/$HOST-pkg-config
