@@ -211,12 +211,17 @@ outputs:
         - {{ pin_compatible("sagelib", exact=True) }}
         - {{ pin_compatible("bliss", max_pin="x.x") }}
         - python
+    test:
+      imports:
+        - sage.graphs.bliss
 
   - name: sagemath-sirocco
     script: install-sirocco-ext.sh
+    build:
+      ignore_run_exports_from:
+        - dummy
     requirements:
       build:
-        - {{ compiler('cxx') }}
         - {{ compiler('c') }}
       host:
         - {{ pin_compatible("sagelib", exact=True) }}
@@ -227,6 +232,9 @@ outputs:
       run:
         - {{ pin_compatible("sagelib", exact=True) }}
         - python
+    test:
+      imports:
+        - sage.libs.sirocco
 
 about:
   home: https://www.sagemath.org
