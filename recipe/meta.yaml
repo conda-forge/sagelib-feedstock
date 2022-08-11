@@ -204,11 +204,11 @@ outputs:
         - {{ compiler('cxx') }}
         - {{ compiler('c') }}
       host:
-        - {{ pin_compatible("sagelib", exact=True) }}
+        - {{ pin_subpackage("sagelib", exact=True) }}
         - bliss
         - python
       run:
-        - {{ pin_compatible("sagelib", exact=True) }}
+        - {{ pin_subpackage("sagelib", exact=True) }}
         - {{ pin_compatible("bliss", max_pin="x.x") }}
         - python
     test:
@@ -224,13 +224,13 @@ outputs:
       build:
         - {{ compiler('c') }}
       host:
-        - {{ pin_compatible("sagelib", exact=True) }}
+        - {{ pin_subpackage("sagelib", exact=True) }}
         - gmp
         - mpfr
         - sirocco
         - python
       run:
-        - {{ pin_compatible("sagelib", exact=True) }}
+        - {{ pin_subpackage("sagelib", exact=True) }}
         - python
     test:
       imports:
