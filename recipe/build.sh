@@ -30,7 +30,8 @@ make configure
 ./configure \
   --prefix="$PREFIX" \
   --with-python="$PYTHON" \
-  --enable-sirocco
+  --enable-sirocco \
+  --enable-bliss
 
 set -x
 
@@ -68,3 +69,4 @@ touch "$PREFIX/var/lib/sage/installed/.conda"
 
 mkdir -p $SRC_DIR/to-copy
 mv $SP_DIR/sage/libs/sirocco* $SRC_DIR/to-copy/
+mv $SP_DIR/sage/graphs/bliss* $SRC_DIR/to-copy/

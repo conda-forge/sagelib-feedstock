@@ -19,6 +19,7 @@ build:
   ignore_run_exports_from:
     - {{ compiler('fortran') }}
     - sirocco
+    - bliss
 
 requirements:
   build:
@@ -110,6 +111,7 @@ requirements:
     - jmol          >=14.29.52,<15
     # optional packages for extensions
     - sirocco
+    - bliss
 
   # We can not include all actual runtime dependencies of Sage here as some of
   # them require Sage to build, such as some of the database packages.
@@ -195,13 +197,27 @@ test:
 outputs:
   - name: sagelib
 
+  - name: sagemath-bliss
+    script: install-bliss-ext.sh
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - {{ compiler('c') }}
+      host:
+        - {{ pin_compatible("sagelib", exact=True) }}
+        - bliss
+        - python
+      run:
+        - {{ pin_compatible("sagelib", exact=True) }}
+        - {{ pin_compatible("bliss", max_pin="x.x") }}
+        - python
+
   - name: sagemath-sirocco
     script: install-sirocco-ext.sh
     requirements:
       build:
         - {{ compiler('cxx') }}
         - {{ compiler('c') }}
-        - {{ compiler('fortran') }}
       host:
         - {{ pin_compatible("sagelib", exact=True) }}
         - gmp
