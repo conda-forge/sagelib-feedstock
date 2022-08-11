@@ -1,0 +1,11 @@
+--- pkgs/sagemath-standard/setup.py  2022-08-11 08:11:52.330427922 -0700
++++ pkgs/sagemath-standard/setup.py  2022-08-11 08:12:39.262953517 -0700
+@@ -85,6 +85,7 @@
+     distributions += ['sagemath-{}'.format(pkg)
+                       for pkg in optional_packages_with_extensions
+                       if is_package_installed_and_updated(pkg)]
++    distributions += ['sagemath-sirocco']
+     log.warn('distributions = {0}'.format(distributions))
+     from sage_setup.find import find_python_sources
+     python_packages, python_modules, cython_modules = find_python_sources(
+

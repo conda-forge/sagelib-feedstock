@@ -27,13 +27,15 @@ rm -f build/pkgs/boost/spkg-configure.m4
 
 rm $PREFIX/bin/$HOST-pkg-config
 make configure
-./configure --prefix="$PREFIX" --with-python="$PYTHON"
+./configure \
+  --prefix="$PREFIX" \
+  --with-python="$PYTHON" \
+  --enable-sirocco
 
 set -x
 
 mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
-
 
 cd $SRC_DIR/build/pkgs/sage_setup/src
 python setup.py install --single-version-externally-managed --record record.txt
@@ -63,3 +65,6 @@ rm "$PREFIX/bin/sage-env-config.bak"
 
 mkdir -p "$PREFIX/var/lib/sage/installed"
 touch "$PREFIX/var/lib/sage/installed/.conda"
+
+mkdir -p $SRC_DIR/to-copy
+mv $SP_DIR/sage/libs/sirocco* $SRC_DIR/to-copy/
