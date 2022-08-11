@@ -190,7 +190,7 @@ test:
     - sage -c 1+1
     # too many doctests fail still but we test that the doctesting framework works by testing a trivial file
     - sage -tp src/sage/version.py
-    - sage -tp --optional=sirocco src/sage/libs/sirocco.pyx
+    - sage -tp src/sage/libs/sirocco.pyx
 
 about:
   home: https://www.sagemath.org
