@@ -8,15 +8,18 @@ package:
 source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
   sha256: c6225d48f70ac955fceed5c1fddfdd7294001d460b43a686329d5d44d836f6a3
-  patches:  # [build_platform != target_platform]
+  patches:
     - singular.patch  # [build_platform != target_platform]
+    - optional-ext.diff
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   skip: true  # [py3k and py<37]
   ignore_run_exports_from:
     - {{ compiler('fortran') }}
+    - sirocco
+    - bliss
 
 requirements:
   build:
@@ -106,6 +109,9 @@ requirements:
     - threejs-sage
     - notebook      >=6.4.6,<7
     - jmol          >=14.29.52,<15
+    # optional packages for extensions
+    - sirocco
+    - bliss
 
   # We can not include all actual runtime dependencies of Sage here as some of
   # them require Sage to build, such as some of the database packages.
@@ -187,6 +193,48 @@ test:
     - sage -c 1+1
     # too many doctests fail still but we test that the doctesting framework works by testing a trivial file
     - sage -tp src/sage/version.py
+
+outputs:
+  - name: sagelib
+
+  - name: sagemath-bliss
+    script: install-bliss-ext.sh
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - {{ compiler('c') }}
+      host:
+        - {{ pin_subpackage("sagelib", exact=True) }}
+        - bliss
+        - python
+      run:
+        - {{ pin_subpackage("sagelib", exact=True) }}
+        - {{ pin_compatible("bliss", max_pin="x.x") }}
+        - python
+    test:
+      imports:
+        - sage.graphs.bliss
+
+  - name: sagemath-sirocco
+    script: install-sirocco-ext.sh
+    build:
+      ignore_run_exports_from:
+        - dummy
+    requirements:
+      build:
+        - {{ compiler('c') }}
+      host:
+        - {{ pin_subpackage("sagelib", exact=True) }}
+        - gmp
+        - mpfr
+        - sirocco
+        - python
+      run:
+        - {{ pin_subpackage("sagelib", exact=True) }}
+        - python
+    test:
+      imports:
+        - sage.libs.sirocco
 
 about:
   home: https://www.sagemath.org
