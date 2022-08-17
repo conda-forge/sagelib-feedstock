@@ -150,6 +150,7 @@ Current release info
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-sagelib-green.svg)](https://anaconda.org/conda-forge/sagelib) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/sagelib.svg)](https://anaconda.org/conda-forge/sagelib) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/sagelib.svg)](https://anaconda.org/conda-forge/sagelib) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/sagelib.svg)](https://anaconda.org/conda-forge/sagelib) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-sagemath--bliss-green.svg)](https://anaconda.org/conda-forge/sagemath-bliss) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/sagemath-bliss.svg)](https://anaconda.org/conda-forge/sagemath-bliss) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/sagemath-bliss.svg)](https://anaconda.org/conda-forge/sagemath-bliss) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/sagemath-bliss.svg)](https://anaconda.org/conda-forge/sagemath-bliss) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-sagemath--gap_packages-green.svg)](https://anaconda.org/conda-forge/sagemath-gap_packages) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/sagemath-gap_packages.svg)](https://anaconda.org/conda-forge/sagemath-gap_packages) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/sagemath-gap_packages.svg)](https://anaconda.org/conda-forge/sagemath-gap_packages) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/sagemath-gap_packages.svg)](https://anaconda.org/conda-forge/sagemath-gap_packages) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-sagemath--sirocco-green.svg)](https://anaconda.org/conda-forge/sagemath-sirocco) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/sagemath-sirocco.svg)](https://anaconda.org/conda-forge/sagemath-sirocco) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/sagemath-sirocco.svg)](https://anaconda.org/conda-forge/sagemath-sirocco) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/sagemath-sirocco.svg)](https://anaconda.org/conda-forge/sagemath-sirocco) |
 
 Installing sagelib
@@ -162,16 +163,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `sagelib, sagemath-bliss, sagemath-sirocco` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `sagelib, sagemath-bliss, sagemath-gap_packages, sagemath-sirocco` can be installed with `conda`:
 
 ```
-conda install sagelib sagemath-bliss sagemath-sirocco
+conda install sagelib sagemath-bliss sagemath-gap_packages sagemath-sirocco
 ```
 
 or with `mamba`:
 
 ```
-mamba install sagelib sagemath-bliss sagemath-sirocco
+mamba install sagelib sagemath-bliss sagemath-gap_packages sagemath-sirocco
 ```
 
 It is possible to list all of the versions of `sagelib` available on your platform with `conda`:
