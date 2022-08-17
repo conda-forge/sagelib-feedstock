@@ -32,6 +32,7 @@ make configure
   --with-python="$PYTHON" \
   --enable-sirocco \
   --enable-bliss
+  --enable-gap_packages \
 
 set -x
 
@@ -70,3 +71,4 @@ touch "$PREFIX/var/lib/sage/installed/.conda"
 mkdir -p $SRC_DIR/to-copy
 mv $SP_DIR/sage/libs/sirocco* $SRC_DIR/to-copy/
 mv $SP_DIR/sage/graphs/bliss* $SRC_DIR/to-copy/
+# mv $SP_DIR/sage/libs/gap_packages* $SRC_DIR/to-copy/
