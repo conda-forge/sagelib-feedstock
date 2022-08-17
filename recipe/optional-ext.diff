@@ -4,7 +4,7 @@
      distributions += ['sagemath-{}'.format(pkg)
                        for pkg in optional_packages_with_extensions
                        if is_package_installed_and_updated(pkg)]
-+    distributions += ['sagemath-sirocco', 'sagemath-bliss']
++    distributions += ['sagemath-sirocco', 'sagemath-bliss', 'sagemath-gap_packages']
      log.warn('distributions = {0}'.format(distributions))
      from sage_setup.find import find_python_sources
      python_packages, python_modules, cython_modules = find_python_sources(
