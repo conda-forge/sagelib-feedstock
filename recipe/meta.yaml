@@ -20,6 +20,7 @@ build:
     - {{ compiler('fortran') }}
     - sirocco
     - bliss
+    - gap_packages
 
 requirements:
   build:
@@ -112,6 +113,7 @@ requirements:
     # optional packages for extensions
     - sirocco
     - bliss
+    - gap_packages
 
   # We can not include all actual runtime dependencies of Sage here as some of
   # them require Sage to build, such as some of the database packages.
@@ -235,6 +237,28 @@ outputs:
     test:
       imports:
         - sage.libs.sirocco
+       
+  - name: sagemath-gap_packages
+    script: install-gap_packages-ext.sh
+    build:
+      ignore_run_exports_from:
+        - dummy
+    requirements:
+      build:
+        - {{ compiler('c') }}
+      host:
+        - {{ pin_subpackage("sagelib", exact=True) }}
+        - gmp
+        - mpfr
+        - sirocco
+        - python
+      run:
+        - {{ pin_subpackage("sagelib", exact=True) }}
+        - python
+    test:
+      imports:
+        #- sage.libs.sirocco
+
 
 about:
   home: https://www.sagemath.org
