@@ -13,7 +13,7 @@ source:
     - optional-ext.diff
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   skip: true  # [py3k and py<37]
   ignore_run_exports_from:
@@ -53,7 +53,8 @@ requirements:
     - cysignals     1.11.*
     - cython
     - ecl           21.2.*
-    - eclib         20210625
+    # This pin should be removed once https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/3418 has been merged.
+    - eclib         20220621
     - ecm           7.*
     - future
     - gap-core      4.11.1
