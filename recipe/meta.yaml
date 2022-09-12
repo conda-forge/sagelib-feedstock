@@ -13,7 +13,7 @@ source:
     - optional-ext.diff
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
   skip: true  # [py3k and py<37]
   ignore_run_exports_from:
