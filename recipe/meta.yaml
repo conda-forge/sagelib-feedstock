@@ -53,7 +53,7 @@ requirements:
     - cysignals     1.11.*
     - cython
     - ecl           21.2.*
-    - eclib         20210625
+    - eclib         20220621
     - ecm           7.*
     - future
     - gap-core      4.11.1
