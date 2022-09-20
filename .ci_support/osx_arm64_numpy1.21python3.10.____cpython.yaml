@@ -16,6 +16,8 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '14'
+eclib:
+- '20220621'
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
