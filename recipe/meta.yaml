@@ -57,13 +57,13 @@ requirements:
     - ecm           7.*
     - future
     - gap-core      4.11.1
-    - giac          1.6.*
+    - giac          1.9.*
     - glpk
     - gmp
     - gmpy2         2.1.*
     - gsl
     - iml           1.0.*
-    - jinja2        3.0.*
+    - jinja2        3.1.*
     - jupyter_core  4.*
     - lcalc         2.0.*
     - lrcalc        2.1
@@ -102,12 +102,12 @@ requirements:
     - zlib
     - zn_poly       0.9.*
     # sageruntime deps
-    - ipython       >=7.29,<8
+    - ipython       >=8.4,<9
     - psutil        >=5.2
     - pexpect       >=4.8.0,<5
     # for the symlinks
     - threejs-sage
-    - notebook      >=6.4.6,<7
+    - notebook      >=6.4.12,<7
     - jmol          >=14.29.52,<15
     # optional packages for extensions
     - sirocco
