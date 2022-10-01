@@ -1,33 +1,29 @@
-BUILD:
-- aarch64-conda_cos7-linux-gnu
+MACOSX_DEPLOYMENT_TARGET:
+- '10.9'
 arb:
 - '2.23'
 boost_cpp:
 - 1.74.0
 c_compiler:
-- gcc
+- clang
 c_compiler_version:
-- '10'
-cdt_arch:
-- aarch64
-cdt_name:
-- cos7
+- '14'
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- gxx
+- clangxx
 cxx_compiler_version:
-- '10'
-docker_image:
-- quay.io/condaforge/linux-anvil-cos7-x86_64
+- '14'
+eclib:
+- '20220621'
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '10'
+- '11'
 glpk:
-- '4.65'
+- '5.0'
 gmp:
 - '6'
 gsl:
@@ -44,40 +40,30 @@ liblapacke:
 - 3.9 *netlib
 libpng:
 - '1.6'
+macos_machine:
+- x86_64-apple-darwin13.4.0
 mpfr:
 - '4'
 ntl:
 - 11.4.3
 numpy:
-- '1.19'
+- '1.20'
 pari:
 - 2.13.* *_pthread
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
-  glpk:
-    max_pin: x.x
-  gmp:
-    max_pin: x
-  libpng:
-    max_pin: x.x
-  mpfr:
-    max_pin: x
   python:
     min_pin: x.x
     max_pin: x.x
-  readline:
-    max_pin: x
-  zlib:
-    max_pin: x.x
 python:
-- 3.9.* *_cpython
+- 3.8.* *_cpython
 readline:
 - '8'
 singular:
 - 4.2.1.p3
 target_platform:
-- linux-aarch64
+- osx-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
