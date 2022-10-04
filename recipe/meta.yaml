@@ -172,9 +172,9 @@ requirements:
     - zlib
     - {{ pin_compatible("zn_poly", max_pin="x.x") }}
     # sageruntime deps
-    - {{ pin_compatible("ipython", max_pin="x.x") }}
-    - {{ pin_compatible("psutil", max_pin="x.x") }}
-    - {{ pin_compatible("pexpect", max_pin="x.x") }}
+    - {{ pin_compatible("ipython", max_pin="x") }}
+    - {{ pin_compatible("psutil", max_pin="x") }}
+    - {{ pin_compatible("pexpect", max_pin="x") }}
     - python-lrcalc
     - {{ pin_compatible("threejs-sage") }}
 
