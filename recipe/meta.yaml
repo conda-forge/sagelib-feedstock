@@ -12,7 +12,7 @@ source:
     - optional-ext.diff
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py<38]
   ignore_run_exports_from:
@@ -172,9 +172,9 @@ requirements:
     - zlib
     - {{ pin_compatible("zn_poly", max_pin="x.x") }}
     # sageruntime deps
-    - ipython       >=7.29,<8
-    - psutil        >=5.2
-    - pexpect       >=4.8.0,<5
+    - {{ pin_compatible("ipython") }}
+    - {{ pin_compatible("psutil") }}
+    - {{ pin_compatible("pexpect") }}
     - python-lrcalc
     - {{ pin_compatible("threejs-sage") }}
 
