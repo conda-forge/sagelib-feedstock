@@ -3,7 +3,7 @@ MACOSX_DEPLOYMENT_TARGET:
 arb:
 - '2.23'
 boost_cpp:
-- 1.74.0
+- 1.78.0
 c_compiler:
 - clang
 c_compiler_version:
@@ -17,7 +17,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '14'
 eclib:
-- '20220621'
+- '20221012'
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
