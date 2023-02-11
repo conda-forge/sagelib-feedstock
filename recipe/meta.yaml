@@ -97,7 +97,7 @@ requirements:
     - rw            0.9
     - singular
     - six
-    - symmetrica    2.0
+    - symmetrica    3.0
     - zlib
     # sageruntime deps
     - ipython       >=8.4,<9
