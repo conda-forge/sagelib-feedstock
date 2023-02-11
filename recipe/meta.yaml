@@ -93,7 +93,6 @@ requirements:
     - ppl           1.2
     - pplpy         0.8.*
     - python
-    - ratpoints     2.1.*
     - readline
     - rw            0.9
     - singular
@@ -163,7 +162,6 @@ requirements:
     - {{ pin_compatible("pplpy", max_pin="x.x") }}
     - primecountpy
     - python
-    - {{ pin_compatible("ratpoints", max_pin="x.x") }}
     - readline
     - {{ pin_compatible("rw", max_pin="x.x") }}
     - singular
