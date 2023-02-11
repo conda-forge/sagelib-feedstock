@@ -99,7 +99,6 @@ requirements:
     - six
     - symmetrica    2.0
     - zlib
-    - zn_poly       0.9.*
     # sageruntime deps
     - ipython       >=8.4,<9
     - psutil        >=5.2
@@ -168,7 +167,6 @@ requirements:
     - six
     - {{ pin_compatible("symmetrica", max_pin="x.x") }}
     - zlib
-    - {{ pin_compatible("zn_poly", max_pin="x.x") }}
     # sageruntime deps
     - {{ pin_compatible("ipython") }}
     - {{ pin_compatible("psutil") }}
