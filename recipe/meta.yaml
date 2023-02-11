@@ -101,7 +101,6 @@ requirements:
     - zlib
     # sageruntime deps
     - ipython       >=8.4,<9
-    - psutil        >=5.2
     - pexpect       >=4.8.0,<5
     # for the symlinks
     - threejs-sage
@@ -169,7 +168,6 @@ requirements:
     - zlib
     # sageruntime deps
     - {{ pin_compatible("ipython") }}
-    - {{ pin_compatible("psutil") }}
     - {{ pin_compatible("pexpect") }}
     - python-lrcalc
     - {{ pin_compatible("threejs-sage") }}
