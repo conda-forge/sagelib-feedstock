@@ -1,4 +1,4 @@
-{% set version = "9.7" %}
+{% set version = "9.8" %}
 {% set name = "sagelib" %}
 
 package:
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: 9f26f14aa322e3cf38a71835b12ac34b23026b467f74d54b064c5d025e76fbfd
+  sha256: 2aff28bd1d18c2d526581f5298acb8336f5b92db5675a7403dec8eaf9a86bc4c
   patches:
-    - optional-ext.diff
+    - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
   skip: true  # [py<38]
   ignore_run_exports_from:
@@ -93,17 +93,14 @@ requirements:
     - ppl           1.2
     - pplpy         0.8.*
     - python
-    - ratpoints     2.1.*
     - readline
     - rw            0.9
     - singular
     - six
-    - symmetrica    2.0
+    - symmetrica    3.0
     - zlib
-    - zn_poly       0.9.*
     # sageruntime deps
     - ipython       >=8.4,<9
-    - psutil        >=5.2
     - pexpect       >=4.8.0,<5
     # for the symlinks
     - threejs-sage
@@ -163,17 +160,14 @@ requirements:
     - {{ pin_compatible("pplpy", max_pin="x.x") }}
     - primecountpy
     - python
-    - {{ pin_compatible("ratpoints", max_pin="x.x") }}
     - readline
     - {{ pin_compatible("rw", max_pin="x.x") }}
     - singular
     - six
     - {{ pin_compatible("symmetrica", max_pin="x.x") }}
     - zlib
-    - {{ pin_compatible("zn_poly", max_pin="x.x") }}
     # sageruntime deps
     - {{ pin_compatible("ipython") }}
-    - {{ pin_compatible("psutil") }}
     - {{ pin_compatible("pexpect") }}
     - python-lrcalc
     - {{ pin_compatible("threejs-sage") }}
@@ -248,3 +242,4 @@ extra:
   recipe-maintainers:
     - isuruf
     - saraedum
+    - alexjbest
