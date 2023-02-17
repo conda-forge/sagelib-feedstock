@@ -53,7 +53,7 @@ ntl:
 numpy:
 - '1.20'
 pari:
-- 2.13.* *_pthread
+- 2.15.* *_pthread
 pin_run_as_build:
   boost-cpp:
     max_pin: x.x.x
