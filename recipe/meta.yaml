@@ -12,7 +12,7 @@ source:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py<38]
   ignore_run_exports_from:
@@ -52,8 +52,7 @@ requirements:
     - cysignals     1.11.*
     - cython
     - ecl           21.2.*
-    # This pin should be removed once https://github.com/conda-forge/conda-forge-pinning-feedstock/pull/3418 has been merged.
-    - eclib         20220621
+    - eclib
     - ecm           7.*
     - future
     - gap-core      4.11.1
