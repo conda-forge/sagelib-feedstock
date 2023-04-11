@@ -47,7 +47,7 @@ mpfr:
 ntl:
 - 11.4.3
 numpy:
-- '1.20'
+- '1.21'
 pari:
 - 2.15.* *_pthread
 pin_run_as_build:
@@ -57,7 +57,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.9.* *_cpython
+- 3.8.* *_cpython
 readline:
 - '8'
 singular:
