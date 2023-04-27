@@ -17,6 +17,12 @@ export SAGE_DOC="$SAGE_SHARE/doc/sage"
 export SAGE_ROOT=`pwd`
 export MATHJAX_DIR="$SAGE_LOCAL/lib/python$PY_VER/site-packages/notebook/static/components/MathJax"
 
+
+# See https://github.com/conda-forge/clangdev-feedstock/issues/213
+if [[ "$target_platform" == osx-64 ]]; then
+  export CXXFLAGS="$CXXFLAGS -fclang-abi-compat=14"
+fi
+
 #ln -s "$PREFIX/bin/python" "$PREFIX/bin/sage-system-python"
 ln -s "$PREFIX" local
 export SAGE_NUM_THREADS=$CPU_COUNT
