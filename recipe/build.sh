@@ -21,6 +21,7 @@ export MATHJAX_DIR="$SAGE_LOCAL/lib/python$PY_VER/site-packages/notebook/static/
 # See https://github.com/conda-forge/clangdev-feedstock/issues/213
 if [[ "$target_platform" == osx-64 ]]; then
   export CXXFLAGS="$CXXFLAGS -fclang-abi-compat=14"
+  export CFLAGS="$CFLAGS -fclang-abi-compat=14"
 fi
 
 #ln -s "$PREFIX/bin/python" "$PREFIX/bin/sage-system-python"
