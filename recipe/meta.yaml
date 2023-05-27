@@ -56,7 +56,7 @@ requirements:
     - eclib
     - ecm           7.*
     - future
-    - gap-core      4.11.1
+    - gap-core      4.12.2
     - giac          1.9.*
     - glpk
     - gmp
