@@ -19,7 +19,7 @@ export MATHJAX_DIR="$SAGE_LOCAL/lib/python$PY_VER/site-packages/notebook/static/
 
 
 # See https://github.com/conda-forge/clangdev-feedstock/issues/213
-if [[ "$target_platform" == osx-64 ]]; then
+if [[ "$target_platform" == osx-* ]]; then
   export CXXFLAGS="$CXXFLAGS -fclang-abi-compat=14"
   export CFLAGS="$CFLAGS -fclang-abi-compat=14"
 fi
