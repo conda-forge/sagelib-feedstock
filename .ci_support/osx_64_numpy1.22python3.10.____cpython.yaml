@@ -1,13 +1,11 @@
 MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
+- '10.9'
 arb:
 - '2.23'
-boost_cpp:
-- 1.78.0
 c_compiler:
 - clang
 c_compiler_version:
-- '15'
+- '16'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -15,7 +13,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '15'
+- '16'
 eclib:
 - '20230424'
 fortran_compiler:
@@ -41,18 +39,16 @@ liblapacke:
 libpng:
 - '1.6'
 macos_machine:
-- arm64-apple-darwin20.0.0
+- x86_64-apple-darwin13.4.0
 mpfr:
 - '4'
 ntl:
 - 11.4.3
 numpy:
-- '1.21'
+- '1.22'
 pari:
 - 2.15.* *_pthread
 pin_run_as_build:
-  boost-cpp:
-    max_pin: x.x.x
   python:
     min_pin: x.x
     max_pin: x.x
@@ -63,7 +59,7 @@ readline:
 singular:
 - 4.2.1.p3
 target_platform:
-- osx-arm64
+- osx-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version

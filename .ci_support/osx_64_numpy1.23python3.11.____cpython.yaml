@@ -2,12 +2,10 @@ MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 arb:
 - '2.23'
-boost_cpp:
-- 1.78.0
 c_compiler:
 - clang
 c_compiler_version:
-- '15'
+- '16'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -15,7 +13,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '15'
+- '16'
 eclib:
 - '20230424'
 fortran_compiler:
@@ -51,8 +49,6 @@ numpy:
 pari:
 - 2.15.* *_pthread
 pin_run_as_build:
-  boost-cpp:
-    max_pin: x.x.x
   python:
     min_pin: x.x
     max_pin: x.x
