@@ -25,7 +25,6 @@ requirements:
     - libtool
     - automake
     - m4
-    - libcxx <16  # [osx]
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - {{ compiler('fortran') }}
