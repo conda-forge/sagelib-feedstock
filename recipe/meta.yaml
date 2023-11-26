@@ -12,7 +12,7 @@ source:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   skip: true  # [py<38]
   ignore_run_exports_from:
@@ -43,8 +43,8 @@ requirements:
     - libcblas
     - liblapack
     - liblapacke
+    - libboost-headers
     - arb
-    - boost-cpp
     - brial         1.2.*
     - libbrial      1.2.*
     - cliquer       1.22.*
