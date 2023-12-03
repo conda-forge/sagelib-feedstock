@@ -1,4 +1,4 @@
-{% set version = "10.0" %}
+{% set version = "10.2" %}
 {% set name = "sagelib" %}
 
 package:
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: 60858efd0d1f2526486740962bf72c99f9141a56caf8395f3291fded276faf55
+  sha256: e7125f13495e1068edab73735aca7f9b2c655688096e9d109e628c023e76411f
   patches:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win]
   skip: true  # [py<38]
   ignore_run_exports_from:
