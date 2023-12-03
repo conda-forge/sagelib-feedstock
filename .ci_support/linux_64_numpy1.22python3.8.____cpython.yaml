@@ -47,7 +47,7 @@ mpfr:
 ntl:
 - 11.4.3
 numpy:
-- '1.21'
+- '1.22'
 pari:
 - 2.15.* *_pthread
 pin_run_as_build:

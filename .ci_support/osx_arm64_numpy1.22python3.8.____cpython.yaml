@@ -7,7 +7,7 @@ boost_cpp:
 c_compiler:
 - clang
 c_compiler_version:
-- '15'
+- '16'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -15,7 +15,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '15'
+- '16'
 eclib:
 - '20230424'
 fortran_compiler:
@@ -47,7 +47,7 @@ mpfr:
 ntl:
 - 11.4.3
 numpy:
-- '1.21'
+- '1.22'
 pari:
 - 2.15.* *_pthread
 pin_run_as_build:
@@ -57,7 +57,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.9.* *_cpython
+- 3.8.* *_cpython
 readline:
 - '8'
 singular:

@@ -1,3 +1,5 @@
+BUILD:
+- aarch64-conda_cos7-linux-gnu
 arb:
 - '2.23'
 boost_cpp:
@@ -6,8 +8,10 @@ c_compiler:
 - gcc
 c_compiler_version:
 - '12'
+cdt_arch:
+- aarch64
 cdt_name:
-- cos6
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
@@ -47,7 +51,7 @@ mpfr:
 ntl:
 - 11.4.3
 numpy:
-- '1.21'
+- '1.22'
 pari:
 - 2.15.* *_pthread
 pin_run_as_build:
@@ -57,13 +61,13 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.10.* *_cpython
+- 3.8.* *_cpython
 readline:
 - '8'
 singular:
 - 4.2.1.p3
 target_platform:
-- linux-64
+- linux-aarch64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
