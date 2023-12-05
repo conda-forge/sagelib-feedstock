@@ -12,7 +12,7 @@ source:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   skip: true  # [py<38]
   ignore_run_exports_from:
@@ -25,7 +25,6 @@ requirements:
     - libtool
     - automake
     - m4
-    - libcxx <16  # [osx]
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - {{ compiler('fortran') }}
@@ -34,7 +33,7 @@ requirements:
     - gettext
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - cython                                 # [build_platform != target_platform]
+    - cython <3                              # [build_platform != target_platform]
     - memory-allocator                       # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
   host:
@@ -44,14 +43,14 @@ requirements:
     - libcblas
     - liblapack
     - liblapacke
+    - libboost-headers
     - arb
-    - boost-cpp
     - brial         1.2.*
     - libbrial      1.2.*
     - cliquer       1.22.*
     - cypari2       2.1.*
     - cysignals     1.11.*
-    - cython
+    - cython <3
     - ecl           21.2.*
     - eclib
     - ecm           7.*

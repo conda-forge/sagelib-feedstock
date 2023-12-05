@@ -2,8 +2,6 @@ BUILD:
 - aarch64-conda_cos7-linux-gnu
 arb:
 - '2.23'
-boost_cpp:
-- 1.78.0
 c_compiler:
 - gcc
 c_compiler_version:
@@ -55,8 +53,6 @@ numpy:
 pari:
 - 2.15.* *_pthread
 pin_run_as_build:
-  boost-cpp:
-    max_pin: x.x.x
   python:
     min_pin: x.x
     max_pin: x.x
