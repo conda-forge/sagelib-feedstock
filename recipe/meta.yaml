@@ -105,9 +105,10 @@ requirements:
     - threejs-sage
     - notebook      >=6.4.12,<7
     - jmol          >=14.29.52,<15
-    # optional packages for extensions
+    # we build glue against the optional sirocco extension
     - sirocco
-    - bliss
+    # we build glue against the header files of the optional bliss extension
+    - bliss >=0.77
 
   # We can not include all actual runtime dependencies of Sage here as some of
   # them require Sage to build, such as some of the database packages.
@@ -198,7 +199,7 @@ outputs:
         - {{ compiler('c') }}
       host:
         - {{ pin_subpackage("sagelib", exact=True) }}
-        - bliss
+        - bliss >=0.77
         - python
       run:
         - {{ pin_subpackage("sagelib", exact=True) }}
