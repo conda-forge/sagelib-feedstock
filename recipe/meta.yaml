@@ -46,7 +46,6 @@ requirements:
     - libboost-headers
     - arb
     - brial         1.2.*
-    - libbrial      1.2.*
     - cliquer       1.22.*
     - cypari2       2.1.*
     - cysignals     1.11.*
@@ -54,9 +53,11 @@ requirements:
     - ecl           21.2.*
     - eclib
     - ecm           7.*
+    - fflas-ffpack  2.4.*
     - future
     - gap-core      4.12.2
     - giac          1.9.*
+    - givaro        4.1.*
     - glpk
     - gmp
     - gmpy2         2.1.*
@@ -65,8 +66,8 @@ requirements:
     - jinja2        3.1.*
     - jupyter_core  4.*
     - lcalc         2.0.*
-    - lrcalc        2.1
-    - libbraiding   1.1
+    - libbraiding   1.2
+    - libbrial      1.2.*
     # trying to merge the two folllowing lines into one doesn't work because of a
     # conda-build bug
     - libflint
@@ -75,8 +76,7 @@ requirements:
     - libhomfly     1.02.*
     - libpng
     - linbox        >=1.6.3
-    - givaro        4.1.*
-    - fflas-ffpack  2.4.*
+    - lrcalc        2.1
     - m4ri
     - m4rie
     - memory-allocator
@@ -86,8 +86,8 @@ requirements:
     - ntl
     - numpy
     - pari
-    - pkgconfig
     - pkg-config
+    - pkgconfig
     - planarity     3.*
     - ppl           1.2
     - pplpy         0.8.*
@@ -98,7 +98,7 @@ requirements:
     - six
     - symmetrica    3.0
     - zlib
-    # sageruntime deps
+    # sage runtime deps
     - ipython       >=8.4,<9
     - pexpect       >=4.8.0,<5
     # for the symlinks
