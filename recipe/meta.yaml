@@ -12,7 +12,7 @@ source:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py<39]
   ignore_run_exports_from:
@@ -94,7 +94,8 @@ requirements:
     - python
     - readline
     - rw            0.9
-    - singular
+    # Force sagelib 10.2 to use a recent Singular
+    - singular      >=4.3.2p8;<4.4
     - six
     - symmetrica    3.0
     - zlib
