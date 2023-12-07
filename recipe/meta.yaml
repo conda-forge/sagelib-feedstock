@@ -1,4 +1,4 @@
-{% set version = "10.1" %}
+{% set version = "10.2" %}
 {% set name = "sagelib" %}
 
 package:
@@ -7,14 +7,14 @@ package:
 
 source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: a658612b1b2376ddaf207cc8ed0ef458d4c2880c16e19139bedbe8baa42ad62f
+  sha256: e7125f13495e1068edab73735aca7f9b2c655688096e9d109e628c023e76411f
   patches:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
 
 build:
   number: 0
   skip: true  # [win]
-  skip: true  # [py<38]
+  skip: true  # [py<39]
   ignore_run_exports_from:
     - {{ compiler('fortran') }}
     - sirocco
@@ -33,7 +33,7 @@ requirements:
     - gettext
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - cython <3                              # [build_platform != target_platform]
+    - cython >=3,<4                          # [build_platform != target_platform]
     - memory-allocator                       # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
   host:
@@ -46,17 +46,18 @@ requirements:
     - libboost-headers
     - arb
     - brial         1.2.*
-    - libbrial      1.2.*
     - cliquer       1.22.*
     - cypari2       2.1.*
     - cysignals     1.11.*
-    - cython <3
+    - cython        >=3,<4
     - ecl           21.2.*
     - eclib
     - ecm           7.*
+    - fflas-ffpack  2.4.*
     - future
     - gap-core      4.12.2
     - giac          1.9.*
+    - givaro        4.1.*
     - glpk
     - gmp
     - gmpy2         2.1.*
@@ -65,8 +66,8 @@ requirements:
     - jinja2        3.1.*
     - jupyter_core  4.*
     - lcalc         2.0.*
-    - lrcalc        2.1
-    - libbraiding   1.1
+    - libbraiding   1.2
+    - libbrial      1.2.*
     # trying to merge the two folllowing lines into one doesn't work because of a
     # conda-build bug
     - libflint
@@ -75,8 +76,7 @@ requirements:
     - libhomfly     1.02.*
     - libpng
     - linbox        >=1.6.3
-    - givaro        4.1.*
-    - fflas-ffpack  2.4.*
+    - lrcalc        2.1
     - m4ri
     - m4rie
     - memory-allocator
@@ -86,8 +86,8 @@ requirements:
     - ntl
     - numpy
     - pari
-    - pkgconfig
     - pkg-config
+    - pkgconfig
     - planarity     3.*
     - ppl           1.2
     - pplpy         0.8.*
@@ -98,7 +98,7 @@ requirements:
     - six
     - symmetrica    3.0
     - zlib
-    # sageruntime deps
+    # sage runtime deps
     - ipython       >=8.4,<9
     - pexpect       >=4.8.0,<5
     # for the symlinks
