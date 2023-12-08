@@ -61,7 +61,7 @@ python:
 readline:
 - '8'
 singular:
-- 4.2.1.p3
+- 4.3.2.p8
 target_platform:
 - linux-aarch64
 zip_keys:
