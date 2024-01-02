@@ -12,7 +12,7 @@ source:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   skip: true  # [py<39]
   ignore_run_exports_from:
@@ -167,7 +167,8 @@ requirements:
     - {{ pin_compatible("symmetrica", max_pin="x.x") }}
     - zlib
     # sageruntime deps
-    - {{ pin_compatible("ipython") }}
+    # Disable ipython 8.19.0 which breaks the interactive session, see https://github.com/sagemath/sage/issues/36975
+    - ipython >=8.4,<9,!=8.19.0
     - {{ pin_compatible("pexpect") }}
     - python-lrcalc
     - {{ pin_compatible("threejs-sage") }}
