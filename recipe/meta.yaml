@@ -168,7 +168,7 @@ requirements:
     - zlib
     # sageruntime deps
     # Disable ipython 8.19.0 which breaks the interactive session, see https://github.com/sagemath/sage/issues/36975
-    - {{ pin_compatible("ipython") }},!=8.19.0
+    - ipython >=8.4,<9,!=8.19.0
     - {{ pin_compatible("pexpect") }}
     - python-lrcalc
     - {{ pin_compatible("threejs-sage") }}
