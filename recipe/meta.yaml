@@ -1,4 +1,4 @@
-{% set version = "9.6" %}
+{% set version = "10.2" %}
 {% set name = "sagelib" %}
 
 package:
@@ -7,16 +7,18 @@ package:
 
 source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: c6225d48f70ac955fceed5c1fddfdd7294001d460b43a686329d5d44d836f6a3
-  patches:  # [build_platform != target_platform]
-    - singular.patch  # [build_platform != target_platform]
+  sha256: e7125f13495e1068edab73735aca7f9b2c655688096e9d109e628c023e76411f
+  patches:
+    - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
 
 build:
-  number: 1
+  number: 3
   skip: true  # [win]
-  skip: true  # [py3k and py<37]
+  skip: true  # [py<39]
   ignore_run_exports_from:
     - {{ compiler('fortran') }}
+    - sirocco
+    - bliss
 
 requirements:
   build:
@@ -31,7 +33,7 @@ requirements:
     - gettext
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - cython                                 # [build_platform != target_platform]
+    - cython >=3,<4                          # [build_platform != target_platform]
     - memory-allocator                       # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
   host:
@@ -41,30 +43,31 @@ requirements:
     - libcblas
     - liblapack
     - liblapacke
+    - libboost-headers
     - arb
-    - boost-cpp
     - brial         1.2.*
-    - libbrial      1.2.*
     - cliquer       1.22.*
     - cypari2       2.1.*
     - cysignals     1.11.*
-    - cython
+    - cython        >=3,<4
     - ecl           21.2.*
-    - eclib         20210625
+    - eclib
     - ecm           7.*
+    - fflas-ffpack  2.4.*
     - future
-    - gap-core      4.11.1
-    - giac          1.6.*
+    - gap-core      4.12.2
+    - giac          1.9.*
+    - givaro        4.1.*
     - glpk
     - gmp
     - gmpy2         2.1.*
     - gsl
     - iml           1.0.*
-    - jinja2        3.0.*
+    - jinja2        3.1.*
     - jupyter_core  4.*
     - lcalc         2.0.*
-    - lrcalc        2.1
-    - libbraiding   1.1
+    - libbraiding   1.2
+    - libbrial      1.2.*
     # trying to merge the two folllowing lines into one doesn't work because of a
     # conda-build bug
     - libflint
@@ -73,39 +76,39 @@ requirements:
     - libhomfly     1.02.*
     - libpng
     - linbox        >=1.6.3
-    - givaro        4.1.*
-    - fflas-ffpack  2.4.*
+    - lrcalc        2.1
     - m4ri
     - m4rie
     - memory-allocator
-    - mpc           1.2.*
+    - mpc           1.*
     - mpfi          1.5.*
     - mpfr
     - ntl
     - numpy
     - pari
-    - pkgconfig
     - pkg-config
+    - pkgconfig
     - planarity     3.*
     - ppl           1.2
     - pplpy         0.8.*
     - python
-    - ratpoints     2.1.*
     - readline
     - rw            0.9
     - singular
     - six
-    - symmetrica    2.0
+    - symmetrica    3.0
     - zlib
-    - zn_poly       0.9.*
-    # sageruntime deps
-    - ipython       >=7.29,<8
-    - psutil        >=5.2
+    # sage runtime deps
+    - ipython       >=8.4,<9
     - pexpect       >=4.8.0,<5
     # for the symlinks
-    - three.js
-    - notebook      >=6.4.6,<7
+    - threejs-sage
+    - notebook      >=6.4.12,<7
     - jmol          >=14.29.52,<15
+    # we build glue against the optional sirocco extension
+    - sirocco
+    # we build glue against the header files of the optional bliss extension
+    - bliss >=0.77
 
   # We can not include all actual runtime dependencies of Sage here as some of
   # them require Sage to build, such as some of the database packages.
@@ -156,21 +159,18 @@ requirements:
     - {{ pin_compatible("pplpy", max_pin="x.x") }}
     - primecountpy
     - python
-    - {{ pin_compatible("ratpoints", max_pin="x.x") }}
     - readline
     - {{ pin_compatible("rw", max_pin="x.x") }}
     - singular
     - six
     - {{ pin_compatible("symmetrica", max_pin="x.x") }}
     - zlib
-    - {{ pin_compatible("zn_poly", max_pin="x.x") }}
     # sageruntime deps
-    - ipython       >=7.29,<8
-    - psutil        >=5.2
-    - pexpect       >=4.8.0,<5
+    # Disable ipython 8.19.0 which breaks the interactive session, see https://github.com/sagemath/sage/issues/36975
+    - ipython >=8.4,<9,!=8.19.0
+    - {{ pin_compatible("pexpect") }}
     - python-lrcalc
-  run_constrained:
-    - {{ pin_compatible("three.js") }}
+    - {{ pin_compatible("threejs-sage") }}
 
 test:
   requires:
@@ -190,6 +190,48 @@ test:
     # Test that #135 has been resolved
     - sage -c 'import sage.modular.multiple_zeta'
 
+outputs:
+  - name: sagelib
+
+  - name: sagemath-bliss
+    script: install-bliss-ext.sh
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - {{ compiler('c') }}
+      host:
+        - {{ pin_subpackage("sagelib", exact=True) }}
+        - bliss >=0.77
+        - python
+      run:
+        - {{ pin_subpackage("sagelib", exact=True) }}
+        - {{ pin_compatible("bliss", max_pin="x.x") }}
+        - python
+    test:
+      imports:
+        - sage.graphs.bliss
+
+  - name: sagemath-sirocco
+    script: install-sirocco-ext.sh
+    build:
+      ignore_run_exports_from:
+        - dummy
+    requirements:
+      build:
+        - {{ compiler('c') }}
+      host:
+        - {{ pin_subpackage("sagelib", exact=True) }}
+        - gmp
+        - mpfr
+        - sirocco
+        - python
+      run:
+        - {{ pin_subpackage("sagelib", exact=True) }}
+        - python
+    test:
+      imports:
+        - sage.libs.sirocco
+
 about:
   home: https://www.sagemath.org
   license: GPL-2.0-or-later
@@ -202,3 +244,4 @@ extra:
   recipe-maintainers:
     - isuruf
     - saraedum
+    - alexjbest

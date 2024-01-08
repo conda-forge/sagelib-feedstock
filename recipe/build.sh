@@ -17,6 +17,13 @@ export SAGE_DOC="$SAGE_SHARE/doc/sage"
 export SAGE_ROOT=`pwd`
 export MATHJAX_DIR="$SAGE_LOCAL/lib/python$PY_VER/site-packages/notebook/static/components/MathJax"
 
+
+# See https://github.com/conda-forge/clangdev-feedstock/issues/213
+if [[ "$target_platform" == osx-* ]]; then
+  export CXXFLAGS="$CXXFLAGS -fclang-abi-compat=14"
+  export CFLAGS="$CFLAGS -fclang-abi-compat=14"
+fi
+
 #ln -s "$PREFIX/bin/python" "$PREFIX/bin/sage-system-python"
 ln -s "$PREFIX" local
 export SAGE_NUM_THREADS=$CPU_COUNT
@@ -27,13 +34,16 @@ rm -f build/pkgs/boost/spkg-configure.m4
 
 rm $PREFIX/bin/$HOST-pkg-config
 make configure
-./configure --prefix="$PREFIX" --with-python="$PYTHON"
+./configure \
+  --prefix="$PREFIX" \
+  --with-python="$PYTHON" \
+  --enable-sirocco \
+  --enable-bliss
 
 set -x
 
 mkdir -p "$SAGE_SPKG_INST"
 mkdir -p "$SAGE_DOC"
-
 
 cd $SRC_DIR/build/pkgs/sage_setup/src
 python setup.py install --single-version-externally-managed --record record.txt
@@ -64,6 +74,6 @@ rm "$PREFIX/bin/sage-env-config.bak"
 mkdir -p "$PREFIX/var/lib/sage/installed"
 touch "$PREFIX/var/lib/sage/installed/.conda"
 
-three_js_version=$(cat $PREFIX/share/threejs/version)
-mkdir -p $PREFIX/share/threejs-sage/r$three_js_version
-ln -sf $PREFIX/share/threejs/build/three.min.js $PREFIX/share/threejs-sage/r$three_js_version/three.min.js
+mkdir -p $SRC_DIR/to-copy
+mv $SP_DIR/sage/libs/sirocco* $SRC_DIR/to-copy/
+mv $SP_DIR/sage/graphs/bliss* $SRC_DIR/to-copy/
