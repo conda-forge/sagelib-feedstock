@@ -17,7 +17,7 @@ cxx_compiler_version:
 docker_image:
 - quay.io/condaforge/linux-anvil-cos7-x86_64
 eclib:
-- '20231211'
+- '20230424'
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
