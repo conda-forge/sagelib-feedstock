@@ -10,9 +10,10 @@ source:
   sha256: e7125f13495e1068edab73735aca7f9b2c655688096e9d109e628c023e76411f
   patches:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
+    - 0002-Do-not-cleanup-all-.so-files-when-cross-compiling.patch  # [build_platform != target_platform]
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
   skip: true  # [py<39]
   ignore_run_exports_from:

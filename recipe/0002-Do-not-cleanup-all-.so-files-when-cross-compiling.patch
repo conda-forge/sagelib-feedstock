@@ -1,0 +1,24 @@
+From eadd8b3326ce5995a7998ef5c8db4f8c782ede38 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Julian=20R=C3=BCth?= <julian.rueth@fsfe.org>
+Date: Wed, 21 Feb 2024 19:28:22 +0200
+Subject: [PATCH] Do not cleanup all .so files when cross-compiling
+
+---
+ src/sage_setup/clean.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/sage_setup/clean.py b/src/sage_setup/clean.py
+index 3cf0d08a353..86d5f75bb2f 100644
+--- a/src/sage_setup/clean.py
++++ b/src/sage_setup/clean.py
+@@ -193,5 +193,5 @@ def clean_install_dir(site_packages, python_packages, python_modules, ext_module
+     for f in stale_file_iter:
+         f = os.path.join(site_packages, f)
+         if f in distribution_filter:
+-            print('Cleaning up stale file: {0}'.format(f))
+-            os.unlink(f)
++            print('Not cleaning up stale file: {0}'.format(f))
++            # os.unlink(f)
+-- 
+2.43.0
+
