@@ -1,4 +1,4 @@
-{% set version = "10.2" %}
+{% set version = "10.3" %}
 {% set name = "sagelib" %}
 
 package:
@@ -7,13 +7,13 @@ package:
 
 source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: e7125f13495e1068edab73735aca7f9b2c655688096e9d109e628c023e76411f
+  sha256: 59feb92c05e74d6db7a75f398c45c24b5157b1ecd3d8ac198806e2e6add77d96
   patches:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
     - 0002-Do-not-cleanup-all-.so-files-when-cross-compiling.patch  # [build_platform != target_platform]
 
 build:
-  number: 4
+  number: 0
   skip: true  # [win]
   skip: true  # [py<39]
   ignore_run_exports_from:
