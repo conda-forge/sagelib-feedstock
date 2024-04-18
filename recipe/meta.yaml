@@ -51,7 +51,7 @@ requirements:
     - cypari2       2.1.*
     - cysignals     1.11.*
     - cython        >=3,<4
-    - ecl           >=23.9.9,<24
+    - ecl           >=21.2,<24
     - eclib
     - ecm           7.*
     - fflas-ffpack  2.4.*
@@ -61,7 +61,7 @@ requirements:
     - givaro        4.1.*
     - glpk
     - gmp
-    - gmpy2         2.2.*
+    - gmpy2         >=2.1,<3
     - gsl
     - iml           1.0.*
     - jinja2        3.1.*
