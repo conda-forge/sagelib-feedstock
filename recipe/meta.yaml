@@ -119,6 +119,7 @@ requirements:
   # and create one output called sage which would probably be an alias for
   # sagemath-standard. Until there is a sagemath-core or something like that,
   # we should probably keep sagelib around to be some minimal distribution.
+  # See #169 for details.
 
   run:
     - {{ pin_compatible("libbrial", max_pin="x.x") }}
