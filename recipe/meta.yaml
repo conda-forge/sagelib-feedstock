@@ -13,7 +13,7 @@ source:
     - 0002-Do-not-cleanup-all-.so-files-when-cross-compiling.patch  # [build_platform != target_platform]
 
 build:
-  number: 4
+  number: 5
   skip: true  # [win]
   skip: true  # [py<39]
   ignore_run_exports_from:
@@ -28,6 +28,7 @@ requirements:
     - m4
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('fortran') }}
     - make
     - pkg-config
@@ -200,6 +201,7 @@ outputs:
       build:
         - {{ compiler('cxx') }}
         - {{ compiler('c') }}
+        - {{ stdlib("c") }}
       host:
         - {{ pin_subpackage("sagelib", exact=True) }}
         - bliss >=0.77
@@ -220,6 +222,7 @@ outputs:
     requirements:
       build:
         - {{ compiler('c') }}
+        - {{ stdlib("c") }}
       host:
         - {{ pin_subpackage("sagelib", exact=True) }}
         - gmp
