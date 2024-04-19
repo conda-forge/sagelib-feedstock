@@ -18,8 +18,6 @@ build:
   skip: true  # [py<39]
   ignore_run_exports_from:
     - {{ compiler('fortran') }}
-    - sirocco
-    - bliss
 
 requirements:
   build:
@@ -106,18 +104,22 @@ requirements:
     - threejs-sage
     - notebook      >=6.4.12,<7
     - jmol          >=14.29.52,<15
-    # we build glue against the optional sirocco extension
-    - sirocco
-    # we build glue against the header files of the optional bliss extension
-    - bliss >=0.77
 
   # We can not include all actual runtime dependencies of Sage here as some of
   # them require Sage to build, such as some of the database packages.
   # The packages listed here are taken from the `SAGERUNTIME` variable in
   # `build/make/Makefile`.
+
   # These dependencies are enough to `import sage` and start `sage` but lots of
   # things do not work. To get all the standard dependencies of Sage, install
   # the "sage" package (which requires this "sagelib" package.)
+
+  # By now we could probably drpo this separation and just use the new naming
+  # from upstream, i.e., sagemath-standard, sagemath-bliss, sagemath-sirocco
+  # and create one output called sage which would probably be an alias for
+  # sagemath-standard. Until there is a sagemath-core or something like that,
+  # we should probably keep sagelib around to be some minimal distribution.
+
   run:
     - {{ pin_compatible("libbrial", max_pin="x.x") }}
     - {{ pin_compatible("cliquer", max_pin="x.x") }}
@@ -195,7 +197,7 @@ outputs:
   - name: sagelib
 
   - name: sagemath-bliss
-    script: install-bliss-ext.sh
+    script: install-sagemath-bliss.sh
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -213,10 +215,7 @@ outputs:
         - sage.graphs.bliss
 
   - name: sagemath-sirocco
-    script: install-sirocco-ext.sh
-    build:
-      ignore_run_exports_from:
-        - dummy
+    script: install-sagemath-sirocco.sh
     requirements:
       build:
         - {{ compiler('c') }}
