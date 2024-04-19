@@ -38,4 +38,4 @@ export SAGE_NUM_THREADS=$CPU_COUNT
 ## mkdir -p "$SAGE_SPKG_INST"
 ## mkdir -p "$SAGE_DOC"
 
-
+export PYTHONPATH=$PYTHONPATH:"$PWD"/pkgs/sage-setup
