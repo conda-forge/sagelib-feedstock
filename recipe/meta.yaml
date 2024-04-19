@@ -122,59 +122,27 @@ requirements:
   # See #169 for details.
 
   run:
-    - {{ pin_compatible("libbrial", max_pin="x.x") }}
-    - {{ pin_compatible("cliquer", max_pin="x.x") }}
     - {{ pin_compatible("cypari2") }}
     - {{ pin_compatible("cysignals") }}
     - {{ pin_compatible("cython") }}
     - {{ pin_compatible("ecl", max_pin="x.x") }}
-    - eclib
-    - {{ pin_compatible("ecm") }}
     - future
     - {{ pin_compatible("gap-core", max_pin="x.x") }}
     - {{ pin_compatible("giac", max_pin="x.x") }}
-    - glpk
-    - gmp
     - {{ pin_compatible("gmpy2", max_pin="x.x") }}
-    - gsl
-    - {{ pin_compatible("iml", max_pin="x.x") }}
     - {{ pin_compatible("jinja2", max_pin="x.x") }}
     - {{ pin_compatible("jupyter_core") }}
-    - {{ pin_compatible("lcalc", max_pin="x.x") }}
-    - {{ pin_compatible("lrcalc", max_pin="x.x") }}
-    - {{ pin_compatible("libbraiding", max_pin="x.x") }}
     - libflint  * *_ntl_*
-    - {{ pin_compatible("libgd", max_pin="x.x") }}
-    - {{ pin_compatible("libhomfly", max_pin="x.x") }}
-    - libpng
-    - {{ pin_compatible("linbox", max_pin="x.x") }}
-    - givaro
-    - fflas-ffpack
-    - {{ pin_compatible("m4ri") }}
-    - {{ pin_compatible("m4rie") }}
     - memory-allocator
-    - mpc
-    - mpfi
-    - mpfr
-    - ntl
-    - {{ pin_compatible("numpy") }}
-    - {{ pin_compatible("planarity") }}
-    - {{ pin_compatible("ppl", max_pin="x.x") }}
     - {{ pin_compatible("pplpy", max_pin="x.x") }}
     - primecountpy
     - python
-    - readline
-    - {{ pin_compatible("rw", max_pin="x.x") }}
-    - singular
     - six
-    - {{ pin_compatible("symmetrica", max_pin="x.x") }}
-    - zlib
-    # sageruntime deps
-    # Disable ipython 8.19.0 which breaks the interactive session, see https://github.com/sagemath/sage/issues/36975
-    - ipython >=8.4,<9,!=8.19.0
     - {{ pin_compatible("pexpect") }}
     - python-lrcalc
     - {{ pin_compatible("threejs-sage") }}
+    # Disable ipython 8.19.0 which breaks the interactive session, see https://github.com/sagemath/sage/issues/36975
+    - ipython >=8.4,<9,!=8.19.0
 
 test:
   requires:
