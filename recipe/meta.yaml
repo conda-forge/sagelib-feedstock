@@ -44,7 +44,6 @@ requirements:
     - liblapack
     - liblapacke
     - libboost-headers
-    - arb
     - brial         1.2.*
     - cliquer       1.22.*
     - cypari2       2.1.*
