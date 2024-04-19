@@ -237,7 +237,7 @@ about:
   license: GPL-2.0-or-later
   license_file: COPYING.txt
   summary: Open Source Mathematical Software
-  dev_url: https://trac.sagemath.org
+  dev_url: https://github.com/sagemath/sage
   doc_url: https://doc.sagemath.org
 
 extra:
