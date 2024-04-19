@@ -9,7 +9,7 @@ Package license: GPL-2.0-or-later
 
 Summary: Open Source Mathematical Software
 
-Development: https://trac.sagemath.org
+Development: https://github.com/sagemath/sage
 
 Documentation: https://doc.sagemath.org
 
