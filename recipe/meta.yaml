@@ -18,6 +18,12 @@ build:
   skip: true  # [py<39]
   ignore_run_exports_from:
     - {{ compiler('fortran') }}
+    # sagemath-standard needs sirocco at build time but only sagemath-sirocco
+    # needs it at runtime
+    - sirocco
+    # sagemath-standard needs bliss at build time but only sagemath-bliss needs
+    # it at runtime
+    - bliss
 
 requirements:
   build:
@@ -104,6 +110,11 @@ requirements:
     - threejs-sage
     - notebook      >=6.4.12,<7
     - jmol          >=14.29.52,<15
+
+    # sagemath-standard needs bliss at build time but not at runtime, see sagemath-bliss
+    - bliss >=0.77
+    # sagemath-standard needs sirocco at build time but not at runtime, see sagemath-sirocco
+    - sirocco
 
   # We can not include all actual runtime dependencies of Sage here as some of
   # them require Sage to build, such as some of the database packages.
