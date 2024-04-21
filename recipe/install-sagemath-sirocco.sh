@@ -1,1 +1,6 @@
-cp $SRC_DIR/to-copy/sirocco* $SP_DIR/sage/libs/
+#!/bin/bash
+set -x
+
+source $RECIPE_DIR/build-env.sh
+
+python -m pip install pkgs/sagemath-sirocco -vv
