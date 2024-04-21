@@ -3,8 +3,9 @@ set -x
 
 source $RECIPE_DIR/build-env.sh
 
-# Do we need to call bootstrap for the stuff below to work?
-# ./bootstrap
+# Bootstrap to get pyproject.toml for sagemath-standrd which defines the
+# entrypoints in bin/ such as the "sage".
+./bootstrap
 
 python -m pip install pkgs/sagemath-standard -vv
 
