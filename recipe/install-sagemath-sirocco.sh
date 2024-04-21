@@ -3,4 +3,7 @@ set -x
 
 source $RECIPE_DIR/build-env.sh
 
-python -m pip install --no-deps pkgs/sagemath-sirocco -vv
+pushd pkgs/sagemath-sirocco
+python setup.py build
+python setup.py install
+popd

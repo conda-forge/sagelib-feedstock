@@ -3,4 +3,7 @@ set -x
 
 source $RECIPE_DIR/build-env.sh
 
-python -m pip install --no-deps pkgs/sagemath-bliss -vv
+pushd pkgs/sagemath-bliss
+python setup.py build
+python setup.py install
+popd

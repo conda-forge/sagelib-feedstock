@@ -7,7 +7,10 @@ source $RECIPE_DIR/build-env.sh
 # entrypoints in bin/ such as the "sage".
 ./bootstrap
 
-python -m pip install --no-deps pkgs/sagemath-standard -vv
+pushd pkgs/sagemath-standard
+python setup.py build
+python setup.py install
+popd
 
 ## # This does not seem to be needed anymore
 ## mkdir -p "$PREFIX/etc/conda/activate.d"
