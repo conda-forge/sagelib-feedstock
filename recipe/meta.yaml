@@ -188,6 +188,8 @@ outputs:
         - bliss >=0.77
         - python
         - pip
+        - pkg-config
+        - pkgconfig
       run:
         - {{ pin_subpackage("sagelib", exact=True) }}
         - {{ pin_compatible("bliss", max_pin="x.x") }}
@@ -209,6 +211,8 @@ outputs:
         - sirocco
         - python
         - pip
+        - pkg-config
+        - pkgconfig
       run:
         - {{ pin_subpackage("sagelib", exact=True) }}
         - python
