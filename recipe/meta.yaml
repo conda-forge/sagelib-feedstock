@@ -142,7 +142,6 @@ requirements:
     - {{ pin_compatible("giac", max_pin="x.x") }}
     - {{ pin_compatible("gmpy2", max_pin="x.x") }}
     - {{ pin_compatible("jinja2", max_pin="x.x") }}
-    - {{ pin_compatible("numpy") }}
     - {{ pin_compatible("jupyter_core") }}
     - libflint  * *_ntl_*
     - memory-allocator
