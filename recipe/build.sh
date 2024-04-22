@@ -13,5 +13,8 @@ python setup.py install
 popd
 
 # Replace symlinks that point outside the prefix with files.
+rm $PREFIX/share/jupyter/kernels/sagemath/logo.svg
 cp pkgs/sagemath-standard/sage/ext_data/notebook-ipython/logo.svg $PREFIX/share/jupyter/kernels/sagemath/
+
+rm $PREFIX/share/jupyter/kernels/sagemath/logo-64x64.svg
 cp pkgs/sagemath-standard/sage/ext_data/notebook-ipython/logo-64x64.svg $PREFIX/share/jupyter/kernels/sagemath/
