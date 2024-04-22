@@ -192,6 +192,9 @@ outputs:
         - pkgconfig
       run:
         - {{ pin_subpackage("sagelib", exact=True) }}
+        # Since the ignore_run_exports_from apply globally to all outputs, we
+        # need to explicitly require bliss here and cannot rely on its
+        # run_exports.
         - {{ pin_compatible("bliss", max_pin="x.x") }}
         - python
     test:
@@ -216,6 +219,10 @@ outputs:
         - pkgconfig
       run:
         - {{ pin_subpackage("sagelib", exact=True) }}
+        # Since the ignore_run_exports_from apply globally to all outputs, we
+        # need to explicitly require bliss here and cannot rely on its
+        # run_exports.
+        - {{ pin_compatible("sirocco") }}
         - python
     test:
       imports:
