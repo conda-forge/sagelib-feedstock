@@ -183,6 +183,11 @@ outputs:
         - {{ compiler('cxx') }}
         - {{ compiler('c') }}
         - {{ stdlib("c") }}
+        - python                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - cython >=3,<4                          # [build_platform != target_platform]
+        - memory-allocator                       # [build_platform != target_platform]
+        - numpy                                  # [build_platform != target_platform]
       host:
         - {{ pin_subpackage("sagelib", exact=True) }}
         - bliss >=0.77
@@ -208,6 +213,11 @@ outputs:
         - {{ compiler('cxx') }}
         - {{ compiler('c') }}
         - {{ stdlib("c") }}
+        - python                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - cython >=3,<4                          # [build_platform != target_platform]
+        - memory-allocator                       # [build_platform != target_platform]
+        - numpy                                  # [build_platform != target_platform]
       host:
         - {{ pin_subpackage("sagelib", exact=True) }}
         - gmp
