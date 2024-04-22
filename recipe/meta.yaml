@@ -192,6 +192,8 @@ outputs:
         - {{ pin_subpackage("sagelib", exact=True) }}
         - bliss >=0.77
         - python
+        - numpy
+        - memory-allocator
         - pip
         - pkg-config
         - pkgconfig
@@ -225,6 +227,8 @@ outputs:
         - sirocco
         - python
         - pip
+        - numpy
+        - memory-allocator
         - pkg-config
         - pkgconfig
       run:
