@@ -7,10 +7,11 @@ source $RECIPE_DIR/build-env.sh
 # entrypoints in bin/ such as the "sage".
 ./bootstrap
 
-pushd pkgs/sagemath-standard
-python setup.py build
-python setup.py install
-popd
+# Install into the PREFIX.
+# --no-deps and --no-build-isolation lets us completely ignore dependencies and
+# build dependencies (which otherwise want things such as sage-setup and
+# sage-conf which we do not want or need.)
+python -m pip install --no-deps --no-build-isolation pkgs/sagemath-standard -vv
 
 # Replace symlinks that point outside the prefix with files.
 rm $PREFIX/share/jupyter/kernels/sagemath/logo.svg

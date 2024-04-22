@@ -3,7 +3,8 @@ set -x
 
 source $RECIPE_DIR/build-env.sh
 
-pushd pkgs/sagemath-sirocco
-python setup.py build
-python setup.py install
-popd
+# Install into the PREFIX.
+# --no-deps and --no-build-isolation lets us completely ignore dependencies and
+# build dependencies (which otherwise want things such as sage-setup and
+# sage-conf which we do not want or need.)
+python -m pip install --no-deps --no-build-isolation pkgs/sagemath-sirocco -vv
