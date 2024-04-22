@@ -11,6 +11,7 @@ source:
   patches:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
     - 0002-Do-not-cleanup-all-.so-files-when-cross-compiling.patch  # [build_platform != target_platform]
+    - 0003-Drop-distutils-do-avoid-conflicts-with-setuptools.patch
 
 build:
   number: 0
