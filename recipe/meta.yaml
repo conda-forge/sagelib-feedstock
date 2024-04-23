@@ -152,6 +152,8 @@ requirements:
     - {{ pin_compatible("pexpect") }}
     - python-lrcalc
     - {{ pin_compatible("threejs-sage") }}
+    # Linbox has a run_exports but the version used in the build does not have it yet.
+    - {{ pin_compatible("linbox", max_pin="x.x") }}
     # Disable ipython 8.19.0 which breaks the interactive session, see https://github.com/sagemath/sage/issues/36975
     - ipython >=8.4,<9,!=8.19.0
 
