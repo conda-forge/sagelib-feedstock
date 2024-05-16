@@ -13,7 +13,7 @@ source:
     - 0002-Do-not-cleanup-all-.so-files-when-cross-compiling.patch  # [build_platform != target_platform]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py<39]
   ignore_run_exports_from:
