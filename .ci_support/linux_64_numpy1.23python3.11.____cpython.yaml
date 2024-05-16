@@ -1,5 +1,3 @@
-arb:
-- '2.23'
 c_compiler:
 - gcc
 c_compiler_version:
