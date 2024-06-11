@@ -11,9 +11,11 @@ source:
   patches:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
     - 0002-Do-not-cleanup-all-.so-files-when-cross-compiling.patch  # [build_platform != target_platform]
+    # Do not use C++ symbols that have been removed in C++17.
+    - 0001-src-sage-modular-arithgroup-farey.cpp-use-std-bind.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py<39]
   ignore_run_exports_from:
