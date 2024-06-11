@@ -15,7 +15,7 @@ source:
     - 0001-src-sage-modular-arithgroup-farey.cpp-use-std-bind.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win]
   skip: true  # [py<39]
   ignore_run_exports_from:
