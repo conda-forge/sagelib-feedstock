@@ -8,9 +8,6 @@ if [[ "$target_platform" == osx-* ]]; then
   export CFLAGS="$CFLAGS -fclang-abi-compat=14"
 fi
 
-# farey.cpp uses bind2nd which has been removed from C++17
-export CXXFLAGS="$CXXFLAGS -std=c++14"
-
 # Compile things in parallel.
 export SAGE_NUM_THREADS=$CPU_COUNT
 
