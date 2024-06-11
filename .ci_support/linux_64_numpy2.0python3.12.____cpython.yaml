@@ -9,7 +9,7 @@ c_stdlib_version:
 cdt_name:
 - cos6
 channel_sources:
-- conda-forge
+- conda-forge/label/numpy_rc,conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -47,7 +47,7 @@ mpfr:
 ntl:
 - 11.4.3
 numpy:
-- '1.26'
+- '2.0'
 pari:
 - 2.15.* *_pthread
 pin_run_as_build:
