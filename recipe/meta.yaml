@@ -1,4 +1,4 @@
-{% set version = "10.3" %}
+{% set version = "10.4" %}
 {% set name = "sagelib" %}
 
 package:
@@ -57,10 +57,10 @@ requirements:
     - cypari2       2.1.*
     - cysignals     1.11.*
     - cython        >=3,<4
-    - ecl           >=21.2,<24
+    - ecl           >=24.5.10,<25
     - eclib
     - ecm           7.*
-    - fflas-ffpack  2.4.*
+    - fflas-ffpack  2.5.*
     - future
     - gap-core      4.12.2
     - giac          1.9.*
@@ -82,7 +82,7 @@ requirements:
     - libgd         2.3.*
     - libhomfly     1.02.*
     - libpng
-    - linbox        >=1.6.3
+    - linbox        >=1.7.0
     - lrcalc        2.1
     - m4ri
     - m4rie
