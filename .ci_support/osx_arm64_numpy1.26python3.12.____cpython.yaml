@@ -23,7 +23,7 @@ eclib:
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '12'
+- '13'
 glpk:
 - '5.0'
 gmp:
