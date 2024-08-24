@@ -199,6 +199,7 @@ outputs:
         - numpy
         - memory-allocator
         - pip
+        - setuptools
         - pkg-config
         - pkgconfig
       run:
@@ -231,6 +232,7 @@ outputs:
         - sirocco
         - python
         - pip
+        - setuptools
         - numpy
         - memory-allocator
         - pkg-config
