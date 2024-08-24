@@ -64,7 +64,7 @@ requirements:
     - future
     - gap-core      4.12.2
     - giac          1.9.*
-    - givaro        4.1.*
+    - givaro        4.2.*
     - glpk
     - gmp
     - gmpy2         >=2.1,<3
