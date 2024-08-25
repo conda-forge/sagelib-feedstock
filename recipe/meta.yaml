@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: 59feb92c05e74d6db7a75f398c45c24b5157b1ecd3d8ac198806e2e6add77d96
+  sha256: aecc320c5bd1980991dfa2c3ee7644f9a017393943e1e908b2607a756ddb5856
   patches:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
     - 0002-Do-not-cleanup-all-.so-files-when-cross-compiling.patch  # [build_platform != target_platform]
