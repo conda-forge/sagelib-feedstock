@@ -10,7 +10,6 @@ source:
   sha256: aecc320c5bd1980991dfa2c3ee7644f9a017393943e1e908b2607a756ddb5856
   patches:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
-    - 0002-Fix-Cython-errors.patch
 
 build:
   number: 0
@@ -39,7 +38,7 @@ requirements:
     - gettext
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - cython >=3,<4                          # [build_platform != target_platform]
+    - cython >=3,<3.0.11                     # [build_platform != target_platform]
     - memory-allocator                       # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
   host:
@@ -54,7 +53,7 @@ requirements:
     - cliquer       1.22.*
     - cypari2       2.1.*
     - cysignals     1.11.*
-    - cython        >=3,<4
+    - cython        >=3,<3.0.11
     - ecl           >=24.5.10,<25
     - eclib
     - ecm           7.*
