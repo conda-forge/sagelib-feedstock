@@ -1,0 +1,69 @@
+From 7d81513379ab2cda1cbfa0be2f72345ce9c17c0f Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Julian=20R=C3=BCth?= <julian.rueth@fsfe.org>
+Date: Mon, 26 Aug 2024 20:43:57 +0300
+Subject: [PATCH] Fix Cython errors
+
+noexcept handling has changed in recent Cython
+---
+ src/sage/sets/disjoint_set.pxd | 6 +++---
+ src/sage/sets/disjoint_set.pyx | 6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/src/sage/sets/disjoint_set.pxd b/src/sage/sets/disjoint_set.pxd
+index 3c83519..6448df3 100644
+--- a/src/sage/sets/disjoint_set.pxd
++++ b/src/sage/sets/disjoint_set.pxd
+@@ -19,8 +19,8 @@ cdef class DisjointSet_class(SageObject):
+     cpdef number_of_subsets(self)
+ 
+ cdef class DisjointSet_of_integers(DisjointSet_class):
+-    cpdef int find(self, int i)
+-    cpdef void union(self, int i, int j)
++    cpdef int find(self, int i) noexcept
++    cpdef void union(self, int i, int j) noexcept
+     cpdef root_to_elements_dict(self)
+     cpdef element_to_root_dict(self)
+     cpdef to_digraph(self)
+@@ -29,7 +29,7 @@ cdef class DisjointSet_of_hashables(DisjointSet_class):
+     cdef list _int_to_el
+     cdef dict _el_to_int
+     cpdef find(self, e)
+-    cpdef void union(self, e, f)
++    cpdef void union(self, e, f) noexcept
+     cpdef root_to_elements_dict(self)
+     cpdef element_to_root_dict(self)
+     cpdef to_digraph(self)
+diff --git a/src/sage/sets/disjoint_set.pyx b/src/sage/sets/disjoint_set.pyx
+index 1c2d93f..6e2900c 100644
+--- a/src/sage/sets/disjoint_set.pyx
++++ b/src/sage/sets/disjoint_set.pyx
+@@ -448,7 +448,7 @@ cdef class DisjointSet_of_integers(DisjointSet_class):
+         for i, parent in enumerate(l):
+             self.union(parent, i)
+ 
+-    cpdef int find(self, int i):
++    cpdef int find(self, int i) noexcept:
+         r"""
+         Return the representative of the set that ``i`` currently belongs to.
+ 
+@@ -492,7 +492,7 @@ cdef class DisjointSet_of_integers(DisjointSet_class):
+             raise ValueError('i must be between 0 and %s (%s given)' % (card - 1, i))
+         return OP_find(self._nodes, i)
+ 
+-    cpdef void union(self, int i, int j):
++    cpdef void union(self, int i, int j) noexcept:
+         r"""
+         Combine the set of ``i`` and the set of ``j`` into one.
+ 
+@@ -797,7 +797,7 @@ cdef class DisjointSet_of_hashables(DisjointSet_class):
+         cdef int r = <int> OP_find(self._nodes, i)
+         return self._int_to_el[r]
+ 
+-    cpdef void union(self, e, f):
++    cpdef void union(self, e, f) noexcept:
+         r"""
+         Combine the set of ``e`` and the set of ``f`` into one.
+ 
+-- 
+2.46.0
+

@@ -10,6 +10,7 @@ source:
   sha256: aecc320c5bd1980991dfa2c3ee7644f9a017393943e1e908b2607a756ddb5856
   patches:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
+    - 0002-Fix-Cython-errors.patch
 
 build:
   number: 0
