@@ -36,6 +36,8 @@ gsl:
 - '2.7'
 libblas:
 - 3.9 *netlib
+libboost_headers:
+- '1.84'
 libcblas:
 - 3.9 *netlib
 libflint:
@@ -63,7 +65,7 @@ python:
 readline:
 - '8'
 singular:
-- 4.3.2.p8
+- 4.4.0
 target_platform:
 - linux-aarch64
 zip_keys:
