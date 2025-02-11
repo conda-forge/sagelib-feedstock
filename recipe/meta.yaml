@@ -51,16 +51,16 @@ requirements:
     - libboost-headers
     - brial         1.2.*
     - cliquer       1.22.*
-    - cypari2       2.1.*
+    - cypari2       2.2.*
     - cysignals     1.11.*
-    - cython        >=3,<3.0.11
+    - cython        3.0.*
     - ecl           >=24.5.10,<25
     - eclib
     - ecm           7.*
     - expat
     - fflas-ffpack  2.5.*
     - future
-    - gap-core      4.12.2
+    - gap-core      4.13.1
     - giac          1.9.*
     - givaro        4.2.*
     - glpk
