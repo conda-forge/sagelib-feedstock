@@ -31,17 +31,17 @@ gmp:
 gsl:
 - '2.7'
 libblas:
-- 3.9 *netlib
+- 3.9.* *netlib
 libboost_headers:
 - '1.84'
 libcblas:
-- 3.9 *netlib
+- 3.9.* *netlib
 libflint:
 - '3.0'
 liblapack:
-- 3.9 *netlib
+- 3.9.* *netlib
 liblapacke:
-- 3.9 *netlib
+- 3.9.* *netlib
 libpng:
 - '1.6'
 macos_machine:
