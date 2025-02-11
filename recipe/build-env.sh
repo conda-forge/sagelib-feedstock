@@ -6,6 +6,8 @@ export CFLAGS="$CFLAGS -Wno-unused-function -Wno-unused-variable"
 if [[ "$target_platform" == osx-* ]]; then
   export CXXFLAGS="$CXXFLAGS -fclang-abi-compat=14"
   export CFLAGS="$CFLAGS -fclang-abi-compat=14"
+  # Work around https://github.com/sagemath/sage/pull/39249
+  export CXXFLAGS="$CXXFLAGS -Wno-error=c++11-narrowing-const-reference"
 fi
 
 # Compile things in parallel.

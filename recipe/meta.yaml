@@ -1,4 +1,4 @@
-{% set version = "10.4" %}
+{% set version = "10.5" %}
 {% set name = "sagelib" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/sagemath/sage/archive/{{ version }}.tar.gz
-  sha256: aecc320c5bd1980991dfa2c3ee7644f9a017393943e1e908b2607a756ddb5856
+  sha256: 63db4171bada189f54058b236b48b295e9111d40c51bc440d2dd77738172f75d
   patches:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
 
@@ -51,15 +51,16 @@ requirements:
     - libboost-headers
     - brial         1.2.*
     - cliquer       1.22.*
-    - cypari2       2.1.*
+    - cypari2       2.1.*   # upstream uses 2.2.0 with SageMath 10.5. But 2.2.0 is not packaged on conda-forge.
     - cysignals     1.11.*
-    - cython        >=3,<3.0.11
+    - cython        3.0.*
     - ecl           >=24.5.10,<25
     - eclib
     - ecm           7.*
+    - expat
     - fflas-ffpack  2.5.*
     - future
-    - gap-core      4.12.2
+    - gap-core      4.13.1
     - giac          1.9.*
     - givaro        4.2.*
     - glpk
