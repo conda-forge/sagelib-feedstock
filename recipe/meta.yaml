@@ -57,6 +57,7 @@ requirements:
     - ecl           >=24.5.10,<25
     - eclib
     - ecm           7.*
+    - expat
     - fflas-ffpack  2.5.*
     - future
     - gap-core      4.12.2
