@@ -51,7 +51,7 @@ requirements:
     - libboost-headers
     - brial         1.2.*
     - cliquer       1.22.*
-    - cypari2       2.2.*
+    - cypari2       2.1.*   # upstream uses 2.2.0 with SageMath 10.5. But 2.2.0 is not packaged on conda-forge.
     - cysignals     1.11.*
     - cython        3.0.*
     - ecl           >=24.5.10,<25
