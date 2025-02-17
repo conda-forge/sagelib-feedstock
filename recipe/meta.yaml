@@ -23,6 +23,8 @@ build:
     # sagemath-standard needs bliss at build time but only sagemath-bliss needs
     # it at runtime
     - bliss
+    # conda-build issue. Should be fixed after 26.x
+    - icu
 
 requirements:
   build:
@@ -115,6 +117,8 @@ requirements:
     - bliss >=0.77
     # sagemath-standard needs sirocco at build time but not at runtime, see sagemath-sirocco
     - sirocco
+    # conda-build issue. remove after conda-build 26.x
+    - icu
 
   # We can not include all actual runtime dependencies of Sage here as some of
   # them require Sage to build, such as some of the database packages.
