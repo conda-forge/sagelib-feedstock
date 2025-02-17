@@ -23,8 +23,6 @@ build:
     # sagemath-standard needs bliss at build time but only sagemath-bliss needs
     # it at runtime
     - bliss
-    # conda-build issue. Should be fixed after 26.x
-    - icu
 
 requirements:
   build:
