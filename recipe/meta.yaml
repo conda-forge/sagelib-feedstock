@@ -12,7 +12,7 @@ source:
     - 0001-Build-glue-code-for-optional-extensions-sirocco-and-.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   skip: true  # [py<39]
   ignore_run_exports_from:
@@ -108,8 +108,8 @@ requirements:
     - pexpect       >=4.9.0,<5
     # for the symlinks
     - threejs-sage
-    - notebook      >=6.4.12,<7
-    - jmol          >=14.29.52,<15
+    - notebook
+    - jmol
 
     # sagemath-standard needs bliss at build time but not at runtime, see sagemath-bliss
     - bliss >=0.77
@@ -146,16 +146,14 @@ requirements:
     - libflint  * *_ntl_*
     - memory-allocator
     - {{ pin_compatible("pplpy", max_pin="x.x") }}
-    - primecountpy
+    - primecountpy >=0.1.0,<0.2.0
     - python
     - six
     - {{ pin_compatible("pexpect") }}
     - python-lrcalc
     - {{ pin_compatible("threejs-sage") }}
-    # Linbox has a run_exports but the version used in the build does not have it yet.
-    - {{ pin_compatible("linbox", max_pin="x.x") }}
     # Disable ipython 8.19.0 which breaks the interactive session, see https://github.com/sagemath/sage/issues/36975
-    - ipython >=8.4,<9,!=8.19.0
+    - ipython >=8.18.1,<9,!=8.19.0
 
 test:
   requires:
