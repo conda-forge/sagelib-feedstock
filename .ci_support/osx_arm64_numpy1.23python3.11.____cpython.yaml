@@ -35,11 +35,11 @@ gsl:
 libblas:
 - 3.9.* *netlib
 libboost_headers:
-- '1.84'
+- '1.86'
 libcblas:
 - 3.9.* *netlib
 libflint:
-- '3.0'
+- '3.1'
 liblapack:
 - 3.9.* *netlib
 liblapacke:
