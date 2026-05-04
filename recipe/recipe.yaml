@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "10.8"
+  version: "10.9"
   name: sagelib
 
 recipe:
@@ -10,7 +10,7 @@ recipe:
 
 source:
   url: https://github.com/sagemath/sage/archive/${{ version }}.tar.gz
-  sha256: 496f90f77b569cb3c93610219d92d4abd390caf909e11f4f01d0d37d86017c8e
+  sha256: c4cebeebf45412830e35672aab40260852b92e64a29f852c7b467209c9654ebe
   patches:
     # See https://github.com/sagemath/sage/issues/42002
     - 0001-Allow-SageMath-to-start-when-neither-HOME-nor-DOT_SA.patch
@@ -43,11 +43,10 @@ outputs:
         - ninja
         - jinja2        3.1.*
         - if: build_platform != target_platform
-          then: python
-        - if: build_platform != target_platform
-          then: cross-python_${{ target_platform }}
-        - if: build_platform != target_platform
-          then: cython        3.1.*
+          then:
+            - python
+            - cross-python_${{ target_platform }}
+            - cython        3.1.*
         - cysignals
         - memory-allocator
         - numpy
